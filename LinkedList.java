@@ -48,4 +48,20 @@ public abstract class LinkedList<T> {
             return removed;
         }
     }
+
+    protected T getIndex(int targetIndex) {
+        if (head == null) {
+            return null;
+        }
+
+        int i = 0;
+        Node<T> current = head;
+        while (current != null) {
+            if (i == targetIndex)
+                return current.data;
+            i++;
+        }
+
+        return null;
+    }
 }

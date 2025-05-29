@@ -14,9 +14,6 @@ public class Main {
         patientRecord.addPatient("John Doe", 30, "123 Elm St", "555-1234");
         System.out.println("After");
         patientRecord.displayAllPatients();
-
-        instanceNewGUI();
-        instanceNewGUI();
     }
 
     public static void instanceNewGUI() {
