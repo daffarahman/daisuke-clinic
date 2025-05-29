@@ -23,4 +23,29 @@ public abstract class LinkedList<T> {
             current.next = newNode;
         }
     }
+
+    protected T removeFirst() {
+        if (head == null) {
+            return null;
+        } else {
+            T removed = head.data;
+            head = head.next;
+            return removed;
+        }
+    }
+
+    protected T removeLast() {
+        if (head == null) {
+            return null;
+        } else {
+            Node<T> current = head;
+            while (current.next != null && current.next.next != null) {
+                current = current.next;
+            }
+
+            T removed = current.next.data;
+            current.next = null;
+            return removed;
+        }
+    }
 }
