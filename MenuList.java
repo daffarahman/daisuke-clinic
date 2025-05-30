@@ -12,10 +12,9 @@ public class MenuList {
     public void printMenu() {
         int menuWidth = getMenuWidth();
 
-        // Top border with newline
         System.out.print("╔");
         Utility.printChars('═', menuWidth);
-        System.out.println("╗"); // Changed to println
+        System.out.println("╗");
 
         if (title != null && !title.isEmpty()) {
             int padding = (menuWidth - title.length()) / 2;
@@ -24,7 +23,7 @@ public class MenuList {
             System.out.print(title);
             Utility.printChars(' ', menuWidth - title.length() - padding);
             System.out.println("║");
-            // Separator under title
+
             System.out.print("╠");
             Utility.printChars('═', menuWidth);
             System.out.println("╣");
@@ -41,7 +40,7 @@ public class MenuList {
 
         System.out.print("╚");
         Utility.printChars('═', menuWidth);
-        System.out.println("╝"); // Changed to println
+        System.out.println("╝");
     }
 
     public void addMenuItem(MenuItem menuItem) {
