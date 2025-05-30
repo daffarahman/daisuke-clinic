@@ -1,0 +1,2 @@
+# Daisuke Clinic
+A clinic management app to practice implementing data structures based from [this requirements](https://docs.google.com/document/d/1nFTebiibxVecV4F5Yga1dyzBEQkZEAGwspSo9VjPVrw/edit?tab=t.0)
