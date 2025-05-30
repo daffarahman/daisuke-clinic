@@ -20,8 +20,24 @@ public class Main {
         DoctorLoginList doctorLoginList = DoctorLoginList.getInstance();
         doctorLoginList.loginDoctor(doctors[7]);
         doctorLoginList.loginDoctor(doctors[2]);
-        doctorLoginList.getAllLoggedInDoctors();
         doctorLoginList.logoutDoctor(2);
-        doctorLoginList.getAllLoggedInDoctors();
+
+        MenuList menuList = new MenuList("Daisuke Clinic", 13);
+
+        menuList.addMenuItem(new MenuItem("Add New Patient", null));
+        menuList.addMenuItem(new MenuItem("Remove Patient by ID", null));
+        menuList.addMenuItem(new MenuItem("Search Patient by Name", null));
+        menuList.addMenuItem(new MenuItem("Display All Patients", null));
+        menuList.addMenuItem(new MenuItem("Doctor Login", null));
+        menuList.addMenuItem(new MenuItem("Doctor Logout", null));
+        menuList.addMenuItem(new MenuItem("View Last Logged-in Doctor", null));
+        menuList.addMenuItem(new MenuItem("Schedule Appointment", null));
+        menuList.addMenuItem(new MenuItem("Process Appointment", null));
+        menuList.addMenuItem(new MenuItem("Display Upcoming Appointments", null));
+        menuList.addMenuItem(new MenuItem("Search Patient by ID (BST)", null));
+        menuList.addMenuItem(new MenuItem("Display All Patients (BST Inorder)", null));
+        menuList.addMenuItem(new MenuItem("Exit", null));
+
+        menuList.printMenu();
     }
 }
