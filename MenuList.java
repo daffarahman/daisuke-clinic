@@ -5,7 +5,14 @@ public class MenuList extends LinkedList<MenuItem> {
         this.title = title;
     }
 
-    public void run(int selection) {
+    public void printMenu() {
+        
+    }
 
+    public void run(int selection) {
+        Runnable r = getIndex(selection - 1).getRunnable();
+        if (r != null) {
+            r.run();
+        }
     }
 }

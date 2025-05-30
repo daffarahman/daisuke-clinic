@@ -1,7 +1,14 @@
-public abstract class LinkedList<T> {
+public class LinkedList<T> {
     protected Node<T> head;
+    protected Node<T> last;
+    protected int size;
 
-    protected void insertFront(T data) {
+    public LinkedList() {
+        last = head;
+        size = 0;
+    }
+
+    public void insertFront(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
             head = newNode;
@@ -9,9 +16,10 @@ public abstract class LinkedList<T> {
             newNode.next = head;
             head = newNode;
         }
+        size++;
     }
 
-    protected void insertBack(T data) {
+    public void insertBack(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
             head = newNode;
@@ -22,34 +30,78 @@ public abstract class LinkedList<T> {
             }
             current.next = newNode;
         }
+        size++;
     }
 
-    protected T removeFirst() {
+    public void remove(T data) {
+        if (head == null)
+            return;
+
+        if (head.data.equals(data)) {
+            head = head.next;
+            size--;
+            return;
+        }
+
+        Node<T> current = head;
+        while (current.next != null) {
+            if (current.next.data.equals(data)) {
+                current.next = current.next.next;
+                size--;
+                return;
+            }
+            current = current.next;
+        }
+    }
+
+    public T removeFirst() {
         if (head == null) {
             return null;
         } else {
             T removed = head.data;
             head = head.next;
+            size--;
             return removed;
         }
     }
 
-    protected T removeLast() {
+    public T removeLast() {
         if (head == null) {
             return null;
-        } else {
-            Node<T> current = head;
-            while (current.next != null && current.next.next != null) {
-                current = current.next;
-            }
+        }
 
-            T removed = current.next.data;
-            current.next = null;
+        if (head.next == null) {
+            T removed = head.data;
+            head = null;
+            size--;
             return removed;
+        }
+
+        Node<T> current = head;
+        while (current.next.next != null) {
+            current = current.next;
+        }
+
+        T removed = current.next.data;
+        current.next = null;
+        size--;
+        return removed;
+
+    }
+
+    public void display() {
+        Node<T> current = head;
+        while (current != null) {
+            System.out.println(current.data.toString());
+            current = current.next;
         }
     }
 
-    protected T getIndex(int targetIndex) {
+    public Node<T> getHead() {
+        return head;
+    }
+
+    public T getIndex(int targetIndex) {
         if (head == null) {
             return null;
         }
@@ -60,8 +112,23 @@ public abstract class LinkedList<T> {
             if (i == targetIndex)
                 return current.data;
             i++;
+            current = current.next;
         }
 
         return null;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void clear() {
+        head = null;
+        last = head;
+        size = 0;
     }
 }
