@@ -22,22 +22,12 @@ public class Main {
         doctorLoginList.loginDoctor(doctors[2]);
         doctorLoginList.logoutDoctor(2);
 
-        MenuList menuList = new MenuList("Daisuke Clinic", 13);
+        MenuList bootMenuList = new MenuList("DaisukeClinic Bootloader", 3);
 
-        menuList.addMenuItem(new MenuItem("Add New Patient", null));
-        menuList.addMenuItem(new MenuItem("Remove Patient by ID", null));
-        menuList.addMenuItem(new MenuItem("Search Patient by Name", null));
-        menuList.addMenuItem(new MenuItem("Display All Patients", null));
-        menuList.addMenuItem(new MenuItem("Doctor Login", null));
-        menuList.addMenuItem(new MenuItem("Doctor Logout", null));
-        menuList.addMenuItem(new MenuItem("View Last Logged-in Doctor", null));
-        menuList.addMenuItem(new MenuItem("Schedule Appointment", null));
-        menuList.addMenuItem(new MenuItem("Process Appointment", null));
-        menuList.addMenuItem(new MenuItem("Display Upcoming Appointments", null));
-        menuList.addMenuItem(new MenuItem("Search Patient by ID (BST)", null));
-        menuList.addMenuItem(new MenuItem("Display All Patients (BST Inorder)", null));
-        menuList.addMenuItem(new MenuItem("Exit", null));
+        bootMenuList.addMenuItem(new MenuItem("Console Mode", null));
+        bootMenuList.addMenuItem(new MenuItem("Graphical Mode", null));
+        bootMenuList.addMenuItem(new MenuItem("Exit", () -> System.exit(0)));
 
-        menuList.printMenu();
+        bootMenuList.printMenu();
     }
 }

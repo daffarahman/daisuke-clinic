@@ -56,7 +56,7 @@ public class MenuList {
     }
 
     private int getMenuWidth() {
-        int width = 0;
+        int width = title != null ? title.length() : 0;
         for (int i = 0; i < menuItems.length; i++) {
             if (menuItems[i].getText().length() > width) {
                 width = menuItems[i].getText().length();
