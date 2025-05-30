@@ -8,8 +8,8 @@ public class Doctor {
 
     public Doctor(int id, String name, String specialty) {
         this.Id = id;
-        this.name = name;
-        this.specialty = specialty;
+        this.name = name.strip();
+        this.specialty = specialty.strip();
         this.loginTime = LocalDateTime.now();
     }
 
