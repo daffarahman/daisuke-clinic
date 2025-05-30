@@ -1,3 +1,4 @@
-public class Stack<T> extends LinkedList<T> {
+public class Stack<T> {
+    private LinkedList<T> elements;
 
 }

@@ -1,12 +1,23 @@
+import java.util.Scanner;
+
 public class MenuList {
+    private Scanner scanner;
+
     private String title;
     private MenuItem[] menuItems;
     private int menuCount;
 
     public MenuList(String title, int size) {
+        scanner = new Scanner(System.in);
+
         this.title = title;
         this.menuItems = new MenuItem[size];
         this.menuCount = 0;
+        ;
+    }
+
+    public void addMenuItem(MenuItem menuItem) {
+        menuItems[menuCount++] = menuItem;
     }
 
     public void printMenu() {
@@ -43,8 +54,14 @@ public class MenuList {
         System.out.println("╝");
     }
 
-    public void addMenuItem(MenuItem menuItem) {
-        menuItems[menuCount++] = menuItem;
+    public int prompt() {
+        int selection = 0;
+        System.out.print("Selection -> ");
+        try {
+            selection = scanner.nextInt();
+        } catch (Exception e) {
+        }
+        return selection;
     }
 
     public void run(int selection) {
