@@ -1,4 +1,4 @@
-public class Patient {
+public class Patient implements Comparable<Patient> {
     private int id;
     private String name;
     private int age;
@@ -51,6 +51,11 @@ public class Patient {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public int compareTo(Patient other) {
+        return Integer.compare(this.getId(), other.getId());
     }
 
     @Override
