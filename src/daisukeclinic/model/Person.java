@@ -12,6 +12,8 @@ public class Person {
 
     public Person(int id, String name) {
         this.id = id;
+        if (name == null)
+            name = "";
         this.name = name.strip();
     }
 

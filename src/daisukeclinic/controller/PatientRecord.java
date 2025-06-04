@@ -21,13 +21,21 @@ public class PatientRecord {
     }
 
     public void addPatient(String name, int age, String address, String phoneNumber) {
-        patients.insertBack(new Patient(lastId++, name, age, address, phoneNumber));
+        Patient newPatient = new Patient(lastId++, name, age, address, phoneNumber);
+        patients.insertBack(newPatient);
+        SearchablePatientTree.getInstance().insertPatient(newPatient);
     }
 
-    public void removePatientById(int id) {
+    public boolean removePatientById(int id) {
         Patient decoy = new Patient(id, null, 0, null, null);
         decoy.setCompareMode(Person.CompareMode.COMPARE_BY_ID);
+
+        if (patients.find(decoy) == null) {
+            return false;
+        }
+
         patients.remove(decoy);
+        return true;
     }
 
     public boolean findPatientByName(String name) {
@@ -48,6 +56,10 @@ public class PatientRecord {
                     patient.getId(), patient.getName(), patient.getAge(),
                     patient.getAddress(), patient.getPhoneNumber());
         }
+    }
+
+    public LinkedList<Patient> getList() {
+        return patients;
     }
 
     public Patient get(int index) {

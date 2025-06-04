@@ -1,8 +1,6 @@
 package daisukeclinic.model;
 
 public class Patient extends Person implements Comparable<Patient> {
-    private int id;
-    private String name;
     private int age;
     private String address;
     private String phoneNumber;
@@ -41,8 +39,8 @@ public class Patient extends Person implements Comparable<Patient> {
     @Override
     public String toString() {
         return "Patient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
