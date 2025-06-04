@@ -2,9 +2,9 @@ package daisukeclinic.controller;
 
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
+import daisukeclinic.model.Person;
 
 public class PatientRecord {
-
     private LinkedList<Patient> patients;
     private static PatientRecord instance;
     private int lastId = 0;
@@ -26,14 +26,14 @@ public class PatientRecord {
 
     public void removePatientById(int id) {
         Patient decoy = new Patient(id, null, 0, null, null);
-        decoy.setCompareId(true);
+        decoy.setCompareMode(Person.CompareMode.COMPARE_BY_ID);
         patients.remove(decoy);
     }
 
     public boolean findPatientByName(String name) {
         Patient decoy = new Patient(0, name, 0, null, null);
-        decoy.setCompareId(false);
-        if (patients.get(decoy) != null) {
+        decoy.setCompareMode(Person.CompareMode.COMPARE_BY_NAME);
+        if (patients.find(decoy) != null) {
             return true;
         }
         return false;

@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Doctor extends Person implements Comparable<Doctor> {
     private String specialty;
     private LocalDateTime loginTime;
+    private LocalDateTime logoutTime;
 
     public Doctor(int id, String name, String specialty) {
         super(id, name);
@@ -20,12 +21,16 @@ public class Doctor extends Person implements Comparable<Doctor> {
         return loginTime;
     }
 
-    public void setLoginTime(LocalDateTime loginTime) {
-        this.loginTime = loginTime;
+    public void updateLoginTime() {
+        loginTime = LocalDateTime.now();
     }
 
-    public void updateLoginTime() {
-        this.loginTime = LocalDateTime.now();
+    public LocalDateTime getLogoutTime() {
+        return logoutTime;
+    }
+
+    public void updateLogoutTime() {
+        logoutTime = LocalDateTime.now();
     }
 
     @Override
@@ -40,6 +45,6 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     @Override
     public int compareTo(Doctor other) {
-        return compareToLocal(other);
+        return compareWithAnotherPerson(other);
     }
 }

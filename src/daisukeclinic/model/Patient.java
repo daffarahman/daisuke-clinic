@@ -51,9 +51,6 @@ public class Patient extends Person implements Comparable<Patient> {
 
     @Override
     public int compareTo(Patient other) {
-        if (isCompareId() || other.isCompareId()) {
-            return Integer.compare(id, other.id);
-        }
-        return name.compareTo(other.getName());
+        return compareWithAnotherPerson(other);
     }
 }

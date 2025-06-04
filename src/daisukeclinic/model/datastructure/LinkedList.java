@@ -2,28 +2,24 @@ package daisukeclinic.model.datastructure;
 
 public class LinkedList<T extends Comparable<T>> {
     protected Node<T> head;
-    protected Node<T> last;
     protected int size;
 
     public LinkedList() {
-        last = head;
         size = 0;
     }
 
     public void insertFront(T data) {
         Node<T> newNode = new Node<>(data);
-        if (head == null) {
-            head = newNode;
-        } else {
+        if (!isEmpty()) {
             newNode.next = head;
-            head = newNode;
         }
+        head = newNode;
         size++;
     }
 
     public void insertBack(T data) {
         Node<T> newNode = new Node<>(data);
-        if (head == null) {
+        if (isEmpty()) {
             head = newNode;
         } else {
             Node<T> current = head;
@@ -36,7 +32,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public void remove(T data) {
-        if (head == null)
+        if (isEmpty())
             return;
 
         if (head.data.compareTo(data) == 0) {
@@ -57,7 +53,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public T removeFirst() {
-        if (head == null) {
+        if (isEmpty()) {
             return null;
         } else {
             T removed = head.data;
@@ -68,7 +64,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public T removeLast() {
-        if (head == null) {
+        if (isEmpty()) {
             return null;
         }
 
@@ -91,7 +87,7 @@ public class LinkedList<T extends Comparable<T>> {
 
     }
 
-    public T get(T data) {
+    public T find(T data) {
         Node<T> current = head;
         while (current != null) {
             if (current.data.compareTo(data) == 0) {
@@ -103,7 +99,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public T getFirst() {
-        if (head != null) {
+        if (!isEmpty()) {
             return head.data;
         }
         return null;
@@ -114,7 +110,7 @@ public class LinkedList<T extends Comparable<T>> {
     }
 
     public T getIndex(int targetIndex) {
-        if (head == null) {
+        if (isEmpty()) {
             return null;
         }
 
@@ -148,7 +144,6 @@ public class LinkedList<T extends Comparable<T>> {
 
     public void clear() {
         head = null;
-        last = head;
         size = 0;
     }
 }

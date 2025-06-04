@@ -3,8 +3,12 @@ package daisukeclinic.model;
 public class Person {
     private int id;
     private String name;
+    private CompareMode compareMode = CompareMode.COMPARE_BY_ID;
 
-    private boolean compareId = true;
+    public static enum CompareMode {
+        COMPARE_BY_ID,
+        COMPARE_BY_NAME
+    }
 
     public Person(int id, String name) {
         this.id = id;
@@ -27,19 +31,19 @@ public class Person {
         this.name = name.strip();
     }
 
-    public boolean isCompareId() {
-        return compareId;
+    public CompareMode getCompareMode() {
+        return compareMode;
     }
 
-    public void setCompareId(boolean b) {
-        compareId = b;
+    public void setCompareMode(CompareMode compareMode) {
+        this.compareMode = compareMode;
     }
 
-    public int compareToLocal(Person other) {
-        if (compareId || other.isCompareId()) {
-            return Integer.compare(id, other.getId());
+    public int compareWithAnotherPerson(Person other) {
+        if (compareMode == CompareMode.COMPARE_BY_NAME || other.compareMode == CompareMode.COMPARE_BY_NAME) {
+            return name.toLowerCase().strip().compareTo(other.name.toLowerCase().strip());
         }
-        return name.toLowerCase().strip().compareTo(other.name.toLowerCase().strip());
+        return Integer.compare(id, other.id);
     }
 
     @Override
