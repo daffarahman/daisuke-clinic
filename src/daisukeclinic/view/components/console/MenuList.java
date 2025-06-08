@@ -2,7 +2,7 @@ package daisukeclinic.view.components.console;
 
 import java.util.Scanner;
 
-import daisukeclinic.utils.Utility;
+import daisukeclinic.utils.ConsoleUtility;
 
 public class MenuList implements Comparable<MenuList> {
     private Scanner scanner;
@@ -27,19 +27,19 @@ public class MenuList implements Comparable<MenuList> {
         int menuWidth = getMenuWidth();
 
         System.out.print("╔");
-        Utility.printChars('═', menuWidth);
+        ConsoleUtility.printChars('═', menuWidth);
         System.out.println("╗");
 
         if (title != null && !title.isEmpty()) {
             int padding = (menuWidth - title.length()) / 2;
             System.out.print("║");
-            Utility.printChars(' ', padding);
+            ConsoleUtility.printChars(' ', padding);
             System.out.print(title);
-            Utility.printChars(' ', menuWidth - title.length() - padding);
+            ConsoleUtility.printChars(' ', menuWidth - title.length() - padding);
             System.out.println("║");
 
             System.out.print("╠");
-            Utility.printChars('═', menuWidth);
+            ConsoleUtility.printChars('═', menuWidth);
             System.out.println("╣");
         }
 
@@ -53,18 +53,12 @@ public class MenuList implements Comparable<MenuList> {
         }
 
         System.out.print("╚");
-        Utility.printChars('═', menuWidth);
+        ConsoleUtility.printChars('═', menuWidth);
         System.out.println("╝");
     }
 
     public int prompt() {
-        int selection = 0;
-        System.out.print("Selection -> ");
-        try {
-            selection = scanner.nextInt();
-        } catch (Exception e) {
-        }
-        return selection;
+        return ConsoleUtility.getIntPromptInput("Selection -> ");
     }
 
     public void run(int selection) {

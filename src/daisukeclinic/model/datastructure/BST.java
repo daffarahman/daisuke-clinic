@@ -11,33 +11,33 @@ public class BST<T extends Comparable<T>> {
 
     // Insert Normal
     public void insert(T data) {
-        root = insertBalance(root, new BSTNode<T>(data));
+        root = insertBalanceHelper(root, new BSTNode<T>(data));
     }
 
-    private BSTNode<T> insertHelper(BSTNode<T> parent, BSTNode<T> node) {
-        T data = node.data;
+    // private BSTNode<T> insertHelper(BSTNode<T> parent, BSTNode<T> node) {
+    // T data = node.data;
 
-        if (parent == null) {
-            parent = node;
-            return parent;
-        } else if (data.compareTo(parent.data) < 0) {
-            parent.left = insertHelper(parent.left, node);
-        } else {
-            parent.right = insertHelper(parent.right, node);
-        }
+    // if (parent == null) {
+    // parent = node;
+    // return parent;
+    // } else if (data.compareTo(parent.data) < 0) {
+    // parent.left = insertHelper(parent.left, node);
+    // } else {
+    // parent.right = insertHelper(parent.right, node);
+    // }
 
-        return parent;
-    }
+    // return parent;
+    // }
 
-    private BSTNode<T> insertBalance(BSTNode<T> parent, BSTNode<T> node) {
+    private BSTNode<T> insertBalanceHelper(BSTNode<T> parent, BSTNode<T> node) {
         if (parent == null) {
             return node;
         }
 
         if (node.data.compareTo(parent.data) < 0) {
-            parent.left = insertBalance(parent.left, node);
+            parent.left = insertBalanceHelper(parent.left, node);
         } else if (node.data.compareTo(parent.data) > 0) {
-            parent.right = insertBalance(parent.right, node);
+            parent.right = insertBalanceHelper(parent.right, node);
         } else {
             return parent;
         }

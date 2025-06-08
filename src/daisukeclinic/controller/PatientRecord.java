@@ -47,6 +47,29 @@ public class PatientRecord {
         return false;
     }
 
+    public boolean findPatientsByNameContaining(String searchTerm) {
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            return false;
+        }
+
+        // Escape special regex characters in the search term
+        String escapedSearchTerm = searchTerm.replaceAll("[\\W]", "\\\\$0");
+        String regex = "(?i).*" + escapedSearchTerm + ".*"; // Case-insensitive pattern
+        int found = 0;
+
+        for (int i = 0; i < patients.getSize(); i++) {
+            Patient patient = patients.getIndex(i);
+            if (patient.getName() != null && patient.getName().matches(regex)) {
+                System.out.println(patient);
+                found++;
+            }
+        }
+
+        if (found > 0)
+            return true;
+        return false;
+    }
+
     public void displayAllPatients() {
         System.out.printf("%-5s %-20s %-3s %-30s %-15s%n", "ID", "Name", "Age", "Address", "Phone Number");
         System.out.println("-------------------------------------------------------------------------------------");

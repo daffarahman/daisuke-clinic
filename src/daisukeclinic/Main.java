@@ -3,19 +3,13 @@ package daisukeclinic;
 import javax.swing.SwingUtilities;
 
 import daisukeclinic.controller.PatientRecord;
-import daisukeclinic.utils.Utility;
-import daisukeclinic.model.Doctor;
-import daisukeclinic.model.Patient;
-import daisukeclinic.model.datastructure.LinkedList;
+import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.view.AppConsole;
 import daisukeclinic.view.AppFrame;
 import daisukeclinic.view.components.console.MenuItem;
 import daisukeclinic.view.components.console.MenuList;
 
 public class Main {
-
-    public static LinkedList<Doctor> doctors;
-    public static LinkedList<Patient> patients;
 
     public Main() {
         loadData();
@@ -26,21 +20,13 @@ public class Main {
         bootMenuList.addMenuItem(new MenuItem("Exit", () -> System.exit(0)));
 
         while (true) {
-            Utility.clearScreen();
+            ConsoleUtility.clearScreen();
             bootMenuList.printMenu();
             bootMenuList.run(bootMenuList.prompt());
         }
     }
 
     public void loadData() {
-        Main.doctors = new LinkedList<>();
-        Main.doctors.insertBack(new Doctor(1, "Dr. Smith", "Cardiology"));
-        Main.doctors.insertBack(new Doctor(2, "Dr. Jones", "Neurology"));
-        Main.doctors.insertBack(new Doctor(3, "Dr. Brown", "Pediatrics"));
-        Main.doctors.insertBack(new Doctor(4, "Dr. Taylor", "Orthopedics"));
-        Main.doctors.insertBack(new Doctor(5, "Dr. Wilson", "Dermatology"));
-        Main.doctors.insertBack(new Doctor(6, "Dr. Johnson", "Oncology"));
-
         PatientRecord.getInstance().addPatient("Alice", 27, "123 Main St", "555-1234");
         PatientRecord.getInstance().addPatient("Bob", 34, "456 Elm St", "555-5678");
         PatientRecord.getInstance().addPatient("Charlie", 29, "789 Oak St", "555-9012");

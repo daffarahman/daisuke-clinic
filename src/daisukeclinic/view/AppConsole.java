@@ -1,8 +1,6 @@
 package daisukeclinic.view;
 
-import java.util.Scanner;
-
-import daisukeclinic.utils.Utility;
+import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.model.Patient;
@@ -19,11 +17,7 @@ public class AppConsole {
     private Stack<MenuList> menuStack;
     private boolean menuShow = true;
 
-    private Scanner scanner;
-
     public AppConsole() {
-        scanner = new Scanner(System.in);
-
         menuStack = new Stack<>();
 
         setupMenus();
@@ -31,7 +25,7 @@ public class AppConsole {
 
         while (!menuStack.isEmpty()) {
             if (menuShow) {
-                Utility.clearScreen();
+                ConsoleUtility.clearScreen();
                 menuStack.peek().printMenu();
                 menuStack.peek().run(menuStack.peek().prompt());
             }
@@ -50,35 +44,52 @@ public class AppConsole {
         mainMenuList.addMenuItem(new MenuItem("View all data", null));
         mainMenuList.addMenuItem(new MenuItem("Exit", () -> menuStack.pop()));
 
+        // ========== MANAGE PATIENTS ==========
+
         // Add Patient
         managePatientMenuList.addMenuItem(new MenuItem("Add New Patient", () -> {
-            Utility.clearScreen();
-            Utility.printTitle("Add New Patient");
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Add New Patient");
+
+            String name = ConsoleUtility.getStringPromptInput("Patient's Name: ");
+            int age = ConsoleUtility.getIntPromptInput("Patient's Age: ");
+            String address = ConsoleUtility.getStringPromptInput("Patient's Address: ");
+            String phoneNumber = ConsoleUtility.getPhoneNumberPromptInput("Patient's Phone Number: ");
+
+            PatientRecord.getInstance().addPatient(name, age, address, phoneNumber);
+            System.out.println("New patient successfuly added!\n");
+
+            ConsoleUtility.pressAnyKeyToContinue();
         }));
+
+        // Remove Patient
         managePatientMenuList.addMenuItem(new MenuItem("Remove Patient", () -> {
             MenuList removePatientMenuList = new MenuList("Remove Patient", 2);
             removePatientMenuList.addMenuItem(new MenuItem("Remove By Id", () -> {
-                Utility.clearScreen();
-                Utility.printTitle("Remove a Patient Their ID");
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("Remove a Patient Their ID");
                 System.out.print("Enter Patient ID: ");
-                int selectedId = getIntegerInput(-1);
+                int selectedId = ConsoleUtility.getIntPromptInput("Enter Patient ID: ");
                 if (PatientRecord.getInstance().removePatientById(selectedId)) {
                     System.out.printf("Patient with id: %d has been successfuly removed\n", selectedId);
                 } else {
                     System.out.printf("Unable to find patient with id: %d!\n", selectedId);
                 }
-                Utility.pressAnyKeyToContinue();
+                ConsoleUtility.pressAnyKeyToContinue();
             }));
             removePatientMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
             menuStack.push(removePatientMenuList);
         }));
+
+        // Search Patient
         managePatientMenuList.addMenuItem(new MenuItem("Search Patient", () -> {
             MenuList searchPatientMenuList = new MenuList("Search Patient", 3);
+
+            // Search Patient by Id (BST)
             searchPatientMenuList.addMenuItem(new MenuItem("Search By Id (BST)", () -> {
-                Utility.clearScreen();
-                Utility.printTitle("Fast lookup for patient");
-                System.out.print("Enter Patient ID: ");
-                int selectedId = getIntegerInput(-1);
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("Fast lookup for patient");
+                int selectedId = ConsoleUtility.getIntPromptInput("Enter Patient ID: ");
                 Patient foundPatient = SearchablePatientTree.getInstance().searchPatient(selectedId);
                 if (foundPatient != null) {
                     System.out.printf("Patient with id: %d found!\n", selectedId);
@@ -86,65 +97,105 @@ public class AppConsole {
                 } else {
                     System.out.printf("Unable to find patient with id: %d!\n", selectedId);
                 }
-                Utility.pressAnyKeyToContinue();
+                ConsoleUtility.pressAnyKeyToContinue();
             }));
-            searchPatientMenuList.addMenuItem(new MenuItem("Search By Name", null));
+
+            // Search Patient by Name
+            searchPatientMenuList.addMenuItem(new MenuItem("Search By Name", () -> {
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("Search Patient By Name");
+
+                String name = ConsoleUtility.getStringPromptInput("Patient Name: ");
+                PatientRecord.getInstance().findPatientsByNameContaining(name);
+
+                ConsoleUtility.pressAnyKeyToContinue();
+            }));
+
+            // Back Menu
             searchPatientMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
             menuStack.push(searchPatientMenuList);
         }));
+
+        // Display All Patients
         managePatientMenuList.addMenuItem(new MenuItem("Display All Patients", () -> {
             MenuList displayAllPatientMenuList = new MenuList("Display All Patient", 5);
+
+            // Normal
             displayAllPatientMenuList.addMenuItem(new MenuItem("Normal", () -> {
-                Utility.clearScreen();
-                Utility.printTitle("All Patients in Daisuke Clinic");
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("All Patients in Daisuke Clinic");
                 PatientRecord.getInstance().displayAllPatients();
-                Utility.pressAnyKeyToContinue();
+                ConsoleUtility.pressAnyKeyToContinue();
             }));
+
+            // Preorder
             displayAllPatientMenuList.addMenuItem(new MenuItem("Preorder", () -> {
-                Utility.clearScreen();
-                Utility.printTitle("All Patients in Daisuke Clinic (Preorder)");
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("All Patients in Daisuke Clinic (Preorder)");
                 SearchablePatientTree.getInstance().preOrderDisplay();
-                Utility.pressAnyKeyToContinue();
+                ConsoleUtility.pressAnyKeyToContinue();
             }));
+
+            // Inorder
             displayAllPatientMenuList.addMenuItem(new MenuItem("Inorder", () -> {
-                Utility.clearScreen();
-                Utility.printTitle("All Patients in Daisuke Clinic (Inorder)");
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("All Patients in Daisuke Clinic (Inorder)");
                 SearchablePatientTree.getInstance().inOrderDisplay();
-                Utility.pressAnyKeyToContinue();
+                ConsoleUtility.pressAnyKeyToContinue();
             }));
+
+            // Postorder
             displayAllPatientMenuList.addMenuItem(new MenuItem("Postorder", () -> {
-                Utility.clearScreen();
-                Utility.printTitle("All Patients in Daisuke Clinic (Postorder)");
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("All Patients in Daisuke Clinic (Postorder)");
                 SearchablePatientTree.getInstance().postOrderDisplay();
-                Utility.pressAnyKeyToContinue();
+                ConsoleUtility.pressAnyKeyToContinue();
             }));
+
+            // Back menu
             displayAllPatientMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
+
             menuStack.push(displayAllPatientMenuList);
         }));
+
+        // Back Menu
         managePatientMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
 
+        // ========== END MANAGE PATIENTS ==========
+
+        // ========== START MANAGE DOCTORS ==========
+
+        // Register new doctor
         manageDoctorMenuList.addMenuItem(new MenuItem("Register New Doctor", null));
+
+        // Login doctor
         manageDoctorMenuList.addMenuItem(new MenuItem("Login Doctor", null));
+
+        // Logout doctor
         manageDoctorMenuList.addMenuItem(new MenuItem("Logout Doctor", null));
-        manageDoctorMenuList.addMenuItem(new MenuItem("View All Doctors", null));
+
+        // All doctors
+        manageDoctorMenuList.addMenuItem(new MenuItem("View All Doctors In This Clinic", null));
+
+        // All logged in doctors
         manageDoctorMenuList.addMenuItem(new MenuItem("View All Logged In Doctors", null));
+
+        // Last logged in doctors
         manageDoctorMenuList.addMenuItem(new MenuItem("View Last Logged In Doctors", null));
+
+        // Back to main menu
         manageDoctorMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
+
+        // ========== END MANAGE DOCTORS ==========
+
+        // ========== START MANAGE APPOINTMENT ==========
 
         manageAppointmentMenuList.addMenuItem(new MenuItem("Schedule Appointment", null));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Proccess Appointment", null));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Cancel Appointment", null));
         manageAppointmentMenuList.addMenuItem(new MenuItem("View Upcoming Appointments", null));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
-    }
 
-    private int getIntegerInput(int fallback) {
-        try {
-            return scanner.nextInt();
-        } catch (Exception e) {
-            return fallback;
-        } finally {
-            scanner.nextLine();
-        }
+        // ========== END MANAGE APPOINTMENT ==========
     }
 }
