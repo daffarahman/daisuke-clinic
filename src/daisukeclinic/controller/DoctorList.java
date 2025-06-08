@@ -7,6 +7,7 @@ import daisukeclinic.model.datastructure.LinkedList;
 public class DoctorList {
     private LinkedList<Doctor> doctorList;
     private static DoctorList instance;
+    private int lastId = 0;
 
     private DoctorList() {
         doctorList = new LinkedList<>();
@@ -21,6 +22,10 @@ public class DoctorList {
 
     public LinkedList<Doctor> getList() {
         return doctorList;
+    }
+
+    public void registerDoctor(String name, String specialty) {
+        doctorList.insertBack(new Doctor(lastId++, name, specialty));
     }
 
     public Doctor findDoctorById(int id) {

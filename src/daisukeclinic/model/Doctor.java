@@ -9,7 +9,7 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     public Doctor(int id, String name, String specialty) {
         super(id, name);
-        this.specialty = specialty.strip();
+        this.specialty = (specialty == null) ? "" : specialty.strip();
         this.loginTime = LocalDateTime.now();
     }
 

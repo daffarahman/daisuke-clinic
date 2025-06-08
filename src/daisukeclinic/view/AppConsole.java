@@ -199,6 +199,7 @@ public class AppConsole {
 
         // ========== START MANAGE APPOINTMENT ==========
 
+        // Schedule Appointment
         manageAppointmentMenuList.addMenuItem(new MenuItem("Schedule Appointment", () -> {
             ConsoleUtility.clearScreen();
             ConsoleUtility.printTitle("Schedule Appointment");
@@ -236,14 +237,28 @@ public class AppConsole {
 
             ConsoleUtility.pressAnyKeyToContinue();
         }));
-        manageAppointmentMenuList.addMenuItem(new MenuItem("Proccess Appointment", null));
+
+        // Process Appointment
+        manageAppointmentMenuList.addMenuItem(new MenuItem("Proccess Appointment", () -> {
+        }));
+
+        // Cancel Appointment
         manageAppointmentMenuList.addMenuItem(new MenuItem("Cancel Appointment", null));
+
+        // View Upcoming Appointments
         manageAppointmentMenuList.addMenuItem(new MenuItem("View Upcoming Appointments", () -> {
             ConsoleUtility.clearScreen();
             ConsoleUtility.printTitle("Upcoming Appointments");
 
             LinkedList<MapEntry<Integer, AppointmentQueue>> appointmentEntries = AppointmentManager.getInstance()
                     .getAppointments().getEntries();
+
+            for (int i = 0; i < appointmentEntries.getSize(); i++) {
+                System.out.println("Doctor id: " + appointmentEntries.getIndex(i).key);
+                appointmentEntries.getIndex(i).value.viewUpcomingAppointments();
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
 
         }));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));

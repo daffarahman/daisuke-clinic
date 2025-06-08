@@ -12,9 +12,7 @@ public class Person {
 
     public Person(int id, String name) {
         this.id = id;
-        if (name == null)
-            name = "";
-        this.name = name.strip();
+        this.name = (name == null) ? "" : name.strip();
     }
 
     public int getId() {
