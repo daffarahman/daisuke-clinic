@@ -217,10 +217,10 @@ public class BST<T extends Comparable<T>> {
         return minValue;
     }
 
-    private T findPredecessor(BSTNode<T> node) {
-        while (node.right != null) {
-            node = node.right;
-        }
-        return node.data;
-    }
+    // private T findPredecessor(BSTNode<T> node) {
+    // while (node.right != null) {
+    // node = node.right;
+    // }
+    // return node.data;
+    // }
 }

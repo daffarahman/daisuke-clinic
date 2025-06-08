@@ -1,18 +1,14 @@
 package daisukeclinic.view.components.console;
 
-import java.util.Scanner;
-
 import daisukeclinic.utils.ConsoleUtility;
 
 public class MenuList implements Comparable<MenuList> {
-    private Scanner scanner;
 
     private String title;
     private MenuItem[] menuItems;
     private int menuCount;
 
     public MenuList(String title, int size) {
-        scanner = new Scanner(System.in);
 
         this.title = title;
         this.menuItems = new MenuItem[size];

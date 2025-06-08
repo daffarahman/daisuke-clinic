@@ -1,9 +1,18 @@
 package daisukeclinic.view;
 
 import daisukeclinic.utils.ConsoleUtility;
+
+import java.time.LocalDateTime;
+
+import daisukeclinic.controller.AppointmentManager;
+import daisukeclinic.controller.AppointmentQueue;
+import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.model.Patient;
+import daisukeclinic.model.datastructure.LinkedList;
+import daisukeclinic.model.datastructure.Map;
+import daisukeclinic.model.datastructure.MapEntry;
 import daisukeclinic.model.datastructure.Stack;
 import daisukeclinic.view.components.console.MenuItem;
 import daisukeclinic.view.components.console.MenuList;
@@ -190,10 +199,53 @@ public class AppConsole {
 
         // ========== START MANAGE APPOINTMENT ==========
 
-        manageAppointmentMenuList.addMenuItem(new MenuItem("Schedule Appointment", null));
+        manageAppointmentMenuList.addMenuItem(new MenuItem("Schedule Appointment", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Schedule Appointment");
+
+            int patientId = 0;
+            while (true) {
+                patientId = ConsoleUtility.getIntPromptInput("Patient's Id: ");
+                if (PatientRecord.getInstance().findPatientById(patientId) == null) {
+                    System.out.println("Patient with that ID does not exist!");
+                    continue;
+                }
+                break;
+            }
+
+            int doctorId = 0;
+            while (true) {
+                doctorId = ConsoleUtility.getIntPromptInput("Doctor's Id: ");
+                if (DoctorList.getInstance().findDoctorById(doctorId) == null) {
+                    System.out.println("Doctor with that ID does not exist!");
+                    continue;
+                }
+                break;
+            }
+
+            LocalDateTime appointmentTime = ConsoleUtility.getDateTimePromptInput("Date & Time: ");
+
+            if (AppointmentManager.getInstance().getAppointments().isPresent(doctorId)) {
+                AppointmentManager.getInstance().getAppointments().get(doctorId).scheduleAppointment(patientId,
+                        doctorId, appointmentTime);
+            } else {
+                AppointmentManager.getInstance().getAppointments().put(doctorId, new AppointmentQueue());
+                AppointmentManager.getInstance().getAppointments().get(doctorId).scheduleAppointment(patientId,
+                        doctorId, appointmentTime);
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
+        }));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Proccess Appointment", null));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Cancel Appointment", null));
-        manageAppointmentMenuList.addMenuItem(new MenuItem("View Upcoming Appointments", null));
+        manageAppointmentMenuList.addMenuItem(new MenuItem("View Upcoming Appointments", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Upcoming Appointments");
+
+            LinkedList<MapEntry<Integer, AppointmentQueue>> appointmentEntries = AppointmentManager.getInstance()
+                    .getAppointments().getEntries();
+
+        }));
         manageAppointmentMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
 
         // ========== END MANAGE APPOINTMENT ==========

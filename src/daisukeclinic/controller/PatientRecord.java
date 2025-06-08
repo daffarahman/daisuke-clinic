@@ -38,15 +38,19 @@ public class PatientRecord {
         return true;
     }
 
-    public boolean findPatientByName(String name) {
-        Patient decoy = new Patient(0, name, 0, null, null);
-        decoy.setCompareMode(Person.CompareMode.COMPARE_BY_NAME);
-        if (patients.find(decoy) != null) {
-            return true;
-        }
-        return false;
+    public Patient findPatientById(int id) {
+        Patient decoy = new Patient(id, null, 0, null, null);
+        decoy.setCompareMode(Person.CompareMode.COMPARE_BY_ID);
+        return patients.find(decoy);
     }
 
+    public Patient findPatientByName(String name) {
+        Patient decoy = new Patient(0, name, 0, null, null);
+        decoy.setCompareMode(Person.CompareMode.COMPARE_BY_NAME);
+        return patients.find(decoy);
+    }
+
+    // TODO:
     public boolean findPatientsByNameContaining(String searchTerm) {
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
             return false;

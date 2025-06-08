@@ -16,4 +16,9 @@ public class AppointmentManager {
         }
         return instance;
     }
+
+    public Map<Integer, AppointmentQueue> getAppointments() {
+        return appointments;
+    }
+
 }

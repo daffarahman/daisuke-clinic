@@ -1,5 +1,7 @@
 package daisukeclinic.utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ConsoleUtility {
@@ -44,6 +46,27 @@ public class ConsoleUtility {
                 System.out.println("Example: +6281234567890 or 081234567890");
             }
         }
+        return result;
+    }
+
+    public static LocalDateTime getDateTimePromptInput(String promptMessage) {
+        boolean looping = true;
+        LocalDateTime result = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        while (looping) {
+            System.out.print(promptMessage + " (Format: yyyy-MM-dd HH:mm): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                result = LocalDateTime.parse(input, formatter);
+                looping = false;
+            } catch (Exception e) {
+                System.out.println("Invalid date time format! Please use yyyy-MM-dd HH:mm");
+                System.out.println("Example: 2023-12-15 14:30");
+            }
+        }
+
         return result;
     }
 

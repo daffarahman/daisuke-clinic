@@ -23,4 +23,8 @@ public class Map<K extends Comparable<K>, V> {
     public boolean isPresent(K key) {
         return entries.find(new MapEntry<K, V>(key, null)) != null;
     }
+
+    public LinkedList<MapEntry<K, V>> getEntries() {
+        return entries;
+    }
 }
