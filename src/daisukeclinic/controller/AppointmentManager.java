@@ -3,6 +3,7 @@ package daisukeclinic.controller;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import daisukeclinic.model.Appointment;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Map;
 import daisukeclinic.model.datastructure.MapEntry;
@@ -27,8 +28,11 @@ public class AppointmentManager implements Serializable {
         return appointments;
     }
 
-    public AppointmentQueue getDoctorQueue(int doctorId) {
-        return appointments.get(doctorId);
+    public AppointmentQueue getAppointmentQueue(int doctorId) {
+        if (appointments.isPresent(doctorId)) {
+            return appointments.get(doctorId);
+        }
+        return null;
     }
 
     public void scheduleAppointment(int patientId, int doctorId, LocalDateTime time) {
@@ -38,6 +42,13 @@ public class AppointmentManager implements Serializable {
             appointments.put(doctorId, new AppointmentQueue());
             appointments.get(doctorId).scheduleAppointment(patientId, doctorId, time);
         }
+    }
+
+    public Appointment proccessNextAppointment(int doctorId) {
+        if (appointments.isPresent(doctorId)) {
+            return appointments.get(doctorId).proccessNextAppointment();
+        }
+        return null;
     }
 
     public void viewUpcomingAppointments() {

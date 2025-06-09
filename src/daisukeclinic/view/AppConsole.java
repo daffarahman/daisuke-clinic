@@ -12,6 +12,7 @@ import daisukeclinic.controller.AppointmentQueue;
 import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
+import daisukeclinic.model.Appointment;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Stack;
@@ -173,7 +174,19 @@ public class AppConsole {
         // ========== START MANAGE DOCTORS ==========
 
         // Register new doctor
-        manageDoctorMenuList.addMenuItem(new MenuItem("Register New Doctor", null));
+        manageDoctorMenuList.addMenuItem(new MenuItem("Register New Doctor", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Register New Doctor");
+
+            String name = ConsoleUtility.getStringPromptInput("Name: ");
+            String specialty = ConsoleUtility.getStringPromptInput("Specialty: ");
+
+            DoctorList.getInstance().registerDoctor(name, specialty);
+
+            System.out.println("Doctor is successfuly added! . . .\n");
+
+            ConsoleUtility.pressAnyKeyToContinue();
+        }));
 
         // Login doctor
         manageDoctorMenuList.addMenuItem(new MenuItem("Login Doctor", null));
@@ -244,27 +257,44 @@ public class AppConsole {
             int doctorId = ConsoleUtility.getIntPromptInput("Doctor ID: ");
             System.out.println(AppointmentManager.getInstance().getAppointments().isPresent(doctorId));
 
-            AppointmentQueue appointments = AppointmentManager.getInstance().getDoctorQueue(doctorId);
-
-            if (appointments != null) {
-                if (appointments.getQueue().isEmpty()) {
-                    System.out.println("No upcoming appointments for the Doctor with ID: " + doctorId +
-                            "!");
-                } else {
-                    System.out.println("Doctor Found Appointment Proccessed!!");
-                    System.out.println(
-                            appointments.proccessNextAppointment());
-                }
+            Appointment appointment = AppointmentManager.getInstance().proccessNextAppointment(doctorId);
+            if (appointment != null) {
+                LinkedList<Appointment> appointmentList = new LinkedList<>();
+                appointmentList.insertBack(appointment);
+                TableUtility.displayAppointmentTable(appointmentList);
+                System.out.println("\nAppointment proccessed, get well soon!\n");
             } else {
-                System.out.println("No upcoming appointments for the Doctor with ID: " + doctorId +
-                        "!");
+                System.out.println("\nWe have a problem proccessing the appointment.\n");
             }
 
             ConsoleUtility.pressAnyKeyToContinue();
         }));
 
         // Cancel Appointment
-        manageAppointmentMenuList.addMenuItem(new MenuItem("Cancel Appointment", null));
+        manageAppointmentMenuList.addMenuItem(new MenuItem("Cancel Appointment", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Cancel Appointment");
+
+            int doctorId = ConsoleUtility.getIntPromptInput("Enter doctor ID: ");
+            AppointmentQueue appointmentQueue = AppointmentManager.getInstance().getAppointmentQueue(doctorId);
+
+            if (appointmentQueue != null) {
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle("Select Appointment to Cancel");
+                TableUtility.displayAppointmentTable(appointmentQueue.getQueue());
+                int appointmentId = ConsoleUtility.getIntPromptInput("Enter Appointment ID: ");
+                Appointment appointment = appointmentQueue.getQueue()
+                        .find(new Appointment(doctorId, appointmentId, doctorId, null));
+                if (appointment != null) {
+                    LinkedList<Appointment> deletedAppointment = new LinkedList<>();
+                    deletedAppointment.insertBack(appointment);
+                    TableUtility.displayAppointmentTable(deletedAppointment);
+                    // TODO:
+                }
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
+        }));
 
         // View Upcoming Appointments
         manageAppointmentMenuList.addMenuItem(new MenuItem("View Upcoming Appointments", () -> {
