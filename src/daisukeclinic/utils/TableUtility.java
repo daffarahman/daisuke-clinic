@@ -1,6 +1,9 @@
 package daisukeclinic.utils;
 
+import java.time.format.DateTimeFormatter;
+
 import daisukeclinic.model.Appointment;
+import daisukeclinic.model.Doctor;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
 
@@ -19,6 +22,25 @@ public class TableUtility {
         }
     }
 
+    public static void displayDoctorTable(LinkedList<Doctor> list) {
+        System.out.printf("%-5s %-20s %-20s %-20s %-20s%n", "ID", "Name", "Specialty",
+                "Last Login", "Last Logout");
+        System.out.println("-------------------------------------------------------------------------------------");
+        if (list != null) {
+            for (int i = 0; i < list.getSize(); i++) {
+                Doctor doctor = list.getIndex(i);
+                String loginTime = doctor.getLoginTime() == null ? "-"
+                        : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(doctor.getLoginTime());
+                String logoutTime = doctor.getLogoutTime() == null ? "-"
+                        : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(doctor.getLogoutTime());
+
+                System.out.printf("%-5d %-20s %-20s %-20s %-20s%n",
+                        doctor.getId(), doctor.getName(), doctor.getSpecialty(),
+                        loginTime, logoutTime);
+            }
+        }
+    }
+
     public static void displayAppointmentTable(LinkedList<Appointment> list) {
         System.out.printf("%-5s %-20s %-20s %-15s%n", "ID", "Patient ID", "Doctor ID", "Time");
         System.out.println("------------------------------------------------------------------------");
@@ -32,4 +54,5 @@ public class TableUtility {
             }
         }
     }
+
 }

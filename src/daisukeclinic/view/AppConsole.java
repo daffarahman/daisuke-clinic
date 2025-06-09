@@ -3,6 +3,7 @@ package daisukeclinic.view;
 import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 
+import java.io.Console;
 import java.time.LocalDateTime;
 
 import javax.swing.SwingUtilities;
@@ -14,7 +15,6 @@ import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
-import daisukeclinic.model.datastructure.MapEntry;
 import daisukeclinic.model.datastructure.Stack;
 import daisukeclinic.view.components.console.MenuItem;
 import daisukeclinic.view.components.console.MenuList;
@@ -184,7 +184,12 @@ public class AppConsole {
 
         // All doctors
         manageDoctorMenuList.addMenuItem(new MenuItem("View All Doctors In This Clinic", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("All Doctors In Daisuke Clinic");
 
+            DoctorList.getInstance().displayAllDoctors();
+
+            ConsoleUtility.pressAnyKeyToContinue();
         }));
 
         // All logged in doctors
@@ -227,14 +232,7 @@ public class AppConsole {
 
             LocalDateTime appointmentTime = ConsoleUtility.getDateTimePromptInput("Date & Time: ");
 
-            if (AppointmentManager.getInstance().getAppointments().isPresent(doctorId)) {
-                AppointmentManager.getInstance().getAppointments().get(doctorId).scheduleAppointment(patientId,
-                        doctorId, appointmentTime);
-            } else {
-                AppointmentManager.getInstance().getAppointments().put(doctorId, new AppointmentQueue());
-                AppointmentManager.getInstance().getAppointments().get(doctorId).scheduleAppointment(patientId,
-                        doctorId, appointmentTime);
-            }
+            AppointmentManager.getInstance().scheduleAppointment(patientId, doctorId, appointmentTime);
 
             ConsoleUtility.pressAnyKeyToContinue();
         }));
@@ -274,16 +272,7 @@ public class AppConsole {
             ConsoleUtility.clearScreen();
             ConsoleUtility.printTitle("Upcoming Appointments");
 
-            LinkedList<MapEntry<Integer, AppointmentQueue>> appointmentEntries = AppointmentManager.getInstance()
-                    .getAppointments().getEntries();
-
-            for (int i = 0; i < appointmentEntries.getSize(); i++) {
-                MapEntry<Integer, AppointmentQueue> entry = appointmentEntries.getIndex(i);
-                if (!entry.value.getQueue().isEmpty()) {
-                    System.out.println("Doctor id: " + entry.key);
-                    TableUtility.displayAppointmentTable(appointmentEntries.getIndex(i).value.getQueue());
-                }
-            }
+            AppointmentManager.getInstance().viewUpcomingAppointments();
 
             ConsoleUtility.pressAnyKeyToContinue();
 
