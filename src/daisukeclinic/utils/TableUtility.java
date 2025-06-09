@@ -1,7 +1,5 @@
 package daisukeclinic.utils;
 
-import java.time.format.DateTimeFormatter;
-
 import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.model.Appointment;
