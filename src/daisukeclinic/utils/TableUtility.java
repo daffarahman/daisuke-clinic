@@ -6,6 +6,7 @@ import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.model.Appointment;
 import daisukeclinic.model.Doctor;
+import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
 
@@ -25,6 +26,24 @@ public class TableUtility {
         }
     }
 
+    public static void displayMedicalRecordsTable(LinkedList<MedicalRecord> list) {
+        System.out.printf("%-30s %-10s %-30s %-40s%n", "Date & Time", "Doctor ID", "Doctor Name", "Problem",
+                "Address", "Phone Number");
+        System.out.println(
+                "---------------------------------------------------------------------------------------------------------");
+        if (list != null) {
+            for (int i = 0; i < list.getSize(); i++) {
+                MedicalRecord record = list.getIndex(i);
+                System.out.printf("%-30s %-10s %-30s %-40s%n", Utility.formatLocalDateTime(record.getAppointmentdate()),
+                        record.getDoctorId(),
+                        DoctorList.getInstance().findDoctorById(record.getDoctorId()).getName(),
+                        record.getProblem());
+            }
+            System.out.println(
+                    "---------------------------------------------------------------------------------------------------------");
+        }
+    }
+
     public static void displayDoctorTable(LinkedList<Doctor> list) {
         System.out.printf("%-5s %-20s %-20s %-20s %-20s%n", "ID", "Name", "Specialty",
                 "Last Login", "Last Logout");
@@ -33,9 +52,9 @@ public class TableUtility {
             for (int i = 0; i < list.getSize(); i++) {
                 Doctor doctor = list.getIndex(i);
                 String loginTime = doctor.getLoginTime() == null ? "-"
-                        : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(doctor.getLoginTime());
+                        : Utility.formatLocalDateTime(doctor.getLoginTime());
                 String logoutTime = doctor.getLogoutTime() == null ? "-"
-                        : DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(doctor.getLogoutTime());
+                        : Utility.formatLocalDateTime(doctor.getLogoutTime());
 
                 System.out.printf("%-5d %-20s %-20s %-20s %-20s%n",
                         doctor.getId(), doctor.getName(), doctor.getSpecialty(),
@@ -62,7 +81,7 @@ public class TableUtility {
                         appointment.getDoctorId(),
                         (currentPatient == null) ? "ERR" : currentPatient.getName(),
                         (currentDoctor == null) ? "ERR" : currentDoctor.getName(),
-                        appointment.getTime());
+                        Utility.formatLocalDateTime(appointment.getTime()));
             }
             System.out.println(
                     "-------------------------------------------------------------------------------------------------------------");

@@ -13,6 +13,7 @@ import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.model.Appointment;
+import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Stack;
@@ -45,7 +46,7 @@ public class AppConsole {
 
     public void setupMenus() {
         mainMenuList = new MenuList("Daisuke Clinic", 5);
-        managePatientMenuList = new MenuList("Manage Patient", 5);
+        managePatientMenuList = new MenuList("Manage Patient", 6);
         manageDoctorMenuList = new MenuList("Manage Doctor", 7);
         manageAppointmentMenuList = new MenuList("Manage Appointment", 5);
 
@@ -122,6 +123,24 @@ public class AppConsole {
             // Back Menu
             searchPatientMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
             menuStack.push(searchPatientMenuList);
+        }));
+
+        // View medical records
+        managePatientMenuList.addMenuItem(new MenuItem("View Medical Records", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("View Patient's Medical Record");
+
+            int patientId = ConsoleUtility.getIntPromptInput("Enter Patient ID: ");
+            Patient patient = PatientRecord.getInstance().findPatientById(patientId);
+            if (patient != null) {
+                ConsoleUtility.clearScreen();
+                ConsoleUtility.printTitle(String.format("%s's Medical Record", patient.getName()));
+                TableUtility.displayMedicalRecordsTable(patient.getMedicalRecords());
+            } else {
+                System.out.println("Patient with ID: " + patientId + " does not exist!\n");
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
         }));
 
         // Display All Patients
@@ -262,6 +281,11 @@ public class AppConsole {
                 LinkedList<Appointment> appointmentList = new LinkedList<>();
                 appointmentList.insertBack(appointment);
                 TableUtility.displayAppointmentTable(appointmentList);
+
+                String patientProblem = ConsoleUtility.getStringPromptInput("Patient's Problem: ");
+                PatientRecord.getInstance().findPatientById(appointment.getPatientId()).getMedicalRecords().insertBack(
+                        new MedicalRecord(doctorId, appointment.getTime(), patientProblem));
+
                 System.out.println("\nAppointment proccessed, get well soon!\n");
             } else {
                 System.out.println("\nWe have a problem proccessing the appointment.\n");
@@ -284,13 +308,18 @@ public class AppConsole {
                 TableUtility.displayAppointmentTable(appointmentQueue.getQueue());
                 int appointmentId = ConsoleUtility.getIntPromptInput("Enter Appointment ID: ");
                 Appointment appointment = appointmentQueue.getQueue()
-                        .find(new Appointment(doctorId, appointmentId, doctorId, null));
+                        .find(new Appointment(appointmentId, 0, 0, null));
                 if (appointment != null) {
-                    LinkedList<Appointment> deletedAppointment = new LinkedList<>();
-                    deletedAppointment.insertBack(appointment);
-                    TableUtility.displayAppointmentTable(deletedAppointment);
-                    // TODO:
+                    LinkedList<Appointment> deletedAppointments = new LinkedList<>();
+                    deletedAppointments.insertBack(appointment);
+                    TableUtility.displayAppointmentTable(deletedAppointments);
+                    appointmentQueue.getQueue().remove(appointment);
+                    System.out.println("Appointment has been successfuly canceled!\n");
+                } else {
+                    System.out.println("Unable to find the appointment\n");
                 }
+            } else {
+                System.out.println("Unable to find the doctor\n");
             }
 
             ConsoleUtility.pressAnyKeyToContinue();

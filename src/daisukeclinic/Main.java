@@ -1,14 +1,30 @@
 package daisukeclinic;
 
+import java.time.LocalDateTime;
+
+import daisukeclinic.controller.AppointmentManager;
 import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
+import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.view.AppConsole;
 
 public class Main {
 
     public Main() {
+        ConsoleUtility.clearScreen();
         loadData();
+        splashScreen();
         new AppConsole();
+    }
+
+    public void splashScreen() {
+        System.out.println(" ____        _           _         ____ _ _       _      ____            \n" + //
+                "|  _ \\  __ _(_)___ _   _| | _____ / ___| (_)_ __ (_) ___|  _ \\ _ __ ___  \n" + //
+                "| | | |/ _` | / __| | | | |/ / _ \\ |   | | | '_ \\| |/ __| |_) | '__/ _ \\ \n" + //
+                "| |_| | (_| | \\__ \\ |_| |   <  __/ |___| | | | | | | (__|  __/| | | (_) |\n" + //
+                "|____/ \\__,_|_|___/\\__,_|_|\\_\\___|\\____|_|_|_| |_|_|\\___|_|   |_|  \\___/ \n\n" + //
+                "                                                                         ");
+        ConsoleUtility.pressAnyKeyToContinue();
     }
 
     public void loadData() {
@@ -22,6 +38,10 @@ public class Main {
         PatientRecord.getInstance().addPatient("Diana", 22, "321 Pine St", "555-3456");
         PatientRecord.getInstance().addPatient("Ethan", 40, "654 Maple St", "555-7890");
         PatientRecord.getInstance().addPatient("Fiona", 31, "987 Cedar St", "555-2345");
+
+        AppointmentManager.getInstance().scheduleAppointment(1, 0, LocalDateTime.now());
+        AppointmentManager.getInstance().scheduleAppointment(2, 0, LocalDateTime.now());
+        AppointmentManager.getInstance().scheduleAppointment(4, 0, LocalDateTime.now());
     }
 
     public static void main(String[] args) {

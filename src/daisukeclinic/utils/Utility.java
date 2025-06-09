@@ -10,4 +10,8 @@ public class Utility {
         }
         return res;
     }
+
+    public static String formatLocalDateTime(java.time.LocalDateTime dateTime) {
+        return dateTime.format(java.time.format.DateTimeFormatter.ofPattern("MMMM dd, yyyy - hh:mm a"));
+    }
 }

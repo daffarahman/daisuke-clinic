@@ -1,19 +1,23 @@
 package daisukeclinic.model;
 
+import daisukeclinic.model.datastructure.LinkedList;
+
 public class Patient extends Person implements Comparable<Patient> {
     private int age;
     private String address;
     private String phoneNumber;
+    private LinkedList<MedicalRecord> medicalRecords;
 
     public Patient(int id, String name, int age, String address, String phoneNumber) {
         super(id, name);
         this.age = age;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.medicalRecords = new LinkedList<>();
     }
 
     public int getAge() {
-        return this.age;
+        return age;
     }
 
     public void setAge(int age) {
@@ -21,7 +25,7 @@ public class Patient extends Person implements Comparable<Patient> {
     }
 
     public String getAddress() {
-        return this.address;
+        return address;
     }
 
     public void setAddress(String address) {
@@ -29,11 +33,15 @@ public class Patient extends Person implements Comparable<Patient> {
     }
 
     public String getPhoneNumber() {
-        return this.phoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public LinkedList<MedicalRecord> getMedicalRecords() {
+        return medicalRecords;
     }
 
     @Override
