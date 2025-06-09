@@ -1,6 +1,8 @@
 package daisukeclinic.model.datastructure;
 
-public class LinkedList<T extends Comparable<T>> {
+import java.io.Serializable;
+
+public class LinkedList<T extends Comparable<T>> implements Serializable {
     protected Node<T> head;
     protected int size;
 

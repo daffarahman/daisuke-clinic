@@ -1,6 +1,8 @@
 package daisukeclinic.model.datastructure;
 
-public class BST<T extends Comparable<T>> {
+import java.io.Serializable;
+
+public class BST<T extends Comparable<T>> implements Serializable {
     private BSTNode<T> root;
 
     public static enum TraverseMode {

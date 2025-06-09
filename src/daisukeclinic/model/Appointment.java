@@ -1,8 +1,9 @@
 package daisukeclinic.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Appointment implements Comparable<Appointment> {
+public class Appointment implements Comparable<Appointment>, Serializable {
     private int id;
     private int patientId;
     private int doctorId;

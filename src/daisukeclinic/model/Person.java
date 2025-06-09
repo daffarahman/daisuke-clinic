@@ -1,6 +1,8 @@
 package daisukeclinic.model;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private int id;
     private String name;
     private CompareMode compareMode = CompareMode.COMPARE_BY_ID;

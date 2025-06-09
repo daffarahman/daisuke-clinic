@@ -1,6 +1,8 @@
 package daisukeclinic.model.datastructure;
 
-public class BSTNode<T extends Comparable<T>> {
+import java.io.Serializable;
+
+public class BSTNode<T extends Comparable<T>> implements Serializable {
     public T data;
     public BSTNode<T> left;
     public BSTNode<T> right;

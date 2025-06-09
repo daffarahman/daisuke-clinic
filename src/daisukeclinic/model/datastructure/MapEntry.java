@@ -1,6 +1,8 @@
 package daisukeclinic.model.datastructure;
 
-public class MapEntry<K extends Comparable<K>, V> implements Comparable<MapEntry<K, V>> {
+import java.io.Serializable;
+
+public class MapEntry<K extends Comparable<K>, V> implements Comparable<MapEntry<K, V>>, Serializable {
     public K key;
     public V value;
 
