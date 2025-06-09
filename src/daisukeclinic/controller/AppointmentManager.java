@@ -21,4 +21,7 @@ public class AppointmentManager {
         return appointments;
     }
 
+    public AppointmentQueue getDoctorQueue(int doctorId) {
+        return appointments.get(doctorId);
+    }
 }

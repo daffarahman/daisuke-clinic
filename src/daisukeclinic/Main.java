@@ -1,30 +1,14 @@
 package daisukeclinic;
 
-import javax.swing.SwingUtilities;
-
 import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
-import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.view.AppConsole;
-import daisukeclinic.view.AppFrame;
-import daisukeclinic.view.components.console.MenuItem;
-import daisukeclinic.view.components.console.MenuList;
 
 public class Main {
 
     public Main() {
         loadData();
-
-        MenuList bootMenuList = new MenuList("Daisuke Clinic Init", 3);
-        bootMenuList.addMenuItem(new MenuItem("Console Mode", AppConsole::new));
-        bootMenuList.addMenuItem(new MenuItem("GUI Mode", () -> SwingUtilities.invokeLater(AppFrame::new)));
-        bootMenuList.addMenuItem(new MenuItem("Exit", () -> System.exit(0)));
-
-        while (true) {
-            ConsoleUtility.clearScreen();
-            bootMenuList.printMenu();
-            bootMenuList.run(bootMenuList.prompt());
-        }
+        new AppConsole();
     }
 
     public void loadData() {

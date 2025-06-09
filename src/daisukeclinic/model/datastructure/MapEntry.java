@@ -11,6 +11,6 @@ public class MapEntry<K extends Comparable<K>, V> implements Comparable<MapEntry
 
     @Override
     public int compareTo(MapEntry<K, V> other) {
-        return other.key.compareTo(other.key);
+        return key.compareTo(other.key);
     }
 }

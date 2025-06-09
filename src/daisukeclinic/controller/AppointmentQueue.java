@@ -57,4 +57,8 @@ public class AppointmentQueue {
     public void viewUpcomingAppointments() {
         appointments.display();
     }
+
+    public Queue<Appointment> getQueue() {
+        return appointments;
+    }
 }

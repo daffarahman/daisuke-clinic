@@ -2,6 +2,8 @@ package daisukeclinic.controller;
 
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
+import daisukeclinic.utils.ConsoleUtility;
+import daisukeclinic.utils.TableUtility;
 import daisukeclinic.model.Person;
 
 public class PatientRecord {
@@ -50,39 +52,29 @@ public class PatientRecord {
         return patients.find(decoy);
     }
 
-    // TODO:
-    public boolean findPatientsByNameContaining(String searchTerm) {
+    public LinkedList<Patient> findPatientsByNameContaining(String searchTerm) {
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
-            return false;
+            return null;
         }
 
         // Escape special regex characters in the search term
         String escapedSearchTerm = searchTerm.replaceAll("[\\W]", "\\\\$0");
         String regex = "(?i).*" + escapedSearchTerm + ".*"; // Case-insensitive pattern
-        int found = 0;
+        LinkedList<Patient> found = new LinkedList<>();
 
         for (int i = 0; i < patients.getSize(); i++) {
             Patient patient = patients.getIndex(i);
             if (patient.getName() != null && patient.getName().matches(regex)) {
-                System.out.println(patient);
-                found++;
+                found.insertBack(patient);
             }
         }
-
-        if (found > 0)
-            return true;
-        return false;
+        if (found.isEmpty())
+            return null;
+        return found;
     }
 
     public void displayAllPatients() {
-        System.out.printf("%-5s %-20s %-3s %-30s %-15s%n", "ID", "Name", "Age", "Address", "Phone Number");
-        System.out.println("-------------------------------------------------------------------------------------");
-        for (int i = 0; i < patients.getSize(); i++) {
-            Patient patient = patients.getIndex(i);
-            System.out.printf("%-5d %-20s %-3d %-30s %-15s%n",
-                    patient.getId(), patient.getName(), patient.getAge(),
-                    patient.getAddress(), patient.getPhoneNumber());
-        }
+        TableUtility.displayPatientTable(patients);
     }
 
     public LinkedList<Patient> getList() {

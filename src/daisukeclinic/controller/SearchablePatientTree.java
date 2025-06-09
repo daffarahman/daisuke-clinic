@@ -3,6 +3,8 @@ package daisukeclinic.controller;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.Person;
 import daisukeclinic.model.datastructure.BST;
+import daisukeclinic.model.datastructure.LinkedList;
+import daisukeclinic.utils.TableUtility;
 
 public class SearchablePatientTree {
     private static SearchablePatientTree instance;
@@ -30,14 +32,17 @@ public class SearchablePatientTree {
     }
 
     public void preOrderDisplay() {
-        patientTree.display(BST.TraverseMode.TRAVERSE_PREORDER);
+        LinkedList<Patient> preorderList = patientTree.getTraversedList(BST.TraverseMode.TRAVERSE_PREORDER);
+        TableUtility.displayPatientTable(preorderList);
     }
 
     public void inOrderDisplay() {
-        patientTree.display(BST.TraverseMode.TRAVERSE_INORDER);
+        LinkedList<Patient> inorderList = patientTree.getTraversedList(BST.TraverseMode.TRAVERSE_INORDER);
+        TableUtility.displayPatientTable(inorderList);
     }
 
     public void postOrderDisplay() {
-        patientTree.display(BST.TraverseMode.TRAVERSE_POSTORDER);
+        LinkedList<Patient> postorderList = patientTree.getTraversedList(BST.TraverseMode.TRAVERSE_POSTORDER);
+        TableUtility.displayPatientTable(postorderList);
     }
 }

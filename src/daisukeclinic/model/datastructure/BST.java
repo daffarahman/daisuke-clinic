@@ -14,21 +14,6 @@ public class BST<T extends Comparable<T>> {
         root = insertBalanceHelper(root, new BSTNode<T>(data));
     }
 
-    // private BSTNode<T> insertHelper(BSTNode<T> parent, BSTNode<T> node) {
-    // T data = node.data;
-
-    // if (parent == null) {
-    // parent = node;
-    // return parent;
-    // } else if (data.compareTo(parent.data) < 0) {
-    // parent.left = insertHelper(parent.left, node);
-    // } else {
-    // parent.right = insertHelper(parent.right, node);
-    // }
-
-    // return parent;
-    // }
-
     private BSTNode<T> insertBalanceHelper(BSTNode<T> parent, BSTNode<T> node) {
         if (parent == null) {
             return node;
@@ -145,6 +130,36 @@ public class BST<T extends Comparable<T>> {
                     displayHelper(parent.left, traverseMode);
                     displayHelper(parent.right, traverseMode);
                     System.out.println(parent.data);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public LinkedList<T> getTraversedList(TraverseMode traverseMode) {
+        LinkedList<T> result = new LinkedList<>();
+        traverseToList(root, traverseMode, result);
+        return result;
+    }
+
+    private void traverseToList(BSTNode<T> parent, TraverseMode traverseMode, LinkedList<T> list) {
+        if (parent != null) {
+            switch (traverseMode) {
+                case TRAVERSE_PREORDER:
+                    list.insertBack(parent.data);
+                    traverseToList(parent.left, traverseMode, list);
+                    traverseToList(parent.right, traverseMode, list);
+                    break;
+                case TRAVERSE_INORDER:
+                    traverseToList(parent.left, traverseMode, list);
+                    list.insertBack(parent.data);
+                    traverseToList(parent.right, traverseMode, list);
+                    break;
+                case TRAVERSE_POSTORDER:
+                    traverseToList(parent.left, traverseMode, list);
+                    traverseToList(parent.right, traverseMode, list);
+                    list.insertBack(parent.data);
                     break;
                 default:
                     break;

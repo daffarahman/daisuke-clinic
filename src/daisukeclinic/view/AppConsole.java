@@ -1,8 +1,11 @@
 package daisukeclinic.view;
 
 import daisukeclinic.utils.ConsoleUtility;
+import daisukeclinic.utils.TableUtility;
 
 import java.time.LocalDateTime;
+
+import javax.swing.SwingUtilities;
 
 import daisukeclinic.controller.AppointmentManager;
 import daisukeclinic.controller.AppointmentQueue;
@@ -11,7 +14,6 @@ import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
-import daisukeclinic.model.datastructure.Map;
 import daisukeclinic.model.datastructure.MapEntry;
 import daisukeclinic.model.datastructure.Stack;
 import daisukeclinic.view.components.console.MenuItem;
@@ -42,15 +44,15 @@ public class AppConsole {
     }
 
     public void setupMenus() {
-        mainMenuList = new MenuList("Main Menu", 5);
-        managePatientMenuList = new MenuList("Manage Patient Menu", 5);
-        manageDoctorMenuList = new MenuList("Manage Doctor Menu", 7);
-        manageAppointmentMenuList = new MenuList("Manage Appointment Menu", 5);
+        mainMenuList = new MenuList("Daisuke Clinic", 5);
+        managePatientMenuList = new MenuList("Manage Patient", 5);
+        manageDoctorMenuList = new MenuList("Manage Doctor", 7);
+        manageAppointmentMenuList = new MenuList("Manage Appointment", 5);
 
         mainMenuList.addMenuItem(new MenuItem("Manage Patients", () -> menuStack.push(managePatientMenuList)));
         mainMenuList.addMenuItem(new MenuItem("Manage Doctors", () -> menuStack.push(manageDoctorMenuList)));
         mainMenuList.addMenuItem(new MenuItem("Manage Appointments", () -> menuStack.push(manageAppointmentMenuList)));
-        mainMenuList.addMenuItem(new MenuItem("View all data", null));
+        mainMenuList.addMenuItem(new MenuItem("Instance GUI", () -> SwingUtilities.invokeLater(AppFrame::new)));
         mainMenuList.addMenuItem(new MenuItem("Exit", () -> menuStack.pop()));
 
         // ========== MANAGE PATIENTS ==========
@@ -100,12 +102,9 @@ public class AppConsole {
                 ConsoleUtility.printTitle("Fast lookup for patient");
                 int selectedId = ConsoleUtility.getIntPromptInput("Enter Patient ID: ");
                 Patient foundPatient = SearchablePatientTree.getInstance().searchPatient(selectedId);
-                if (foundPatient != null) {
-                    System.out.printf("Patient with id: %d found!\n", selectedId);
-                    System.out.println(foundPatient.toString());
-                } else {
-                    System.out.printf("Unable to find patient with id: %d!\n", selectedId);
-                }
+                LinkedList<Patient> l = new LinkedList<>();
+                l.insertBack(foundPatient);
+                TableUtility.displayPatientTable(l);
                 ConsoleUtility.pressAnyKeyToContinue();
             }));
 
@@ -115,7 +114,7 @@ public class AppConsole {
                 ConsoleUtility.printTitle("Search Patient By Name");
 
                 String name = ConsoleUtility.getStringPromptInput("Patient Name: ");
-                PatientRecord.getInstance().findPatientsByNameContaining(name);
+                TableUtility.displayPatientTable(PatientRecord.getInstance().findPatientsByNameContaining(name));
 
                 ConsoleUtility.pressAnyKeyToContinue();
             }));
@@ -168,7 +167,7 @@ public class AppConsole {
         }));
 
         // Back Menu
-        managePatientMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
+        managePatientMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
 
         // ========== END MANAGE PATIENTS ==========
 
@@ -184,7 +183,9 @@ public class AppConsole {
         manageDoctorMenuList.addMenuItem(new MenuItem("Logout Doctor", null));
 
         // All doctors
-        manageDoctorMenuList.addMenuItem(new MenuItem("View All Doctors In This Clinic", null));
+        manageDoctorMenuList.addMenuItem(new MenuItem("View All Doctors In This Clinic", () -> {
+
+        }));
 
         // All logged in doctors
         manageDoctorMenuList.addMenuItem(new MenuItem("View All Logged In Doctors", null));
@@ -193,7 +194,7 @@ public class AppConsole {
         manageDoctorMenuList.addMenuItem(new MenuItem("View Last Logged In Doctors", null));
 
         // Back to main menu
-        manageDoctorMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
+        manageDoctorMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
 
         // ========== END MANAGE DOCTORS ==========
 
@@ -240,6 +241,29 @@ public class AppConsole {
 
         // Process Appointment
         manageAppointmentMenuList.addMenuItem(new MenuItem("Proccess Appointment", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Proccess Appointment");
+
+            int doctorId = ConsoleUtility.getIntPromptInput("Doctor ID: ");
+            System.out.println(AppointmentManager.getInstance().getAppointments().isPresent(doctorId));
+
+            AppointmentQueue appointments = AppointmentManager.getInstance().getDoctorQueue(doctorId);
+
+            if (appointments != null) {
+                if (appointments.getQueue().isEmpty()) {
+                    System.out.println("No upcoming appointments for the Doctor with ID: " + doctorId +
+                            "!");
+                } else {
+                    System.out.println("Doctor Found Appointment Proccessed!!");
+                    System.out.println(
+                            appointments.proccessNextAppointment());
+                }
+            } else {
+                System.out.println("No upcoming appointments for the Doctor with ID: " + doctorId +
+                        "!");
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
         }));
 
         // Cancel Appointment
@@ -254,14 +278,17 @@ public class AppConsole {
                     .getAppointments().getEntries();
 
             for (int i = 0; i < appointmentEntries.getSize(); i++) {
-                System.out.println("Doctor id: " + appointmentEntries.getIndex(i).key);
-                appointmentEntries.getIndex(i).value.viewUpcomingAppointments();
+                MapEntry<Integer, AppointmentQueue> entry = appointmentEntries.getIndex(i);
+                if (!entry.value.getQueue().isEmpty()) {
+                    System.out.println("Doctor id: " + entry.key);
+                    TableUtility.displayAppointmentTable(appointmentEntries.getIndex(i).value.getQueue());
+                }
             }
 
             ConsoleUtility.pressAnyKeyToContinue();
 
         }));
-        manageAppointmentMenuList.addMenuItem(new MenuItem("Back to Main Menu", () -> menuStack.pop()));
+        manageAppointmentMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
 
         // ========== END MANAGE APPOINTMENT ==========
     }
