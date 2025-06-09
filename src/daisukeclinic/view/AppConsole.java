@@ -3,7 +3,6 @@ package daisukeclinic.view;
 import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 
-import java.io.Console;
 import java.time.LocalDateTime;
 
 import javax.swing.SwingUtilities;

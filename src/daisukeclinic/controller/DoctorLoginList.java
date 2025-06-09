@@ -1,10 +1,12 @@
 package daisukeclinic.controller;
 
+import java.io.Serializable;
+
 import daisukeclinic.model.Doctor;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Node;
 
-public class DoctorLoginList {
+public class DoctorLoginList implements Serializable {
     private static DoctorLoginList instance;
     private LinkedList<Doctor> doctorLogins;
 

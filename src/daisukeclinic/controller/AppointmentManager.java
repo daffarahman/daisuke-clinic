@@ -1,5 +1,6 @@
 package daisukeclinic.controller;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import daisukeclinic.model.datastructure.LinkedList;
@@ -7,7 +8,7 @@ import daisukeclinic.model.datastructure.Map;
 import daisukeclinic.model.datastructure.MapEntry;
 import daisukeclinic.utils.TableUtility;
 
-public class AppointmentManager {
+public class AppointmentManager implements Serializable {
     private static AppointmentManager instance;
     private Map<Integer, AppointmentQueue> appointments;
 

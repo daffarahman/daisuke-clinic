@@ -1,12 +1,13 @@
 package daisukeclinic.controller;
 
+import java.io.Serializable;
+
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
-import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 import daisukeclinic.model.Person;
 
-public class PatientRecord {
+public class PatientRecord implements Serializable {
     private LinkedList<Patient> patients;
     private static PatientRecord instance;
     private int lastId = 0;
