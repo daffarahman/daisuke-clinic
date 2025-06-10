@@ -5,6 +5,7 @@ import java.io.Serializable;
 import daisukeclinic.model.Doctor;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Node;
+import daisukeclinic.utils.TableUtility;
 
 public class DoctorLoginList implements Serializable {
     private static DoctorLoginList instance;
@@ -28,14 +29,14 @@ public class DoctorLoginList implements Serializable {
             doctorLogins.insertBack(doctor);
         } else {
             while (current != null) {
-                if (current.data.getId() == doctor.getId()) {
+                if (current.data.compareTo(doctor) == 0) {
                     return false;
                 }
                 current = current.next;
             }
             doctorLogins.insertBack(doctor);
         }
-
+        doctor.login();
         doctor.updateLoginTime();
         return true;
     }
@@ -45,6 +46,7 @@ public class DoctorLoginList implements Serializable {
         while (current != null) {
             if (current.data.getId() == doctorId) {
                 doctorLogins.remove(current.data);
+                current.data.logout();
                 return;
             }
             current = current.next;
@@ -52,6 +54,6 @@ public class DoctorLoginList implements Serializable {
     }
 
     public void getAllLoggedInDoctors() {
-        doctorLogins.display();
+        TableUtility.displayDoctorLoginTable(doctorLogins);
     }
 }

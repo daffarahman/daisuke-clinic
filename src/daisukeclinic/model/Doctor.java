@@ -6,10 +6,12 @@ public class Doctor extends Person implements Comparable<Doctor> {
     private String specialty;
     private LocalDateTime loginTime;
     private LocalDateTime logoutTime;
+    private boolean isLoggedIn;
 
     public Doctor(int id, String name, String specialty) {
         super(id, name);
         this.specialty = (specialty == null) ? "" : specialty.strip();
+        isLoggedIn = false;
     }
 
     public String getSpecialty() {
@@ -30,6 +32,18 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     public void updateLogoutTime() {
         logoutTime = LocalDateTime.now();
+    }
+
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void login() {
+        isLoggedIn = true;
+    }
+
+    public void logout() {
+        isLoggedIn = false;
     }
 
     @Override

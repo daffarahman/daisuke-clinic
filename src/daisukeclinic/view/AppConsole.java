@@ -10,9 +10,11 @@ import javax.swing.SwingUtilities;
 import daisukeclinic.controller.AppointmentManager;
 import daisukeclinic.controller.AppointmentQueue;
 import daisukeclinic.controller.DoctorList;
+import daisukeclinic.controller.DoctorLoginList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.model.Appointment;
+import daisukeclinic.model.Doctor;
 import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
@@ -208,7 +210,28 @@ public class AppConsole {
         }));
 
         // Login doctor
-        manageDoctorMenuList.addMenuItem(new MenuItem("Login Doctor", null));
+        manageDoctorMenuList.addMenuItem(new MenuItem("Login Doctor", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Login Doctor");
+
+            int doctorId = ConsoleUtility.getIntPromptInput("Doctor ID: ");
+            Doctor doctor = DoctorList.getInstance().findDoctorById(doctorId);
+            if (doctor != null) {
+                if (DoctorLoginList.getInstance().loginDoctor(doctor)) {
+                    LinkedList<Doctor> lTmp = new LinkedList<>();
+                    lTmp.insertBack(doctor);
+                    System.out.println("Doctor logged in:");
+                    TableUtility.displayDoctorLoginTable(lTmp);
+                    System.out.println("Successfully logged in!");
+                } else {
+                    System.out.println("Doctor already logged in!");
+                }
+            } else {
+                System.out.println("Can't find a Doctor with ID: " + doctorId + "!");
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
+        }));
 
         // Logout doctor
         manageDoctorMenuList.addMenuItem(new MenuItem("Logout Doctor", null));
@@ -224,7 +247,14 @@ public class AppConsole {
         }));
 
         // All logged in doctors
-        manageDoctorMenuList.addMenuItem(new MenuItem("View All Logged In Doctors", null));
+        manageDoctorMenuList.addMenuItem(new MenuItem("View All Logged In Doctors", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("All Logged In Doctors");
+
+            DoctorLoginList.getInstance().getAllLoggedInDoctors();
+
+            ConsoleUtility.pressAnyKeyToContinue();
+        }));
 
         // Last logged in doctors
         manageDoctorMenuList.addMenuItem(new MenuItem("View Last Logged In Doctors", null));
@@ -274,21 +304,35 @@ public class AppConsole {
             ConsoleUtility.printTitle("Proccess Appointment");
 
             int doctorId = ConsoleUtility.getIntPromptInput("Doctor ID: ");
-            System.out.println(AppointmentManager.getInstance().getAppointments().isPresent(doctorId));
 
-            Appointment appointment = AppointmentManager.getInstance().proccessNextAppointment(doctorId);
-            if (appointment != null) {
-                LinkedList<Appointment> appointmentList = new LinkedList<>();
-                appointmentList.insertBack(appointment);
-                TableUtility.displayAppointmentTable(appointmentList);
+            Doctor doctor = DoctorList.getInstance().findDoctorById(doctorId);
+            if (doctor != null) {
 
-                String patientProblem = ConsoleUtility.getStringPromptInput("Patient's Problem: ");
-                PatientRecord.getInstance().findPatientById(appointment.getPatientId()).getMedicalRecords().insertBack(
-                        new MedicalRecord(doctorId, appointment.getTime(), patientProblem));
+                if (doctor.isLoggedIn()) {
 
-                System.out.println("\nAppointment proccessed, get well soon!\n");
+                    System.out.println(AppointmentManager.getInstance().getAppointments().isPresent(doctorId));
+
+                    Appointment appointment = AppointmentManager.getInstance().proccessNextAppointment(doctorId);
+                    if (appointment != null) {
+                        LinkedList<Appointment> appointmentList = new LinkedList<>();
+                        appointmentList.insertBack(appointment);
+                        TableUtility.displayAppointmentTable(appointmentList);
+
+                        String patientProblem = ConsoleUtility.getStringPromptInput("Patient's Problem: ");
+                        PatientRecord.getInstance().findPatientById(appointment.getPatientId()).getMedicalRecords()
+                                .insertBack(
+                                        new MedicalRecord(doctorId, appointment.getTime(), patientProblem));
+
+                        System.out.println("\nAppointment proccessed, get well soon!\n");
+                    } else {
+                        System.out.println("\nWe have a problem proccessing the appointment.\n");
+                    }
+                } else {
+                    System.out.println(
+                            "Can't proccess appointment because this doctor isn't currently available this time.");
+                }
             } else {
-                System.out.println("\nWe have a problem proccessing the appointment.\n");
+                System.out.println("Can't find doctor with that ID!");
             }
 
             ConsoleUtility.pressAnyKeyToContinue();
