@@ -23,6 +23,10 @@ public class PatientRecord implements Serializable {
         return instance;
     }
 
+    public static void setInstance(PatientRecord newInstance) {
+        instance = newInstance;
+    }
+
     public void addPatient(String name, int age, String address, String phoneNumber) {
         Patient newPatient = new Patient(lastId++, name, age, address, phoneNumber);
         patients.insertBack(newPatient);
@@ -38,6 +42,7 @@ public class PatientRecord implements Serializable {
         }
 
         patients.remove(decoy);
+        // SearchablePatientTree.getInstance().deletePatientFromTree(decoy);
         return true;
     }
 

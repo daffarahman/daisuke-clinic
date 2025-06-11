@@ -24,6 +24,10 @@ public class AppointmentManager implements Serializable {
         return instance;
     }
 
+    public static void setInstance(AppointmentManager newInstance) {
+        instance = newInstance;
+    }
+
     public Map<Integer, AppointmentQueue> getAppointments() {
         return appointments;
     }

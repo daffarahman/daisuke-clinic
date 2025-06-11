@@ -23,6 +23,10 @@ public class DoctorList implements Serializable {
         return instance;
     }
 
+    public static void setInstance(DoctorList newInstance) {
+        instance = newInstance;
+    }
+
     public LinkedList<Doctor> getList() {
         return doctorList;
     }

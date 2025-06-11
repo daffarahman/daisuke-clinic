@@ -22,6 +22,10 @@ public class DoctorLoginList implements Serializable {
         return instance;
     }
 
+    public static void setInstance(DoctorLoginList newInstance) {
+        instance = newInstance;
+    }
+
     public boolean loginDoctor(Doctor doctor) {
         Node<Doctor> current = doctorLogins.getHead();
 
@@ -41,16 +45,18 @@ public class DoctorLoginList implements Serializable {
         return true;
     }
 
-    public void logoutDoctor(int doctorId) {
+    public boolean logoutDoctor(int doctorId) {
         Node<Doctor> current = doctorLogins.getHead();
         while (current != null) {
             if (current.data.getId() == doctorId) {
                 doctorLogins.remove(current.data);
                 current.data.logout();
-                return;
+                current.data.updateLogoutTime();
+                return true;
             }
             current = current.next;
         }
+        return false;
     }
 
     public void getAllLoggedInDoctors() {

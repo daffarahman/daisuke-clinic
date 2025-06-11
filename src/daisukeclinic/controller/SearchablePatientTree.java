@@ -23,6 +23,10 @@ public class SearchablePatientTree implements Serializable {
         return instance;
     }
 
+    public static void setInstance(SearchablePatientTree newInstance) {
+        instance = newInstance;
+    }
+
     public void insertPatient(Patient p) {
         patientTree.insert(p);
     }
@@ -31,6 +35,10 @@ public class SearchablePatientTree implements Serializable {
         Patient decoy = new Patient(id, null, 0, null, null);
         decoy.setCompareMode(Person.CompareMode.COMPARE_BY_ID);
         return patientTree.search(decoy);
+    }
+
+    public void deletePatientFromTree(Patient decoy) {
+        patientTree.delete(decoy);
     }
 
     public void preOrderDisplay() {

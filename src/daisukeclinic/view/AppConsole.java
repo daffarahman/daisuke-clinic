@@ -1,6 +1,7 @@
 package daisukeclinic.view;
 
 import daisukeclinic.utils.ConsoleUtility;
+import daisukeclinic.utils.SaveUtility;
 import daisukeclinic.utils.TableUtility;
 
 import java.time.LocalDateTime;
@@ -29,7 +30,6 @@ public class AppConsole {
     private MenuList manageAppointmentMenuList;
 
     private Stack<MenuList> menuStack;
-    private boolean menuShow = true;
 
     public AppConsole() {
         menuStack = new Stack<>();
@@ -38,18 +38,17 @@ public class AppConsole {
         menuStack.push(mainMenuList);
 
         while (!menuStack.isEmpty()) {
-            if (menuShow) {
-                ConsoleUtility.clearScreen();
-                menuStack.peek().printMenu();
-                menuStack.peek().run(menuStack.peek().prompt());
-            }
+            SaveUtility.saveAll();
+            ConsoleUtility.clearScreen();
+            menuStack.peek().printMenu();
+            menuStack.peek().run(menuStack.peek().prompt());
         }
     }
 
     public void setupMenus() {
         mainMenuList = new MenuList("Daisuke Clinic", 5);
         managePatientMenuList = new MenuList("Manage Patient", 6);
-        manageDoctorMenuList = new MenuList("Manage Doctor", 7);
+        manageDoctorMenuList = new MenuList("Manage Doctor", 6);
         manageAppointmentMenuList = new MenuList("Manage Appointment", 5);
 
         mainMenuList.addMenuItem(new MenuItem("Manage Patients", () -> menuStack.push(managePatientMenuList)));
@@ -234,7 +233,28 @@ public class AppConsole {
         }));
 
         // Logout doctor
-        manageDoctorMenuList.addMenuItem(new MenuItem("Logout Doctor", null));
+        manageDoctorMenuList.addMenuItem(new MenuItem("Logout Doctor", () -> {
+            ConsoleUtility.clearScreen();
+            ConsoleUtility.printTitle("Logout Doctor");
+
+            int doctorId = ConsoleUtility.getIntPromptInput("Doctor ID: ");
+            Doctor doctor = DoctorList.getInstance().findDoctorById(doctorId);
+            if (doctor != null) {
+                if (DoctorLoginList.getInstance().logoutDoctor(doctorId)) {
+                    LinkedList<Doctor> lTmp = new LinkedList<>();
+                    lTmp.insertBack(doctor);
+                    System.out.println("Doctor logged out:");
+                    TableUtility.displayDoctorLoginTable(lTmp);
+                    System.out.println("Successfully logged out in!");
+                } else {
+                    System.out.println("Doctor is not logged in!");
+                }
+            } else {
+                System.out.println("Can't find a Doctor with ID: " + doctorId + "!");
+            }
+
+            ConsoleUtility.pressAnyKeyToContinue();
+        }));
 
         // All doctors
         manageDoctorMenuList.addMenuItem(new MenuItem("View All Doctors In This Clinic", () -> {
@@ -246,18 +266,15 @@ public class AppConsole {
             ConsoleUtility.pressAnyKeyToContinue();
         }));
 
-        // All logged in doctors
-        manageDoctorMenuList.addMenuItem(new MenuItem("View All Logged In Doctors", () -> {
+        // Last logged in doctors
+        manageDoctorMenuList.addMenuItem(new MenuItem("View Last Logged In Doctors", () -> {
             ConsoleUtility.clearScreen();
-            ConsoleUtility.printTitle("All Logged In Doctors");
+            ConsoleUtility.printTitle("Last Logged In Doctors");
 
             DoctorLoginList.getInstance().getAllLoggedInDoctors();
 
             ConsoleUtility.pressAnyKeyToContinue();
         }));
-
-        // Last logged in doctors
-        manageDoctorMenuList.addMenuItem(new MenuItem("View Last Logged In Doctors", null));
 
         // Back to main menu
         manageDoctorMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
@@ -295,6 +312,8 @@ public class AppConsole {
 
             AppointmentManager.getInstance().scheduleAppointment(patientId, doctorId, appointmentTime);
 
+            System.out.println("Successfuly scheduled the appointment!\n");
+
             ConsoleUtility.pressAnyKeyToContinue();
         }));
 
@@ -325,7 +344,7 @@ public class AppConsole {
 
                         System.out.println("\nAppointment proccessed, get well soon!\n");
                     } else {
-                        System.out.println("\nWe have a problem proccessing the appointment.\n");
+                        System.out.println("\nThis doctor currently has no more appointments!.\n");
                     }
                 } else {
                     System.out.println(
