@@ -189,40 +189,40 @@ public class BST<T extends Comparable<T>> implements Serializable {
     }
 
     public void delete(T data) {
-        deleteHelper(root, data);
+        root = deleteHelper(root, data);
     }
 
     private BSTNode<T> deleteHelper(BSTNode<T> parent, T data) {
         if (parent == null)
             return null;
 
-        int compareResult = data.compareTo(root.data);
+        int compareResult = data.compareTo(parent.data);
         if (compareResult < 0) {
-            root.left = deleteHelper(root.left, data);
+            parent.left = deleteHelper(parent.left, data);
         } else if (compareResult > 0) {
-            root.right = deleteHelper(root.right, data);
+            parent.right = deleteHelper(parent.right, data);
         } else {
             // Node found - handle deletion cases
 
             // Case 1: Leaf node
-            if (root.left == null && root.right == null) {
+            if (parent.left == null && parent.right == null) {
                 return null;
             }
             // Case 2: Node has only one child
-            else if (root.left == null) {
-                return root.right;
-            } else if (root.right == null) {
-                return root.left;
+            else if (parent.left == null) {
+                return parent.right;
+            } else if (parent.right == null) {
+                return parent.left;
             }
             // Case 3: Node has two children
             else {
                 // Find the minimum value in right subtree (successor)
-                root.data = findSuccessor(root.right);
+                parent.data = findSuccessor(parent.right);
                 // Delete the successor
-                root.right = deleteHelper(root.right, root.data);
+                parent.right = deleteHelper(parent.right, parent.data);
             }
         }
-        return root;
+        return parent;
     }
 
     private T findSuccessor(BSTNode<T> node) {
@@ -235,6 +235,8 @@ public class BST<T extends Comparable<T>> implements Serializable {
     }
 
     // private T findPredecessor(BSTNode<T> node) {
+    // // Predecessor is the maximum value in left subtree
+    // node = node.left;
     // while (node.right != null) {
     // node = node.right;
     // }

@@ -42,7 +42,7 @@ public class PatientRecord implements Serializable {
         }
 
         patients.remove(decoy);
-        // SearchablePatientTree.getInstance().deletePatientFromTree(decoy);
+        SearchablePatientTree.getInstance().deletePatientFromTree(decoy);
         return true;
     }
 
