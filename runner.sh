@@ -12,7 +12,10 @@ NC='\033[0m' # No Color
 # Function to compile the project
 compile() {
     echo -e "${BLUE}Compiling project...${NC}"
-    # Find all java files and compile them to out directory
+    mkdir -p out
+    # Copy resources to output directory
+    cp -r resources/* out/
+    # Compile Java files
     find src -name "*.java" > sources.txt
     javac -d out @sources.txt
     rm sources.txt
@@ -25,7 +28,6 @@ compile() {
         return 1
     fi
 }
-
 # Function to run the project
 run() {
     if [ ! -d "out" ]; then

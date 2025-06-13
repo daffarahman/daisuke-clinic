@@ -1,4 +1,4 @@
-package daisukeclinic.view.components.console;
+package daisukeclinic.components;
 
 public class MenuItem {
     private String text;

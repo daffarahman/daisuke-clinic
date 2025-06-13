@@ -6,8 +6,8 @@ import daisukeclinic.utils.TableUtility;
 
 import java.time.LocalDateTime;
 
-import javax.swing.SwingUtilities;
-
+import daisukeclinic.components.MenuItem;
+import daisukeclinic.components.MenuList;
 import daisukeclinic.controller.AppointmentManager;
 import daisukeclinic.controller.AppointmentQueue;
 import daisukeclinic.controller.DoctorList;
@@ -20,8 +20,6 @@ import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Stack;
-import daisukeclinic.view.components.console.MenuItem;
-import daisukeclinic.view.components.console.MenuList;
 
 public class AppConsole {
     private MenuList mainMenuList;
@@ -46,7 +44,7 @@ public class AppConsole {
     }
 
     public void setupMenus() {
-        mainMenuList = new MenuList("Daisuke Clinic", 5);
+        mainMenuList = new MenuList("Daisuke Clinic", 4);
         managePatientMenuList = new MenuList("Manage Patient", 6);
         manageDoctorMenuList = new MenuList("Manage Doctor", 6);
         manageAppointmentMenuList = new MenuList("Manage Appointment", 5);
@@ -54,7 +52,6 @@ public class AppConsole {
         mainMenuList.addMenuItem(new MenuItem("Manage Patients", () -> menuStack.push(managePatientMenuList)));
         mainMenuList.addMenuItem(new MenuItem("Manage Doctors", () -> menuStack.push(manageDoctorMenuList)));
         mainMenuList.addMenuItem(new MenuItem("Manage Appointments", () -> menuStack.push(manageAppointmentMenuList)));
-        mainMenuList.addMenuItem(new MenuItem("Instance GUI", () -> SwingUtilities.invokeLater(AppFrame::new)));
         mainMenuList.addMenuItem(new MenuItem("Exit", () -> menuStack.pop()));
 
         // ========== MANAGE PATIENTS ==========

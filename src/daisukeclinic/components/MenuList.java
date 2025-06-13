@@ -1,4 +1,4 @@
-package daisukeclinic.view.components.console;
+package daisukeclinic.components;
 
 import daisukeclinic.utils.ConsoleUtility;
 
