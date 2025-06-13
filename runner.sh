@@ -13,8 +13,6 @@ NC='\033[0m' # No Color
 compile() {
     echo -e "${BLUE}Compiling project...${NC}"
     mkdir -p out
-    # Copy resources to output directory
-    cp -r resources/* out/
     # Compile Java files
     find src -name "*.java" > sources.txt
     javac -d out @sources.txt
