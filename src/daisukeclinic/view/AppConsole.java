@@ -101,9 +101,11 @@ public class AppConsole {
                 ConsoleUtility.printTitle("Fast lookup for patient");
                 int selectedId = ConsoleUtility.getIntPromptInput("Enter Patient ID: ");
                 Patient foundPatient = SearchablePatientTree.getInstance().searchPatient(selectedId);
-                LinkedList<Patient> l = new LinkedList<>();
-                l.insertBack(foundPatient);
-                TableUtility.displayPatientTable(l);
+                if (foundPatient != null) {
+                    LinkedList<Patient> l = new LinkedList<>();
+                    l.insertBack(foundPatient);
+                    TableUtility.displayPatientTable(l);
+                }
                 ConsoleUtility.pressAnyKeyToContinue();
             }));
 
