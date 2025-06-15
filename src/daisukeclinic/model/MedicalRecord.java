@@ -7,11 +7,15 @@ public class MedicalRecord implements Comparable<MedicalRecord>, Serializable {
     private int doctorId;
     private LocalDateTime appointmentdate;
     private String problem;
+    private String diagnosis;
+    private String drug;
 
-    public MedicalRecord(int doctorId, LocalDateTime appointmentdate, String problem) {
+    public MedicalRecord(int doctorId, LocalDateTime appointmentdate, String problem, String diagnosis, String drug) {
         this.doctorId = doctorId;
         this.appointmentdate = appointmentdate;
         this.problem = problem;
+        this.diagnosis = diagnosis;
+        this.drug = drug;
     }
 
     public int getDoctorId() {
@@ -28,6 +32,22 @@ public class MedicalRecord implements Comparable<MedicalRecord>, Serializable {
 
     public void setProblem(String problem) {
         this.problem = problem;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getDrug() {
+        return drug;
+    }
+
+    public void setDrug(String drug) {
+        this.drug = drug;
     }
 
     @Override

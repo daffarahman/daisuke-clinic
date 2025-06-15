@@ -37,6 +37,7 @@ public class AppConsole {
 
         while (!menuStack.isEmpty()) {
             SaveUtility.saveAll();
+            SaveUtility.loadAll();
             ConsoleUtility.clearScreen();
             menuStack.peek().printMenu();
             menuStack.peek().run(menuStack.peek().prompt());
@@ -67,7 +68,15 @@ public class AppConsole {
             String phoneNumber = ConsoleUtility.getPhoneNumberPromptInput("Patient's Phone Number: ");
 
             PatientRecord.getInstance().addPatient(name, age, address, phoneNumber);
-            System.out.println("New patient successfuly added!\n");
+
+            System.out.println("\nNew patient successfuly added!");
+
+            Patient addedPatient = PatientRecord.getInstance().findPatientByName(name);
+            if (addedPatient != null) {
+                LinkedList<Patient> l = new LinkedList<>();
+                l.insertBack(addedPatient);
+                TableUtility.displayPatientTable(l);
+            }
 
             ConsoleUtility.pressAnyKeyToContinue();
         }));
@@ -337,9 +346,13 @@ public class AppConsole {
                         TableUtility.displayAppointmentTable(appointmentList);
 
                         String patientProblem = ConsoleUtility.getStringPromptInput("Patient's Problem: ");
+                        String patientDiagnosis = ConsoleUtility.getStringPromptInput("Patient's Diagnosis: ");
+                        String patientDrug = ConsoleUtility.getStringPromptInput("Patient's Drug: ");
+
                         PatientRecord.getInstance().findPatientById(appointment.getPatientId()).getMedicalRecords()
                                 .insertBack(
-                                        new MedicalRecord(doctorId, appointment.getTime(), patientProblem));
+                                        new MedicalRecord(doctorId, appointment.getTime(), patientProblem,
+                                                patientDiagnosis, patientDrug));
 
                         System.out.println("\nAppointment proccessed, get well soon!\n");
                     } else {

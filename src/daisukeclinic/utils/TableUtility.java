@@ -27,8 +27,8 @@ public class TableUtility {
         }
 
         public static void displayMedicalRecordsTable(LinkedList<MedicalRecord> list) {
-                System.out.printf("%-30s %-10s %-30s %-40s%n", "Date & Time", "Doctor ID", "Doctor Name", "Problem",
-                                "Address", "Phone Number");
+                System.out.printf("%-30s %-10s %-30s %-40s %-30s %-20s%n", "Date & Time", "Doctor ID", "Doctor Name",
+                                "Problem", "Diagnosis", "Drug");
                 System.out.println(
                                 "---------------------------------------------------------------------------------------------------------");
                 if (list != null) {
@@ -38,7 +38,7 @@ public class TableUtility {
                                                 Utility.formatLocalDateTime(record.getAppointmentdate()),
                                                 record.getDoctorId(),
                                                 DoctorList.getInstance().findDoctorById(record.getDoctorId()).getName(),
-                                                record.getProblem());
+                                                record.getProblem(), record.getDiagnosis(), record.getDrug());
                         }
                         System.out.println(
                                         "---------------------------------------------------------------------------------------------------------");
