@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 public class Doctor extends Person implements Comparable<Doctor> {
     private String specialty;
+
     private LocalDateTime loginTime;
     private LocalDateTime logoutTime;
+
     private boolean isLoggedIn;
 
     public Doctor(int id, String name, String specialty) {
@@ -40,10 +42,12 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     public void login() {
         isLoggedIn = true;
+        updateLoginTime();
     }
 
     public void logout() {
         isLoggedIn = false;
+        updateLogoutTime();
     }
 
     @Override

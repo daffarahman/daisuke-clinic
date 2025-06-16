@@ -1,6 +1,7 @@
 package daisukeclinic.utils;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -61,6 +62,51 @@ public class ConsoleUtility {
             try {
                 result = LocalDateTime.parse(input, formatter);
                 looping = false;
+            } catch (Exception e) {
+                System.out.println("Invalid date time format! Please use yyyy-MM-dd HH:mm");
+                System.out.println("Example: 2023-12-15 14:30");
+            }
+        }
+
+        return result;
+    }
+
+    public static LocalDateTime getDateTimePromptInput(String promptMessage, LocalTime hourStart,
+            LocalTime hourEnd) {
+
+        boolean looping = true;
+        LocalDateTime result = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        while (looping) {
+            System.out.print(promptMessage + " (Format: yyyy-MM-dd HH:mm): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                result = LocalDateTime.parse(input, formatter);
+
+                LocalDateTime todayStart = LocalDateTime.of(
+                        result.getYear(),
+                        result.getMonth(),
+                        result.getDayOfMonth(),
+                        hourStart.getHour(),
+                        hourStart.getMinute());
+
+                LocalDateTime todayEnd = LocalDateTime.of(
+                        result.getYear(),
+                        result.getMonth(),
+                        result.getDayOfMonth(),
+                        hourEnd.getHour(),
+                        hourEnd.getMinute());
+
+                if (result.isAfter(todayStart) && result.isBefore(todayEnd))
+                    looping = false;
+                else {
+                    System.out.println("Time must be between " +
+                            hourStart.getHour() + ":" + hourStart.getMinute() +
+                            " and " +
+                            hourEnd.getHour() + ":" + hourEnd.getMinute());
+                }
             } catch (Exception e) {
                 System.out.println("Invalid date time format! Please use yyyy-MM-dd HH:mm");
                 System.out.println("Example: 2023-12-15 14:30");
