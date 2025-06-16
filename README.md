@@ -18,7 +18,7 @@ Daisuke Clinic is a **console based data management application** for a small cl
 | [Naufal Ahmad Fakhriza](https://github.com/sinopalll)               | L0124068 | AppointmentQueue                                     |
 | [Phyrurizqi Altiano Firdauzan](https://github.com/Qiwqiw-Alt)       | L0124069 | DoctorLoginList and SearchablePatientTree            |
 | [Majeeda Athaya Nashwanaira Ali](https://github.com/nashwanairaath) | L0124104 | PatientRecord and MedicalRecord                      |
-| M. Faza Zulfan Balya                                                | L0124107 |                                                      |
+| [M. Faza Zulfan Balya](https://github.com/FazeBalya)                | L0124107 |                                                      |
 
 ## How To Run?
 
