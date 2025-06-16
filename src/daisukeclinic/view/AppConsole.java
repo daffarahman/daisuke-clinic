@@ -4,7 +4,6 @@ import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.SaveUtility;
 import daisukeclinic.utils.TableUtility;
 
-import java.io.Console;
 import java.time.LocalDateTime;
 
 import daisukeclinic.components.MenuItem;
@@ -42,13 +41,6 @@ public class AppConsole {
 
             ConsoleUtility.clearScreen();
 
-            // String pathTexts = "";
-            // for (int i = menuStack.getSize() - 1; i >= 0; i--) {
-            // pathTexts += menuStack.getIndex(i).getTitle() + " > ";
-            // }
-
-            // ConsoleUtility.printTitle(pathTexts);
-
             menuStack.peek().printMenu();
 
             int appointmentPending = 0;
@@ -69,15 +61,22 @@ public class AppConsole {
     }
 
     public void setupMenus() {
-        mainMenuList = new MenuList("Daisuke Clinic Data Management App", 4);
+        mainMenuList = new MenuList("Daisuke Clinic Data Management App", 5);
         managePatientMenuList = new MenuList("Manage Patient", 6);
         manageDoctorMenuList = new MenuList("Manage Doctor", 6);
         manageAppointmentMenuList = new MenuList("Manage Appointment", 5);
 
+        // ========== MAIN MENU ==========
+
         mainMenuList.addMenuItem(new MenuItem("Manage Patients", () -> menuStack.push(managePatientMenuList)));
         mainMenuList.addMenuItem(new MenuItem("Manage Doctors", () -> menuStack.push(manageDoctorMenuList)));
         mainMenuList.addMenuItem(new MenuItem("Manage Appointments", () -> menuStack.push(manageAppointmentMenuList)));
+        mainMenuList.addMenuItem(new MenuItem("About This App", () -> {
+
+        }));
         mainMenuList.addMenuItem(new MenuItem("Exit", () -> menuStack.pop()));
+
+        // ========== END MAIN MENU ==========
 
         // ========== MANAGE PATIENTS ==========
 

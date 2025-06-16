@@ -1,32 +1,34 @@
 package daisukeclinic.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
+import java.time.LocalDateTime;
 
-import daisukeclinic.controller.AppointmentManager;
-import daisukeclinic.controller.DoctorList;
-import daisukeclinic.controller.DoctorLoginList;
-import daisukeclinic.controller.PatientRecord;
-import daisukeclinic.controller.SearchablePatientTree;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import daisukeclinic.controller.*;
 
 public class SaveUtility {
-    private static final String DATA_FILE = "clinic_data.dat";
+    private static final String DATA_DIR = "db";
+    private static final String PATIENT_FILE = DATA_DIR + "/patients.json";
+    private static final String DOCTOR_FILE = DATA_DIR + "/doctors.json";
+    private static final String APPOINTMENT_FILE = DATA_DIR + "/appointments.json";
+    private static final String LOGIN_FILE = DATA_DIR + "/logins.json";
+    private static final String TREE_FILE = DATA_DIR + "/tree.json";
+
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .setPrettyPrinting()
+            .create();
 
     public static void saveAll() {
-        try (ObjectOutputStream out = new ObjectOutputStream(
-                new FileOutputStream(DATA_FILE))) {
-            DataContainer container = new DataContainer(
-                    PatientRecord.getInstance(),
-                    DoctorList.getInstance(),
-                    AppointmentManager.getInstance(),
-                    DoctorLoginList.getInstance(),
-                    SearchablePatientTree.getInstance());
-            out.writeObject(container);
+        new File(DATA_DIR).mkdirs();
+        try {
+            writeToFile(PATIENT_FILE, PatientRecord.getInstance());
+            writeToFile(DOCTOR_FILE, DoctorList.getInstance());
+            writeToFile(APPOINTMENT_FILE, AppointmentManager.getInstance());
+            writeToFile(LOGIN_FILE, DoctorLoginList.getInstance());
+            writeToFile(TREE_FILE, SearchablePatientTree.getInstance());
             System.out.println("All data saved successfully!");
         } catch (IOException e) {
             System.err.println("Error saving data: " + e.getMessage());
@@ -35,49 +37,32 @@ public class SaveUtility {
 
     public static void loadAll() {
         try {
-            File file = new File(DATA_FILE);
-            if (!file.exists()) {
+            if (!new File(DATA_DIR).exists())
                 return;
-            }
 
-            try (ObjectInputStream in = new ObjectInputStream(
-                    new FileInputStream(file))) {
-                DataContainer container = (DataContainer) in.readObject();
+            PatientRecord.setInstance(readFromFile(PATIENT_FILE, PatientRecord.class));
+            DoctorList.setInstance(readFromFile(DOCTOR_FILE, DoctorList.class));
+            AppointmentManager.setInstance(readFromFile(APPOINTMENT_FILE, AppointmentManager.class));
+            DoctorLoginList.setInstance(readFromFile(LOGIN_FILE, DoctorLoginList.class));
+            SearchablePatientTree.setInstance(readFromFile(TREE_FILE, SearchablePatientTree.class));
 
-                // Restore all instances
-                PatientRecord.setInstance(container.patientRecord);
-                DoctorList.setInstance(container.doctorList);
-                AppointmentManager.setInstance(container.appointmentManager);
-                DoctorLoginList.setInstance(container.doctorLoginList);
-                SearchablePatientTree.setInstance(container.searchablePatientTree);
-
-                System.out.println("All data loaded successfully!");
-            }
-        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("All data loaded successfully!");
+        } catch (IOException e) {
             System.err.println("Error loading data: " + e.getMessage());
         }
     }
 
-    private static class DataContainer implements Serializable {
-        private static final long serialVersionUID = 1L;
+    private static void writeToFile(String file, Object obj) throws IOException {
+        try (FileWriter writer = new FileWriter(file)) {
+            gson.toJson(obj, writer);
+        }
+    }
 
-        final PatientRecord patientRecord;
-        final DoctorList doctorList;
-        final AppointmentManager appointmentManager;
-        final DoctorLoginList doctorLoginList;
-        final SearchablePatientTree searchablePatientTree;
-
-        DataContainer(
-                PatientRecord patientRecord,
-                DoctorList doctorList,
-                AppointmentManager appointmentManager,
-                DoctorLoginList doctorLoginList,
-                SearchablePatientTree searchablePatientTree) {
-            this.patientRecord = patientRecord;
-            this.doctorList = doctorList;
-            this.appointmentManager = appointmentManager;
-            this.doctorLoginList = doctorLoginList;
-            this.searchablePatientTree = searchablePatientTree;
+    private static <T> T readFromFile(String file, Class<T> type) throws IOException {
+        if (!new File(file).exists())
+            return null;
+        try (FileReader reader = new FileReader(file)) {
+            return gson.fromJson(reader, type);
         }
     }
 }

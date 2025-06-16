@@ -1,0 +1,58 @@
+{
+  "patients": {
+    "head": {
+      "data": {
+        "age": 29,
+        "address": "Magelang, Jateng",
+        "phoneNumber": "1233029302302",
+        "medicalRecords": {
+          "size": 0
+        },
+        "id": 0,
+        "name": "Qiqi",
+        "compareMode": "COMPARE_BY_ID"
+      },
+      "next": {
+        "data": {
+          "age": 19,
+          "address": "Cepu",
+          "phoneNumber": "239203920392",
+          "medicalRecords": {
+            "size": 0
+          },
+          "id": 1,
+          "name": "Nopal",
+          "compareMode": "COMPARE_BY_ID"
+        },
+        "next": {
+          "data": {
+            "age": 18,
+            "address": "Idk",
+            "phoneNumber": "+62293203920923",
+            "medicalRecords": {
+              "size": 0
+            },
+            "id": 2,
+            "name": "Faze",
+            "compareMode": "COMPARE_BY_ID"
+          },
+          "next": {
+            "data": {
+              "age": 19,
+              "address": "London",
+              "phoneNumber": "2903920392",
+              "medicalRecords": {
+                "size": 0
+              },
+              "id": 3,
+              "name": "James",
+              "compareMode": "COMPARE_BY_ID"
+            }
+          }
+        }
+      }
+    },
+    "size": 4
+  },
+  "lastId": 4
+}
