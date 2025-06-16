@@ -1,12 +1,27 @@
 package daisukeclinic.utils;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import org.jline.terminal.Terminal;
+import org.jline.terminal.TerminalBuilder;
+
 public class ConsoleUtility {
     private static Scanner scanner = new Scanner(System.in);
+    private static Terminal terminal;
+
+    public static Terminal getTerminal() {
+        if (terminal == null) {
+            try {
+                terminal = TerminalBuilder.terminal();
+            } catch (IOException e) {
+            }
+        }
+        return terminal;
+    }
 
     public static int getIntPromptInput(String promptMessage) {
         boolean looping = true;
@@ -146,7 +161,7 @@ public class ConsoleUtility {
     }
 
     public static void printTitle(String title) {
-        int titleWidth = title.length() + 16;
+        int titleWidth = getConsoleWidth() - 2;
         int padding = (titleWidth - title.length()) / 2;
 
         System.out.print("╔");
@@ -191,6 +206,16 @@ public class ConsoleUtility {
             System.in.read();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static int getConsoleWidth() {
+        try {
+            if (getTerminal() != null)
+                return getTerminal().getWidth();
+            return 80;
+        } catch (Exception e) {
+            return 80;
         }
     }
 }

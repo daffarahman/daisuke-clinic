@@ -18,4 +18,8 @@ public class UserListManager {
         }
         return instance;
     }
+
+    public LinkedList<User> getList() {
+        return userList;
+    }
 }

@@ -12,8 +12,7 @@ public class TableUtility {
         public static void displayPatientTable(LinkedList<Patient> list) {
                 System.out.printf("%-5s %-20s %-3s %-30s %-15s%n", "ID", "Name", "Age",
                                 "Address", "Phone Number");
-                System.out.println(
-                                "-------------------------------------------------------------------------------------");
+                ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Patient patient = list.getIndex(i);
@@ -21,16 +20,14 @@ public class TableUtility {
                                                 patient.getId(), patient.getName(), patient.getAge(),
                                                 patient.getAddress(), patient.getPhoneNumber());
                         }
-                        System.out.println(
-                                        "-------------------------------------------------------------------------------------");
+                        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 }
         }
 
         public static void displayMedicalRecordsTable(LinkedList<MedicalRecord> list) {
                 System.out.printf("%-30s %-25s %-25s %-25s %-25s%n", "Date & Time", "Doctor",
                                 "Problem", "Diagnosis", "Drug");
-                System.out.println(
-                                "----------------------------------------------------------------------------------------------------------------------------------");
+                ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 MedicalRecord record = list.getIndex(i);
@@ -39,16 +36,14 @@ public class TableUtility {
                                                 DoctorList.getInstance().findDoctorById(record.getDoctorId()).getName(),
                                                 record.getProblem(), record.getDiagnosis(), record.getDrug());
                         }
-                        System.out.println(
-                                        "----------------------------------------------------------------------------------------------------------------------------------");
+                        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 }
         }
 
         public static void displayDoctorTable(LinkedList<Doctor> list) {
                 System.out.printf("%-5s %-20s %-20s %-30s %-30s%n", "ID", "Name", "Specialty",
                                 "Last Login", "Last Logout");
-                System.out.println(
-                                "-------------------------------------------------------------------------------------------------------------");
+                ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Doctor doctor = list.getIndex(i);
@@ -61,8 +56,7 @@ public class TableUtility {
                                                 doctor.getId(), doctor.getName(), doctor.getSpecialty(),
                                                 loginTime, logoutTime);
                         }
-                        System.out.println(
-                                        "-------------------------------------------------------------------------------------------------------------");
+                        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 }
 
         }
@@ -70,8 +64,7 @@ public class TableUtility {
         public static void displayDoctorLoginTable(LinkedList<Doctor> list) {
                 System.out.printf("%-5s %-20s %-20s %-20s%n", "ID", "Name", "Specialty",
                                 "Login Time");
-                System.out.println(
-                                "---------------------------------------------------------------------------------------------------");
+                ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Doctor doctor = list.getIndex(i);
@@ -82,8 +75,7 @@ public class TableUtility {
                                                 doctor.getId(), doctor.getName(), doctor.getSpecialty(),
                                                 loginTime);
                         }
-                        System.out.println(
-                                        "---------------------------------------------------------------------------------------------------");
+                        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 }
         }
 
@@ -91,8 +83,7 @@ public class TableUtility {
                 System.out.printf("%-5s %-15s %-15s %-25s %-25s %-15s%n", "ID", "Patient ID", "Doctor ID",
                                 "Patient Name",
                                 "Doctor Name", "Time");
-                System.out.println(
-                                "---------------------------------------------------------------------------------------------------------------------");
+                ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Appointment appointment = list.getIndex(i);
@@ -108,8 +99,7 @@ public class TableUtility {
                                                 (currentDoctor == null) ? "ERR" : currentDoctor.getName(),
                                                 Utility.formatLocalDateTime(appointment.getTime()));
                         }
-                        System.out.println(
-                                        "---------------------------------------------------------------------------------------------------------------------");
+                        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 }
 
         }

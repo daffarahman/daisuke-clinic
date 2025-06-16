@@ -1,6 +1,25 @@
 {
   "doctorList": {
-    "size": 0
+    "head": {
+      "data": {
+        "specialty": "Ambasing",
+        "loginTime": "2025-06-17T06:02:01.223271282",
+        "isLoggedIn": true,
+        "id": 0,
+        "name": "Dr. Amba",
+        "compareMode": "COMPARE_BY_ID"
+      },
+      "next": {
+        "data": {
+          "specialty": "Idk",
+          "isLoggedIn": false,
+          "id": 1,
+          "name": "Dr James",
+          "compareMode": "COMPARE_BY_ID"
+        }
+      }
+    },
+    "size": 2
   },
-  "lastId": 0
+  "lastId": 2
 }

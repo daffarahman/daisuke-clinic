@@ -24,7 +24,8 @@ public class MenuList implements Comparable<MenuList> {
     }
 
     public void printMenu() {
-        int menuWidth = getMenuWidth();
+        // int menuWidth = getMenuWidth();
+        int menuWidth = ConsoleUtility.getConsoleWidth() - 2;
 
         System.out.print("╔");
         ConsoleUtility.printChars('═', menuWidth);
@@ -68,15 +69,15 @@ public class MenuList implements Comparable<MenuList> {
         }
     }
 
-    private int getMenuWidth() {
-        int width = title != null ? title.length() : 0;
-        for (int i = 0; i < menuItems.length; i++) {
-            if (menuItems[i].getText().length() > width) {
-                width = menuItems[i].getText().length();
-            }
-        }
-        return width + 8;
-    }
+    // private int getMenuWidth() {
+    // int width = title != null ? title.length() : 0;
+    // for (int i = 0; i < menuItems.length; i++) {
+    // if (menuItems[i].getText().length() > width) {
+    // width = menuItems[i].getText().length();
+    // }
+    // }
+    // return width + 8;
+    // }
 
     @Override
     public int compareTo(MenuList arg0) {
