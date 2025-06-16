@@ -19,6 +19,10 @@ public class MenuList implements Comparable<MenuList> {
         menuItems[menuCount++] = menuItem;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void printMenu() {
         int menuWidth = getMenuWidth();
 

@@ -62,4 +62,8 @@ public class DoctorLoginList implements Serializable {
     public void getAllLoggedInDoctors() {
         TableUtility.displayDoctorLoginTable(doctorLogins);
     }
+
+    public LinkedList<Doctor> getList() {
+        return doctorLogins;
+    }
 }

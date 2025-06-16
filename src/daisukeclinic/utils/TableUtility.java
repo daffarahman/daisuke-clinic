@@ -27,21 +27,20 @@ public class TableUtility {
         }
 
         public static void displayMedicalRecordsTable(LinkedList<MedicalRecord> list) {
-                System.out.printf("%-30s %-10s %-30s %-40s %-30s %-20s%n", "Date & Time", "Doctor ID", "Doctor Name",
+                System.out.printf("%-30s %-25s %-25s %-25s %-25s%n", "Date & Time", "Doctor",
                                 "Problem", "Diagnosis", "Drug");
                 System.out.println(
-                                "---------------------------------------------------------------------------------------------------------");
+                                "----------------------------------------------------------------------------------------------------------------------------------");
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 MedicalRecord record = list.getIndex(i);
-                                System.out.printf("%-30s %-10s %-30s %-40s%n",
+                                System.out.printf("%-30s %-25s %-25s %-25s %-25s%n",
                                                 Utility.formatLocalDateTime(record.getAppointmentdate()),
-                                                record.getDoctorId(),
                                                 DoctorList.getInstance().findDoctorById(record.getDoctorId()).getName(),
                                                 record.getProblem(), record.getDiagnosis(), record.getDrug());
                         }
                         System.out.println(
-                                        "---------------------------------------------------------------------------------------------------------");
+                                        "----------------------------------------------------------------------------------------------------------------------------------");
                 }
         }
 
@@ -49,7 +48,7 @@ public class TableUtility {
                 System.out.printf("%-5s %-20s %-20s %-30s %-30s%n", "ID", "Name", "Specialty",
                                 "Last Login", "Last Logout");
                 System.out.println(
-                                "-------------------------------------------------------------------------------------");
+                                "-------------------------------------------------------------------------------------------------------------");
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Doctor doctor = list.getIndex(i);
@@ -63,7 +62,7 @@ public class TableUtility {
                                                 loginTime, logoutTime);
                         }
                         System.out.println(
-                                        "-------------------------------------------------------------------------------------");
+                                        "-------------------------------------------------------------------------------------------------------------");
                 }
 
         }
@@ -72,7 +71,7 @@ public class TableUtility {
                 System.out.printf("%-5s %-20s %-20s %-20s%n", "ID", "Name", "Specialty",
                                 "Login Time");
                 System.out.println(
-                                "-------------------------------------------------------------------------------------");
+                                "---------------------------------------------------------------------------------------------------");
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Doctor doctor = list.getIndex(i);
@@ -84,7 +83,7 @@ public class TableUtility {
                                                 loginTime);
                         }
                         System.out.println(
-                                        "-------------------------------------------------------------------------------------");
+                                        "---------------------------------------------------------------------------------------------------");
                 }
         }
 
@@ -93,7 +92,7 @@ public class TableUtility {
                                 "Patient Name",
                                 "Doctor Name", "Time");
                 System.out.println(
-                                "-------------------------------------------------------------------------------------------------------------");
+                                "---------------------------------------------------------------------------------------------------------------------");
                 if (list != null) {
                         for (int i = 0; i < list.getSize(); i++) {
                                 Appointment appointment = list.getIndex(i);
@@ -110,7 +109,7 @@ public class TableUtility {
                                                 Utility.formatLocalDateTime(appointment.getTime()));
                         }
                         System.out.println(
-                                        "-------------------------------------------------------------------------------------------------------------");
+                                        "---------------------------------------------------------------------------------------------------------------------");
                 }
 
         }

@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import daisukeclinic.model.Appointment;
+import daisukeclinic.model.Doctor;
 import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.model.datastructure.Map;
 import daisukeclinic.model.datastructure.MapEntry;
+import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 
 public class AppointmentManager implements Serializable {
@@ -60,8 +62,13 @@ public class AppointmentManager implements Serializable {
         for (int i = 0; i < appointmentEntries.getSize(); i++) {
             MapEntry<Integer, AppointmentQueue> entry = appointmentEntries.getIndex(i);
             if (!entry.value.getQueue().isEmpty()) {
-                System.out.println("Doctor id: " + entry.key);
-                TableUtility.displayAppointmentTable(appointmentEntries.getIndex(i).value.getQueue());
+                // System.out.println("Doctor ID: " + entry.key);
+                System.out.print("\n");
+                Doctor d = DoctorList.getInstance().findDoctorById(i);
+                if (d != null) {
+                    ConsoleUtility.printTitle(String.format("%d | %s | %s", entry.key, d.getName(), d.getSpecialty()));
+                    TableUtility.displayAppointmentTable(appointmentEntries.getIndex(i).value.getQueue());
+                }
             }
         }
     }

@@ -4,8 +4,8 @@ import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.SaveUtility;
 import daisukeclinic.utils.TableUtility;
 
+import java.io.Console;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import daisukeclinic.components.MenuItem;
 import daisukeclinic.components.MenuList;
@@ -39,8 +39,31 @@ public class AppConsole {
         while (!menuStack.isEmpty()) {
             SaveUtility.saveAll();
             SaveUtility.loadAll();
+
             ConsoleUtility.clearScreen();
+
+            // String pathTexts = "";
+            // for (int i = menuStack.getSize() - 1; i >= 0; i--) {
+            // pathTexts += menuStack.getIndex(i).getTitle() + " > ";
+            // }
+
+            // ConsoleUtility.printTitle(pathTexts);
+
             menuStack.peek().printMenu();
+
+            int appointmentPending = 0;
+            for (int i = 0; i < AppointmentManager.getInstance().getAppointments().getEntries().getSize(); i++) {
+                appointmentPending += AppointmentManager.getInstance().getAppointments().getEntries().getIndex(i).value
+                        .getQueue().getSize();
+            }
+
+            ConsoleUtility.printTitle(
+                    String.format("Available Doctors: (%d/%d) | Patients: %d | Appointment Pending: %d",
+                            DoctorLoginList.getInstance().getList().getSize(),
+                            DoctorList.getInstance().getList().getSize(),
+                            PatientRecord.getInstance().getList().getSize(),
+                            appointmentPending));
+
             menuStack.peek().run(menuStack.peek().prompt());
         }
     }
@@ -326,6 +349,8 @@ public class AppConsole {
             }
 
             LocalDateTime appointmentTime = ConsoleUtility.getDateTimePromptInput("Date & Time: ");
+
+            // System.out.println("Appointment Time");
 
             AppointmentManager.getInstance().scheduleAppointment(patientId, doctorId, appointmentTime);
 

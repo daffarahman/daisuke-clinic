@@ -25,6 +25,24 @@ public class ConsoleUtility {
         return result;
     }
 
+    public static int getIntPromptInput(String promptMessage, int min, int max) {
+        boolean looping = true;
+        int result = 0;
+        while (looping) {
+            System.out.print(promptMessage);
+            try {
+                result = scanner.nextInt();
+                if (result >= min && result <= max)
+                    looping = false;
+            } catch (Exception e) {
+                continue;
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        return result;
+    }
+
     public static String getPhoneNumberPromptInput(String promptMessage) {
         boolean looping = true;
         String result = "";
