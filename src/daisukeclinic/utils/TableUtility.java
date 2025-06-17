@@ -41,7 +41,7 @@ public class TableUtility {
         }
 
         public static void displayDoctorTable(LinkedList<Doctor> list) {
-                System.out.printf("%-5s %-20s %-20s %-30s %-30s%n", "ID", "Name", "Specialty",
+                System.out.printf("%-5s %-20s %-20s %-30s %-30s %-30s%n", "ID", "Name", "Specialty", "Schedule",
                                 "Last Login", "Last Logout");
                 ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
                 if (list != null) {
@@ -52,8 +52,10 @@ public class TableUtility {
                                 String logoutTime = doctor.getLogoutTime() == null ? "-"
                                                 : Utility.formatLocalDateTime(doctor.getLogoutTime());
 
-                                System.out.printf("%-5d %-20s %-20s %-30s %-30s%n",
+                                System.out.printf("%-5d %-20s %-20s %-30s %-30s %-30s%n",
                                                 doctor.getId(), doctor.getName(), doctor.getSpecialty(),
+                                                String.format("%s-%s", doctor.getScheduleStart(),
+                                                                doctor.getScheduleEnd()),
                                                 loginTime, logoutTime);
                         }
                         ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());

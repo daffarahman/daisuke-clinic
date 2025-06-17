@@ -15,6 +15,10 @@ public class Utility {
         return dateTime.format(java.time.format.DateTimeFormatter.ofPattern("MMMM dd, yyyy - hh:mm a"));
     }
 
+    public static String formatLocalTime(java.time.LocalTime time) {
+        return time.format(java.time.format.DateTimeFormatter.ofPattern("hh:mm a"));
+    }
+
     public static String hashPassword(String password) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");

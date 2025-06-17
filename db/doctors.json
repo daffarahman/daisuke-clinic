@@ -1,0 +1,17 @@
+{
+  "doctorList": {
+    "head": {
+      "data": {
+        "specialty": "General",
+        "isLoggedIn": false,
+        "scheduleStart": "14:00:00",
+        "scheduleEnd": "15:00:00",
+        "id": 0,
+        "name": "James",
+        "compareMode": "COMPARE_BY_ID"
+      }
+    },
+    "size": 1
+  },
+  "lastId": 1
+}
