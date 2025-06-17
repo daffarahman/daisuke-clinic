@@ -10,7 +10,7 @@ import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 import daisukeclinic.view.AppConsole;
 
-public class PatientRoute {
+public class PatientRoutes {
     public static void addNewPatientRoute() {
         ConsoleUtility.clearScreen();
         ConsoleUtility.printTitle("Add New Patient");

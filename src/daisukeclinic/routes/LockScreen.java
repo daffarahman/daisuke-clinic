@@ -12,7 +12,7 @@ import daisukeclinic.utils.ConsoleUtility;
 
 public class LockScreen {
 
-    // ============== LOGIN ACCOUNT ==============
+    // Login Account
     public static void loginAccountPage() {
         ConsoleUtility.clearScreen();
         ConsoleUtility.printTitle("Login MyDaisuke Account");
@@ -38,8 +38,7 @@ public class LockScreen {
         ConsoleUtility.pressAnyKeyToContinue();
     }
 
-    // ============== REGISTER ACCOUNT ==============
-
+    // Register Account
     public static void registerAccountPage() {
         ConsoleUtility.clearScreen();
         ConsoleUtility.printTitle("Register MyDaisuke Account");
@@ -105,5 +104,4 @@ public class LockScreen {
         ConsoleUtility.pressAnyKeyToContinue();
     }
 
-    // ============== END REGISTER ACCOUNT ==============
 }
