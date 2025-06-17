@@ -47,12 +47,25 @@
               "id": 3,
               "name": "James",
               "compareMode": "COMPARE_BY_ID"
+            },
+            "next": {
+              "data": {
+                "age": 29,
+                "address": "Apa ya",
+                "phoneNumber": "+623902930230",
+                "medicalRecords": {
+                  "size": 0
+                },
+                "id": 4,
+                "name": "Amba Singh",
+                "compareMode": "COMPARE_BY_ID"
+              }
             }
           }
         }
       }
     },
-    "size": 4
+    "size": 5
   },
-  "lastId": 4
+  "lastId": 5
 }

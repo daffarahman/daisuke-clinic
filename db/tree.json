@@ -28,26 +28,40 @@
       },
       "right": {
         "data": {
-          "age": 18,
-          "address": "Idk",
-          "phoneNumber": "+62293203920923",
+          "age": 19,
+          "address": "London",
+          "phoneNumber": "2903920392",
           "medicalRecords": {
             "size": 0
           },
-          "id": 2,
-          "name": "Faze",
+          "id": 3,
+          "name": "James",
           "compareMode": "COMPARE_BY_ID"
         },
-        "right": {
+        "left": {
           "data": {
-            "age": 19,
-            "address": "London",
-            "phoneNumber": "2903920392",
+            "age": 18,
+            "address": "Idk",
+            "phoneNumber": "+62293203920923",
             "medicalRecords": {
               "size": 0
             },
-            "id": 3,
-            "name": "James",
+            "id": 2,
+            "name": "Faze",
+            "compareMode": "COMPARE_BY_ID"
+          },
+          "height": 1
+        },
+        "right": {
+          "data": {
+            "age": 29,
+            "address": "Apa ya",
+            "phoneNumber": "+623902930230",
+            "medicalRecords": {
+              "size": 0
+            },
+            "id": 4,
+            "name": "Amba Singh",
             "compareMode": "COMPARE_BY_ID"
           },
           "height": 1
