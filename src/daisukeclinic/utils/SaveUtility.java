@@ -10,14 +10,14 @@ import java.time.LocalTime;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import daisukeclinic.adapter.LocalDateTimeAdapter;
+import daisukeclinic.adapter.LocalTimeAdapter;
 import daisukeclinic.controller.AppointmentManager;
 import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.DoctorLoginList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
 import daisukeclinic.controller.UserListManager;
-import daisukeclinic.utils.adapter.LocalDateTimeAdapter;
-import daisukeclinic.utils.adapter.LocalTimeAdapter;
 
 public class SaveUtility {
     private static final String DATA_DIR = "db";
