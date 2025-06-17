@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import org.jline.reader.LineReader;
+import org.jline.reader.LineReaderBuilder;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
@@ -200,6 +202,34 @@ public class ConsoleUtility {
     public static String getStringPromptInput(String promptMessage) {
         System.out.print(promptMessage);
         return scanner.nextLine().strip();
+    }
+
+    public static String getPasswordPromptInput(String promptMessage) {
+        boolean looping = true;
+        String password = "";
+
+        while (looping) {
+            try {
+                LineReader reader = LineReaderBuilder.builder()
+                        .terminal(getTerminal())
+                        .build();
+                password = reader.readLine(promptMessage, '*');
+
+                if (password.length() >= 8) {
+                    looping = false;
+                } else {
+                    System.out.println("Password must be at least 8 characters long!");
+                }
+            } catch (Exception e) {
+                password = getStringPromptInput(promptMessage);
+                if (password.length() >= 8) {
+                    looping = false;
+                } else {
+                    System.out.println("Password must be at least 8 characters long!");
+                }
+            }
+        }
+        return password;
     }
 
     public static void printChars(char c, int length) {

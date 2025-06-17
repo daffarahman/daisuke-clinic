@@ -15,6 +15,7 @@ import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.DoctorLoginList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
+import daisukeclinic.controller.UserListManager;
 import daisukeclinic.utils.adapter.LocalDateTimeAdapter;
 import daisukeclinic.utils.adapter.LocalTimeAdapter;
 
@@ -25,6 +26,7 @@ public class SaveUtility {
     private static final String APPOINTMENT_FILE = DATA_DIR + "/appointments.json";
     private static final String LOGIN_FILE = DATA_DIR + "/doctor_logins.json";
     private static final String TREE_FILE = DATA_DIR + "/patient_tree.json";
+    private static final String USER_FILE = DATA_DIR + "/user.json";
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
@@ -40,6 +42,7 @@ public class SaveUtility {
             writeToFile(APPOINTMENT_FILE, AppointmentManager.getInstance());
             writeToFile(LOGIN_FILE, DoctorLoginList.getInstance());
             writeToFile(TREE_FILE, SearchablePatientTree.getInstance());
+            writeToFile(USER_FILE, UserListManager.getInstance());
         } catch (IOException e) {
             System.err.println("Error saving data: " + e.getMessage());
             ConsoleUtility.pressAnyKeyToContinue();
@@ -56,6 +59,7 @@ public class SaveUtility {
             AppointmentManager.setInstance(readFromFile(APPOINTMENT_FILE, AppointmentManager.class));
             DoctorLoginList.setInstance(readFromFile(LOGIN_FILE, DoctorLoginList.class));
             SearchablePatientTree.setInstance(readFromFile(TREE_FILE, SearchablePatientTree.class));
+            UserListManager.setInstance(readFromFile(USER_FILE, UserListManager.class));
         } catch (IOException e) {
             System.err.println("Error loading data: " + e.getMessage());
             ConsoleUtility.pressAnyKeyToContinue();

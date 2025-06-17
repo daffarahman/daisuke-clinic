@@ -1,0 +1,13 @@
+{
+  "userList": {
+    "head": {
+      "data": {
+        "username": "admin",
+        "password": "admin123",
+        "role": "ROLE_ADMIN",
+        "roleId": -1
+      }
+    },
+    "size": 1
+  }
+}

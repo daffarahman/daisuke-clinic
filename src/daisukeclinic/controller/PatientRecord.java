@@ -27,10 +27,12 @@ public class PatientRecord implements Serializable {
         instance = newInstance;
     }
 
-    public void addPatient(String name, int age, String address, String phoneNumber) {
-        Patient newPatient = new Patient(lastId++, name, age, address, phoneNumber);
+    public int addPatient(String name, int age, String address, String phoneNumber) {
+        lastId += 1;
+        Patient newPatient = new Patient(lastId, name, age, address, phoneNumber);
         patients.insertBack(newPatient);
         SearchablePatientTree.getInstance().insertPatient(newPatient);
+        return lastId;
     }
 
     public boolean removePatientById(int id) {

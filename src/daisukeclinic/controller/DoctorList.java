@@ -32,8 +32,10 @@ public class DoctorList implements Serializable {
         return doctorList;
     }
 
-    public void registerDoctor(String name, String specialty, LocalTime schedulStart, LocalTime scheduleEnd) {
-        doctorList.insertBack(new Doctor(lastId++, name, specialty, schedulStart, scheduleEnd));
+    public int registerDoctor(String name, String specialty, LocalTime schedulStart, LocalTime scheduleEnd) {
+        lastId += 1;
+        doctorList.insertBack(new Doctor(lastId, name, specialty, schedulStart, scheduleEnd));
+        return lastId;
     }
 
     public Doctor findDoctorById(int id) {
