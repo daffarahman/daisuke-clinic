@@ -1,23 +1,34 @@
 package daisukeclinic.utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import daisukeclinic.controller.*;
+import daisukeclinic.controller.AppointmentManager;
+import daisukeclinic.controller.DoctorList;
+import daisukeclinic.controller.DoctorLoginList;
+import daisukeclinic.controller.PatientRecord;
+import daisukeclinic.controller.SearchablePatientTree;
+import daisukeclinic.utils.adapter.LocalDateTimeAdapter;
+import daisukeclinic.utils.adapter.LocalTimeAdapter;
 
 public class SaveUtility {
     private static final String DATA_DIR = "db";
     private static final String PATIENT_FILE = DATA_DIR + "/patients.json";
     private static final String DOCTOR_FILE = DATA_DIR + "/doctors.json";
     private static final String APPOINTMENT_FILE = DATA_DIR + "/appointments.json";
-    private static final String LOGIN_FILE = DATA_DIR + "/logins.json";
-    private static final String TREE_FILE = DATA_DIR + "/tree.json";
+    private static final String LOGIN_FILE = DATA_DIR + "/doctor_logins.json";
+    private static final String TREE_FILE = DATA_DIR + "/patient_tree.json";
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+            .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
             .setPrettyPrinting()
             .create();
 

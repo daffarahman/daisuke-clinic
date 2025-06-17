@@ -1,4 +1,4 @@
-package daisukeclinic.utils;
+package daisukeclinic.utils.adapter;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;

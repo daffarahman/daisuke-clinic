@@ -149,6 +149,54 @@ public class ConsoleUtility {
         return result;
     }
 
+    public static LocalTime getLocalTimePromptInput(String promptMessage) {
+        boolean looping = true;
+        LocalTime result = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        while (looping) {
+            System.out.print(promptMessage + " (Format: HH:mm): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                result = LocalTime.parse(input, formatter);
+                looping = false;
+            } catch (Exception e) {
+                System.out.println("Invalid time format! Please use HH:mm");
+                System.out.println("Example: 14:30");
+            }
+        }
+
+        return result;
+    }
+
+    public static LocalTime getLocalTimePromptInput(String promptMessage, LocalTime timeStart, LocalTime timeEnd) {
+        boolean looping = true;
+        LocalTime result = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        while (looping) {
+            System.out.print(promptMessage + " (Format: HH:mm): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                result = LocalTime.parse(input, formatter);
+
+                if (result.isAfter(timeStart) && result.isBefore(timeEnd)) {
+                    looping = false;
+                } else {
+                    System.out.println("Time must be between " +
+                            timeStart.format(formatter) + " and " + timeEnd.format(formatter));
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid time format! Please use HH:mm");
+                System.out.println("Example: 14:30");
+            }
+        }
+
+        return result;
+    }
+
     public static String getStringPromptInput(String promptMessage) {
         System.out.print(promptMessage);
         return scanner.nextLine().strip();

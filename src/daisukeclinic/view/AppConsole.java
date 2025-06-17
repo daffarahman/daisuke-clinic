@@ -5,6 +5,7 @@ import daisukeclinic.utils.SaveUtility;
 import daisukeclinic.utils.TableUtility;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import daisukeclinic.components.MenuItem;
 import daisukeclinic.components.MenuList;
@@ -232,15 +233,12 @@ public class AppConsole {
             String name = ConsoleUtility.getStringPromptInput("Name: ");
             String specialty = ConsoleUtility.getStringPromptInput("Specialty: ");
 
-            // LocalDateTime loginTime = ConsoleUtility.getDateTimePromptInput(
-            // "Enter Login Time",
-            // LocalTime.of(8, 0, 0), LocalTime.of(19, 0, 0));
-            // LocalDateTime logoutTime = ConsoleUtility.getDateTimePromptInput(
-            // "Enter Logout Time",
-            // LocalTime.of(loginTime.getHour(), loginTime.getMinute() + 1, 0),
-            // LocalTime.of(19, 30, 0));
+            LocalTime scheduleStart = ConsoleUtility.getLocalTimePromptInput("Schedule Starts  At: ",
+                    LocalTime.of(8, 0), LocalTime.of(18, 0));
+            LocalTime scheduleEnd = ConsoleUtility.getLocalTimePromptInput("Schedule Ends  At: ", scheduleStart,
+                    LocalTime.of(19, 0));
 
-            DoctorList.getInstance().registerDoctor(name, specialty);
+            DoctorList.getInstance().registerDoctor(name, specialty, scheduleStart, scheduleEnd);
 
             System.out.println("Doctor is successfuly added! . . .\n");
 

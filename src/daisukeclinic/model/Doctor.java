@@ -1,6 +1,7 @@
 package daisukeclinic.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Doctor extends Person implements Comparable<Doctor> {
     private String specialty;
@@ -10,10 +11,16 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     private boolean isLoggedIn;
 
-    public Doctor(int id, String name, String specialty) {
+    private LocalTime scheduleStart;
+    private LocalTime scheduleEnd;
+
+    public Doctor(int id, String name, String specialty, LocalTime scheduleStart, LocalTime scheduleEnd) {
         super(id, name);
-        this.specialty = (specialty == null) ? "" : specialty.strip();
+        this.specialty = (specialty == null || specialty.isEmpty() || specialty.isBlank()) ? "General"
+                : specialty.strip();
         isLoggedIn = false;
+        this.scheduleStart = (scheduleStart == null) ? LocalTime.of(8, 0) : scheduleStart;
+        this.scheduleEnd = (scheduleEnd == null) ? LocalTime.of(8, 0) : scheduleEnd;
     }
 
     public String getSpecialty() {
@@ -22,6 +29,14 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     public LocalDateTime getLoginTime() {
         return loginTime;
+    }
+
+    public LocalTime getScheduleStart() {
+        return scheduleStart;
+    }
+
+    public LocalTime getScheduleEnd() {
+        return scheduleEnd;
     }
 
     public void updateLoginTime() {
