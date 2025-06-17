@@ -1,8 +1,8 @@
 package daisukeclinic.controller;
 
+import daisukeclinic.datastructure.LinkedList;
 import daisukeclinic.model.User;
 import daisukeclinic.model.User.Role;
-import daisukeclinic.model.datastructure.LinkedList;
 
 public class UserListManager {
     private LinkedList<User> userList;

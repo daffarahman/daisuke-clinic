@@ -2,8 +2,8 @@ package daisukeclinic.controller;
 
 import java.io.Serializable;
 
+import daisukeclinic.datastructure.LinkedList;
 import daisukeclinic.model.Patient;
-import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.utils.TableUtility;
 import daisukeclinic.model.Person;
 

@@ -3,11 +3,11 @@ package daisukeclinic.controller;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import daisukeclinic.datastructure.LinkedList;
+import daisukeclinic.datastructure.Map;
+import daisukeclinic.datastructure.MapEntry;
 import daisukeclinic.model.Appointment;
 import daisukeclinic.model.Doctor;
-import daisukeclinic.model.datastructure.LinkedList;
-import daisukeclinic.model.datastructure.Map;
-import daisukeclinic.model.datastructure.MapEntry;
 import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 

@@ -1,4 +1,4 @@
-package daisukeclinic.model.datastructure;
+package daisukeclinic.datastructure;
 
 public class Stack<T extends Comparable<T>> extends LinkedList<T> {
 

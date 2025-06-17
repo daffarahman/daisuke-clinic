@@ -2,10 +2,10 @@ package daisukeclinic.controller;
 
 import java.io.Serializable;
 
+import daisukeclinic.datastructure.BST;
+import daisukeclinic.datastructure.LinkedList;
 import daisukeclinic.model.Patient;
 import daisukeclinic.model.Person;
-import daisukeclinic.model.datastructure.BST;
-import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.utils.TableUtility;
 
 public class SearchablePatientTree implements Serializable {

@@ -3,9 +3,9 @@ package daisukeclinic.controller;
 import java.io.Serializable;
 import java.time.LocalTime;
 
+import daisukeclinic.datastructure.LinkedList;
 import daisukeclinic.model.Doctor;
 import daisukeclinic.model.Person;
-import daisukeclinic.model.datastructure.LinkedList;
 import daisukeclinic.utils.TableUtility;
 
 public class DoctorList implements Serializable {

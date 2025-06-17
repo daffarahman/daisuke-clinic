@@ -1,4 +1,4 @@
-package daisukeclinic.model.datastructure;
+package daisukeclinic.datastructure;
 
 import java.io.Serializable;
 

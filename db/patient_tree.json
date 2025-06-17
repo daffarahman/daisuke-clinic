@@ -2,17 +2,45 @@
   "patientTree": {
     "root": {
       "data": {
-        "age": 12,
-        "address": "magelang",
-        "phoneNumber": "902392039202",
+        "age": 30,
+        "address": "Skyfall, England",
+        "phoneNumber": "390290329032",
         "medicalRecords": {
           "size": 0
         },
-        "id": 0,
-        "name": "Qiqi",
+        "id": 2,
+        "name": "Bond, James Bond",
         "compareMode": "COMPARE_BY_ID"
       },
-      "height": 1
+      "left": {
+        "data": {
+          "age": 12,
+          "address": "magelang",
+          "phoneNumber": "902392039202",
+          "medicalRecords": {
+            "size": 0
+          },
+          "id": 0,
+          "name": "Qiqi",
+          "compareMode": "COMPARE_BY_ID"
+        },
+        "height": 1
+      },
+      "right": {
+        "data": {
+          "age": 2,
+          "address": "sldklaskds",
+          "phoneNumber": "230239203920",
+          "medicalRecords": {
+            "size": 0
+          },
+          "id": 3,
+          "name": "ladksldk",
+          "compareMode": "COMPARE_BY_ID"
+        },
+        "height": 1
+      },
+      "height": 2
     }
   }
 }

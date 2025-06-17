@@ -1,6 +1,6 @@
 package daisukeclinic.model;
 
-import daisukeclinic.model.datastructure.LinkedList;
+import daisukeclinic.datastructure.LinkedList;
 
 public class Patient extends Person implements Comparable<Patient> {
     private int age;

@@ -3,8 +3,8 @@ package daisukeclinic.controller;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import daisukeclinic.datastructure.Queue;
 import daisukeclinic.model.Appointment;
-import daisukeclinic.model.datastructure.Queue;
 
 public class AppointmentQueue implements Serializable {
     private Queue<Appointment> appointments;

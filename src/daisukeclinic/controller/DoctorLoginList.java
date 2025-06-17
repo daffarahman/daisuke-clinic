@@ -2,9 +2,9 @@ package daisukeclinic.controller;
 
 import java.io.Serializable;
 
+import daisukeclinic.datastructure.LinkedList;
+import daisukeclinic.datastructure.Node;
 import daisukeclinic.model.Doctor;
-import daisukeclinic.model.datastructure.LinkedList;
-import daisukeclinic.model.datastructure.Node;
 import daisukeclinic.utils.TableUtility;
 
 public class DoctorLoginList implements Serializable {

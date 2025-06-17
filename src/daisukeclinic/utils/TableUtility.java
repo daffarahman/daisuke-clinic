@@ -2,11 +2,11 @@ package daisukeclinic.utils;
 
 import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.PatientRecord;
+import daisukeclinic.datastructure.LinkedList;
 import daisukeclinic.model.Appointment;
 import daisukeclinic.model.Doctor;
 import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
-import daisukeclinic.model.datastructure.LinkedList;
 
 public class TableUtility {
         public static void displayPatientTable(LinkedList<Patient> list) {
