@@ -40,9 +40,9 @@ public class SaveUtility {
             writeToFile(APPOINTMENT_FILE, AppointmentManager.getInstance());
             writeToFile(LOGIN_FILE, DoctorLoginList.getInstance());
             writeToFile(TREE_FILE, SearchablePatientTree.getInstance());
-            System.out.println("All data saved successfully!");
         } catch (IOException e) {
             System.err.println("Error saving data: " + e.getMessage());
+            ConsoleUtility.pressAnyKeyToContinue();
         }
     }
 
@@ -56,10 +56,9 @@ public class SaveUtility {
             AppointmentManager.setInstance(readFromFile(APPOINTMENT_FILE, AppointmentManager.class));
             DoctorLoginList.setInstance(readFromFile(LOGIN_FILE, DoctorLoginList.class));
             SearchablePatientTree.setInstance(readFromFile(TREE_FILE, SearchablePatientTree.class));
-
-            System.out.println("All data loaded successfully!");
         } catch (IOException e) {
             System.err.println("Error loading data: " + e.getMessage());
+            ConsoleUtility.pressAnyKeyToContinue();
         }
     }
 

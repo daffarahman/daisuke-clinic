@@ -1,3 +1,18 @@
 {
-  "patientTree": {}
+  "patientTree": {
+    "root": {
+      "data": {
+        "age": 12,
+        "address": "magelang",
+        "phoneNumber": "902392039202",
+        "medicalRecords": {
+          "size": 0
+        },
+        "id": 0,
+        "name": "Qiqi",
+        "compareMode": "COMPARE_BY_ID"
+      },
+      "height": 1
+    }
+  }
 }
