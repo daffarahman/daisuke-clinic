@@ -13,9 +13,25 @@
           "password": "007reportingforduty",
           "role": "ROLE_PATIENT",
           "roleId": 2
+        },
+        "next": {
+          "data": {
+            "username": "sudo",
+            "password": "helloworld",
+            "role": "ROLE_ADMIN",
+            "roleId": -1
+          },
+          "next": {
+            "data": {
+              "username": "amba123",
+              "password": "apayahello",
+              "role": "ROLE_PATIENT",
+              "roleId": 4
+            }
+          }
         }
       }
     },
-    "size": 2
+    "size": 4
   }
 }

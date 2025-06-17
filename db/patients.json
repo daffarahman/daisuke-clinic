@@ -35,11 +35,24 @@
             "id": 3,
             "name": "ladksldk",
             "compareMode": "COMPARE_BY_ID"
+          },
+          "next": {
+            "data": {
+              "age": 20,
+              "address": "Atlanta",
+              "phoneNumber": "+62930293029302",
+              "medicalRecords": {
+                "size": 0
+              },
+              "id": 4,
+              "name": "Amba Singh",
+              "compareMode": "COMPARE_BY_ID"
+            }
           }
         }
       }
     },
-    "size": 3
+    "size": 4
   },
-  "lastId": 3
+  "lastId": 4
 }

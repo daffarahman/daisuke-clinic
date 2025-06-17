@@ -9,6 +9,7 @@ import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.UserListManager;
 import daisukeclinic.model.User;
 import daisukeclinic.utils.ConsoleUtility;
+import daisukeclinic.view.AppConsole;
 
 public class LockScreen {
 
@@ -33,7 +34,14 @@ public class LockScreen {
             return;
         }
 
-        System.out.println("Successfully Logged In! " + u.getRole());
+        if (u.getRole() == User.Role.ROLE_PATIENT)
+            AppConsole.getInstance().menuStack.push(AppConsole.getInstance().patientMainMenuList);
+        else if (u.getRole() == User.Role.ROLE_DOCTOR)
+            AppConsole.getInstance().menuStack.push(AppConsole.getInstance().doctorMainMenuList);
+        else if (u.getRole() == User.Role.ROLE_ADMIN)
+            AppConsole.getInstance().menuStack.push(AppConsole.getInstance().mainMenuList);
+
+        AppConsole.getInstance().currentUser = u;
 
         ConsoleUtility.pressAnyKeyToContinue();
     }

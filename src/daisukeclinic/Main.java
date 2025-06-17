@@ -10,7 +10,7 @@ public class Main {
         ConsoleUtility.clearScreen();
         SaveUtility.loadAll();
         splashScreen();
-        new AppConsole();
+        AppConsole.getInstance().start();
     }
 
     public void splashScreen() {
