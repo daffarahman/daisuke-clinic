@@ -1,5 +1,6 @@
 package daisukeclinic.routes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -257,20 +258,28 @@ public class AdminRoutes {
         }
 
         int doctorId = 0;
+        Doctor doctor;
         while (true) {
             doctorId = ConsoleUtility.getIntPromptInput("Doctor's Id: ");
-            if (DoctorList.getInstance().findDoctorById(doctorId) == null) {
+            doctor = DoctorList.getInstance().findDoctorById(doctorId);
+            if (doctor == null) {
                 System.out.println("Doctor with that ID does not exist!");
                 continue;
             }
             break;
         }
 
-        LocalDateTime appointmentTime = ConsoleUtility.getDateTimePromptInput("Date & Time: ");
+        LocalDate appointmentDate = ConsoleUtility.getLocalDatePromptInputFuture("Date: ");
 
-        // System.out.println("Appointment Time");
-
-        AppointmentManager.getInstance().scheduleAppointment(patientId, doctorId, appointmentTime);
+        AppointmentManager.getInstance().scheduleAppointment(
+                patientId,
+                doctorId,
+                LocalDateTime.of(
+                        appointmentDate.getYear(),
+                        appointmentDate.getMonth(),
+                        appointmentDate.getDayOfMonth(),
+                        doctor.getScheduleStart().getHour(),
+                        doctor.getScheduleStart().getMinute()));
 
         System.out.println("Successfuly scheduled the appointment!\n");
 
@@ -282,14 +291,10 @@ public class AdminRoutes {
         ConsoleUtility.printTitle("Proccess Appointment");
 
         int doctorId = ConsoleUtility.getIntPromptInput("Doctor ID: ");
-
         Doctor doctor = DoctorList.getInstance().findDoctorById(doctorId);
+
         if (doctor != null) {
-
             if (doctor.isLoggedIn()) {
-
-                System.out.println(AppointmentManager.getInstance().getAppointments().isPresent(doctorId));
-
                 Appointment appointment = AppointmentManager.getInstance().proccessNextAppointment(doctorId);
                 if (appointment != null) {
                     LinkedList<Appointment> appointmentList = new LinkedList<>();

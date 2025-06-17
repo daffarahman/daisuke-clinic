@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import daisukeclinic.adapter.LocalDateAdapter;
 import daisukeclinic.adapter.LocalDateTimeAdapter;
 import daisukeclinic.adapter.LocalTimeAdapter;
 import daisukeclinic.controller.AppointmentManager;
@@ -31,6 +33,7 @@ public class SaveUtility {
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
             .registerTypeAdapter(LocalTime.class, new LocalTimeAdapter())
+            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
             .setPrettyPrinting()
             .create();
 

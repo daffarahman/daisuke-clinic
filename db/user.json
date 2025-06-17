@@ -27,11 +27,35 @@
               "password": "apayahello",
               "role": "ROLE_PATIENT",
               "roleId": 4
+            },
+            "next": {
+              "data": {
+                "username": "amba",
+                "password": "helloworld",
+                "role": "ROLE_PATIENT",
+                "roleId": 5
+              },
+              "next": {
+                "data": {
+                  "username": "Dr. Dapa",
+                  "password": "hewlloworld",
+                  "role": "ROLE_DOCTOR",
+                  "roleId": 2
+                },
+                "next": {
+                  "data": {
+                    "username": "qiqi",
+                    "password": "helloworld",
+                    "role": "ROLE_PATIENT",
+                    "roleId": 6
+                  }
+                }
+              }
             }
           }
         }
       }
     },
-    "size": 4
+    "size": 7
   }
 }

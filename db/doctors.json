@@ -9,9 +9,22 @@
         "id": 0,
         "name": "James",
         "compareMode": "COMPARE_BY_ID"
+      },
+      "next": {
+        "data": {
+          "specialty": "Men",
+          "loginTime": "2025-06-17T22:53:00.37926575",
+          "logoutTime": "2025-06-17T22:53:03.493143643",
+          "isLoggedIn": false,
+          "scheduleStart": "09:00:00",
+          "scheduleEnd": "11:00:00",
+          "id": 2,
+          "name": "Dapa",
+          "compareMode": "COMPARE_BY_ID"
+        }
       }
     },
-    "size": 1
+    "size": 2
   },
-  "lastId": 1
+  "lastId": 2
 }

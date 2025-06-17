@@ -1,6 +1,7 @@
 package daisukeclinic.utils;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -193,6 +194,54 @@ public class ConsoleUtility {
             } catch (Exception e) {
                 System.out.println("Invalid time format! Please use HH:mm");
                 System.out.println("Example: 14:30");
+            }
+        }
+
+        return result;
+    }
+
+    public static LocalDate getLocalDatePromptInput(String promptMessage) {
+        boolean looping = true;
+        LocalDate result = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        while (looping) {
+            System.out.print(promptMessage + " (Format: yyyy-MM-dd): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                result = LocalDate.parse(input, formatter);
+                looping = false;
+            } catch (Exception e) {
+                System.out.println("Invalid date format! Please use yyyy-MM-dd");
+                System.out.println("Example: 2023-12-15");
+            }
+        }
+
+        return result;
+    }
+
+    public static LocalDate getLocalDatePromptInputFuture(String promptMessage) {
+        boolean looping = true;
+        LocalDate result = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate today = LocalDate.now();
+
+        while (looping) {
+            System.out.print(promptMessage + " (Format: yyyy-MM-dd): ");
+            String input = scanner.nextLine().trim();
+
+            try {
+                result = LocalDate.parse(input, formatter);
+
+                if (result.isEqual(today) || result.isAfter(today)) {
+                    looping = false;
+                } else {
+                    System.out.println("Date must be today or later!");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid date format! Please use yyyy-MM-dd");
+                System.out.println("Example: 2023-12-15");
             }
         }
 

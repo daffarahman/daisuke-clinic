@@ -12,7 +12,10 @@ import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.datastructure.Stack;
 import daisukeclinic.model.User;
 import daisukeclinic.routes.AdminRoutes;
+import daisukeclinic.routes.DoctorRoutes;
+import daisukeclinic.routes.GlobalRoutes;
 import daisukeclinic.routes.LockScreen;
+import daisukeclinic.routes.PatientRoutes;
 
 public class AppConsole {
 
@@ -88,7 +91,7 @@ public class AppConsole {
     }
 
     public void setupMenus() {
-        loginMenuList = new MenuList("Daisuke Login", 5);
+        loginMenuList = new MenuList("MyDaisuke Login", 5);
         mainMenuList = new MenuList("Daisuke Clinic Data Management App", 5);
 
         managePatientMenuList = new MenuList("Manage Patient", 6);
@@ -147,12 +150,17 @@ public class AppConsole {
         manageAppointmentMenuList.addMenuItem(new MenuItem("Back", () -> menuStack.pop()));
 
         // ========== PATIENT MAIN MENU ==========
-        patientMainMenuList.addMenuItem(new MenuItem("Schedule an Appointment", null));
-        patientMainMenuList.addMenuItem(new MenuItem("Cancel an Appointment", null));
-        patientMainMenuList.addMenuItem(new MenuItem("View My Upcoming Appointments", null));
-        patientMainMenuList.addMenuItem(new MenuItem("View Doctor Schedule", null));
-        patientMainMenuList.addMenuItem(new MenuItem("View My Medical Record", null));
-        patientMainMenuList.addMenuItem(new MenuItem("About Me", null));
+        patientMainMenuList
+                .addMenuItem(new MenuItem("Schedule an Appointment", () -> PatientRoutes.scheduleAppointmentRoute()));
+        patientMainMenuList
+                .addMenuItem(new MenuItem("Cancel an Appointment", () -> PatientRoutes.cancelAppointmentRoute()));
+        patientMainMenuList.addMenuItem(
+                new MenuItem("View My Upcoming Appointments", () -> PatientRoutes.viewUpcomingAppointmentsRoute()));
+        patientMainMenuList.addMenuItem(
+                new MenuItem("View Doctors At Daisuke Clinics", () -> AdminRoutes.viewAllDoctorsInThisClinicRoute()));
+        patientMainMenuList
+                .addMenuItem(new MenuItem("View My Medical Record", () -> PatientRoutes.viewMedicalRecordsRoute()));
+        patientMainMenuList.addMenuItem(new MenuItem("About Me", () -> GlobalRoutes.aboutMeRoute()));
         patientMainMenuList.addMenuItem(new MenuItem("Logout", () -> {
             currentUser = null;
             menuStack.pop();
@@ -160,10 +168,13 @@ public class AppConsole {
         // ========== END PATIENT MAIN MENU ==========
 
         // ========== DOCTOR MAIN MENU ==========
-        doctorMainMenuList.addMenuItem(new MenuItem("View Upcoming Appointments", null));
-        doctorMainMenuList.addMenuItem(new MenuItem("Proccess Appointment", null));
-        doctorMainMenuList.addMenuItem(new MenuItem("About Me", null));
+        doctorMainMenuList.addMenuItem(
+                new MenuItem("View Upcoming Appointments", () -> DoctorRoutes.viewUpcomingAppointmentsRoute()));
+        doctorMainMenuList
+                .addMenuItem(new MenuItem("Proccess Appointment", () -> DoctorRoutes.proccessAppointmentRoute()));
+        doctorMainMenuList.addMenuItem(new MenuItem("About Me", () -> GlobalRoutes.aboutMeRoute()));
         doctorMainMenuList.addMenuItem(new MenuItem("Logout", () -> {
+            DoctorList.getInstance().findDoctorById(currentUser.getRoleId()).logout();
             currentUser = null;
             menuStack.pop();
         }));
