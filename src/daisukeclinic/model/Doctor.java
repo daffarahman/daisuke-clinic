@@ -31,14 +31,6 @@ public class Doctor extends Person implements Comparable<Doctor> {
         return loginTime;
     }
 
-    public LocalTime getScheduleStart() {
-        return scheduleStart;
-    }
-
-    public LocalTime getScheduleEnd() {
-        return scheduleEnd;
-    }
-
     public void updateLoginTime() {
         loginTime = LocalDateTime.now();
     }
@@ -53,6 +45,14 @@ public class Doctor extends Person implements Comparable<Doctor> {
 
     public boolean isLoggedIn() {
         return isLoggedIn;
+    }
+
+    public LocalTime getScheduleStart() {
+        return scheduleStart;
+    }
+
+    public LocalTime getScheduleEnd() {
+        return scheduleEnd;
     }
 
     public void login() {

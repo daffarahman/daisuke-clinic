@@ -3,9 +3,9 @@
     "head": {
       "data": {
         "specialty": "Men",
-        "loginTime": "2025-06-18T08:49:03.265513944",
-        "logoutTime": "2025-06-18T08:46:34.842849024",
-        "isLoggedIn": true,
+        "loginTime": "2025-06-18T09:31:29.287306523",
+        "logoutTime": "2025-06-18T09:31:43.485278189",
+        "isLoggedIn": false,
         "scheduleStart": "08:01:00",
         "scheduleEnd": "09:00:00",
         "id": 1,
@@ -16,6 +16,8 @@
       "next": {
         "data": {
           "specialty": "Computer",
+          "loginTime": "2025-06-18T09:32:04.132981486",
+          "logoutTime": "2025-06-18T09:32:55.388944941",
           "isLoggedIn": false,
           "scheduleStart": "09:41:00",
           "scheduleEnd": "10:41:00",

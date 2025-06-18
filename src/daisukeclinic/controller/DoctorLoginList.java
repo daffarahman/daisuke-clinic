@@ -49,9 +49,17 @@ public class DoctorLoginList implements Serializable {
         Node<Doctor> current = doctorLogins.getHead();
         while (current != null) {
             if (current.data.getId() == doctorId) {
-                doctorLogins.remove(current.data);
+                Doctor mainDoctor = DoctorList.getInstance().findDoctorById(doctorId);
+
                 current.data.logout();
                 current.data.updateLogoutTime();
+
+                if (mainDoctor != null) {
+                    mainDoctor.logout();
+                    mainDoctor.updateLogoutTime();
+                }
+
+                doctorLogins.remove(current.data);
                 return true;
             }
             current = current.next;
