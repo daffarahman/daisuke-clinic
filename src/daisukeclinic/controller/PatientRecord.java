@@ -65,9 +65,8 @@ public class PatientRecord implements Serializable {
             return null;
         }
 
-        // Escape special regex characters in the search term
         String escapedSearchTerm = searchTerm.replaceAll("[\\W]", "\\\\$0");
-        String regex = "(?i).*" + escapedSearchTerm + ".*"; // Case-insensitive pattern
+        String regex = "(?i).*" + escapedSearchTerm + ".*";
         LinkedList<Patient> found = new LinkedList<>();
 
         for (int i = 0; i < patients.getSize(); i++) {
