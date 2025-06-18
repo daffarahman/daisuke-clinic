@@ -11,7 +11,7 @@ import daisukeclinic.model.User;
 import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.view.AppConsole;
 
-public class LockScreen {
+public class GreeterRoutes {
 
     // Login Account
     public static void loginAccountPage() {
@@ -43,8 +43,6 @@ public class LockScreen {
             AppConsole.getInstance().menuStack.push(AppConsole.getInstance().mainMenuList);
 
         AppConsole.getInstance().currentUser = u;
-
-        ConsoleUtility.pressAnyKeyToContinue();
     }
 
     // Register Account
@@ -110,7 +108,8 @@ public class LockScreen {
 
         UserListManager.getInstance().addNewUser(username, password, role[0], roleId);
 
+        System.out.println("User is successfuly registered! Now user can login using their MyDaisuke account!");
+
         ConsoleUtility.pressAnyKeyToContinue();
     }
-
 }

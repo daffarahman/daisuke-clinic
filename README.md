@@ -1,7 +1,7 @@
 # DaisukeClinic
 Small Clinic, BIG Impact.
 
-![alt text](screenshots/hero.png)
+![alt text](img/hero.png)
 
 ## About This App
 Daisuke Clinic is a **console based data management application** for a small clinic built using Java.

@@ -12,11 +12,13 @@ import daisukeclinic.controller.DoctorList;
 import daisukeclinic.controller.DoctorLoginList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.SearchablePatientTree;
+import daisukeclinic.controller.UserListManager;
 import daisukeclinic.datastructure.LinkedList;
 import daisukeclinic.model.Appointment;
 import daisukeclinic.model.Doctor;
 import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
+import daisukeclinic.model.User;
 import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
 import daisukeclinic.view.AppConsole;
@@ -360,6 +362,86 @@ public class AdminRoutes {
         ConsoleUtility.printTitle("Upcoming Appointments");
 
         AppointmentManager.getInstance().viewUpcomingAppointments();
+
+        ConsoleUtility.pressAnyKeyToContinue();
+    }
+
+    public static void registerAndConnectAccountRoute() {
+        ConsoleUtility.clearScreen();
+        ConsoleUtility.printTitle("Register and Connect MyDaisuke Account");
+
+        final User.Role[] role = new User.Role[1];
+        int roleId = -1;
+
+        MenuList roleMenuList = new MenuList("Select Account Type", 3);
+        roleMenuList.addMenuItem(new MenuItem("Patient", () -> {
+            role[0] = User.Role.ROLE_PATIENT;
+        }));
+        roleMenuList.addMenuItem(new MenuItem("Doctor", () -> {
+            role[0] = User.Role.ROLE_DOCTOR;
+        }));
+
+        roleMenuList.printMenu();
+        roleMenuList.run(roleMenuList.prompt());
+
+        if (role[0] == null) {
+            System.out.println("Please select either of two types, exiting...");
+            ConsoleUtility.pressAnyKeyToContinue();
+            return;
+        }
+
+        if (role[0] == User.Role.ROLE_DOCTOR) {
+            roleId = ConsoleUtility.getIntPromptInput("Enter Doctor ID to Connect: ");
+            Doctor d = DoctorList.getInstance().findDoctorById(roleId);
+
+            if (d == null) {
+                System.out.println("Doctor with that ID did not exist! exiting...");
+                ConsoleUtility.pressAnyKeyToContinue();
+                return;
+            }
+
+            User decoy = new User("", "", User.Role.ROLE_DOCTOR, roleId);
+            decoy.setCompareMode(User.CompareMode.COMPARE_BY_ROLE_ID);
+            if (UserListManager.getInstance().getList().find(decoy) != null) {
+                System.out.println("This doctor is already connected into an account! exiting...");
+                ConsoleUtility.pressAnyKeyToContinue();
+                return;
+            }
+        } else if (role[0] == User.Role.ROLE_PATIENT) {
+            roleId = ConsoleUtility.getIntPromptInput("Enter Patient ID to Connect: ");
+            Patient p = PatientRecord.getInstance().findPatientById(roleId);
+
+            if (p == null) {
+                System.out.println("Patient with that ID did not exist! exiting...");
+                ConsoleUtility.pressAnyKeyToContinue();
+                return;
+            }
+
+            User decoy = new User("", "", User.Role.ROLE_PATIENT, roleId);
+            decoy.setCompareMode(User.CompareMode.COMPARE_BY_ROLE_ID);
+            if (UserListManager.getInstance().getList().find(decoy) != null) {
+                System.out.println("This patient is already connected into an account! exiting...");
+                ConsoleUtility.pressAnyKeyToContinue();
+                return;
+            }
+        } else {
+            System.out.println("Please select either Doctor or Patient! exiting...");
+            ConsoleUtility.pressAnyKeyToContinue();
+            return;
+        }
+
+        String username = ConsoleUtility.getStringPromptInput("Username: ");
+
+        if (UserListManager.getInstance().getUser(username) != null) {
+            System.out.println("Username already exist!");
+            ConsoleUtility.pressAnyKeyToContinue();
+        }
+
+        String password = ConsoleUtility.getPasswordPromptInput("Enter Password: ");
+
+        UserListManager.getInstance().addNewUser(username, password, role[0], roleId);
+
+        System.out.println("User is successfuly connected! Now user can login using their MyDaisuke account!");
 
         ConsoleUtility.pressAnyKeyToContinue();
     }
