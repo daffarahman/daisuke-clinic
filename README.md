@@ -66,27 +66,27 @@ Daisuke Clinic is a **console based data management application** for a small cl
 Feaure checklist from this [docs](https://docs.google.com/document/d/1nFTebiibxVecV4F5Yga1dyzBEQkZEAGwspSo9VjPVrw/edit?tab=t.0#heading=h.bvhel064fgvf)
 
 ### Proof that we uses all custom data structures
-![alt text](img/proof9.png)
+![alt text](img/proof9.png)  
 
 ### Patient Record Management (LinkedList)
 * Each patient has: ID, Name, Age, Address, Phone Number.
-  ![Proof 1](img/proof1.png)
+  ![Proof 1](img/proof1.png)  
 * Create a singly linked list to store patient records.
-[Custom Implemented LinkedList.java](src/daisukeclinic/datastructure/LinkedList.java)
-![alt text](img/proof2.png)
-[Custom LinkedList implemented in PatientRecord.java](src/daisukeclinic/controller/PatientRecord.java)
-![alt text](img/proof3.png)
+[Custom Implemented LinkedList.java](src/daisukeclinic/datastructure/LinkedList.java)  
+![alt text](img/proof2.png)  
+[Custom LinkedList implemented in PatientRecord.java](src/daisukeclinic/controller/PatientRecord.java)  
+![alt text](img/proof3.png)  
 * Implement the following:
-   * addPatient()
-![alt text](img/proof4.png)
-   * removePatientById(int id)
-![alt text](img/proof5.png)
-   * findPatientByName(String name)
-![alt text](img/proof6.png)
-   * displayAllPatients()
-![alt text](img/proof7.png)
-TableUtility.java to display the list as table
-![alt text](img/proof8.png)
+   * addPatient()  
+![alt text](img/proof4.png)  
+   * removePatientById(int id)  
+![alt text](img/proof5.png)  
+   * findPatientByName(String name)  
+![alt text](img/proof6.png)  
+   * displayAllPatients()  
+![alt text](img/proof7.png)  
+TableUtility.java to display the list as table  
+![alt text](img/proof8.png)  
 
 ### DoctorLoginList (LinkedList)
 
