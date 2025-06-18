@@ -6,6 +6,7 @@ public class Person implements Serializable {
     private int id;
     private String name;
     private CompareMode compareMode = CompareMode.COMPARE_BY_ID;
+    private boolean isConnectedToAccount = false;
 
     public static enum CompareMode {
         COMPARE_BY_ID,
@@ -39,6 +40,14 @@ public class Person implements Serializable {
 
     public void setCompareMode(CompareMode compareMode) {
         this.compareMode = compareMode;
+    }
+
+    public boolean isConnectedToAccount() {
+        return isConnectedToAccount;
+    }
+
+    public void setIsConnectedAccount(boolean b) {
+        isConnectedToAccount = b;
     }
 
     public int compareWithAnotherPerson(Person other) {

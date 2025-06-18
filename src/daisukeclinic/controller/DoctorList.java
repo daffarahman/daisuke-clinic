@@ -45,6 +45,6 @@ public class DoctorList implements Serializable {
     }
 
     public void displayAllDoctors() {
-        TableUtility.displayDoctorTable(doctorList);
+        TableUtility.displayDoctorCompleteTable(doctorList);
     }
 }

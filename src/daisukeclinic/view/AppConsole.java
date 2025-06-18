@@ -93,7 +93,7 @@ public class AppConsole {
         }
 
         public void setupMenus() {
-                loginMenuList = new MenuList("MyDaisuke Login", 4);
+                loginMenuList = new MenuList("MyDaisuke Login", 3);
                 mainMenuList = new MenuList("Daisuke Clinic Data Management App", 6);
 
                 managePatientMenuList = new MenuList("Manage Patient", 6);
@@ -106,7 +106,6 @@ public class AppConsole {
                 // Login Menu
                 loginMenuList.addMenuItem(new MenuItem("Login", () -> GreeterRoutes.loginAccountPage()));
                 loginMenuList.addMenuItem(new MenuItem("Register", () -> GreeterRoutes.registerAccountPage()));
-                loginMenuList.addMenuItem(new MenuItem("Guest Mode", null));
                 loginMenuList.addMenuItem(new MenuItem("Quit", () -> {
                         isRunning = false;
                 }));
@@ -177,8 +176,8 @@ public class AppConsole {
                                 new MenuItem("View My Upcoming Appointments",
                                                 () -> PatientRoutes.viewUpcomingAppointmentsRoute()));
                 patientMainMenuList.addMenuItem(
-                                new MenuItem("View Doctors At Daisuke Clinics",
-                                                () -> AdminRoutes.viewAllDoctorsInThisClinicRoute()));
+                                new MenuItem("View Doctor Schedules",
+                                                () -> PatientRoutes.viewAllDoctorsScheduleRoute()));
                 patientMainMenuList
                                 .addMenuItem(new MenuItem("View My Medical Record",
                                                 () -> PatientRoutes.viewMedicalRecordsRoute()));
@@ -198,7 +197,8 @@ public class AppConsole {
                                                 () -> DoctorRoutes.proccessAppointmentRoute()));
                 doctorMainMenuList.addMenuItem(new MenuItem("About Me", () -> GlobalRoutes.aboutMeRoute()));
                 doctorMainMenuList.addMenuItem(new MenuItem("Logout", () -> {
-                        DoctorList.getInstance().findDoctorById(currentUser.getRoleId()).logout();
+                        DoctorLoginList.getInstance()
+                                        .logoutDoctor(currentUser.getRoleId());
                         currentUser = null;
                         menuStack.pop();
                 }));

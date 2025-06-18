@@ -1,0 +1,29 @@
+{
+  "patients": {
+    "head": {
+      "data": {
+        "age": 19,
+        "address": "Magelang",
+        "phoneNumber": "293230230232",
+        "medicalRecords": {
+          "head": {
+            "data": {
+              "doctorId": 1,
+              "appointmentdate": "2025-06-19T08:01:00",
+              "problem": "kecapekan",
+              "diagnosis": "ya capek",
+              "drug": "tidur"
+            }
+          },
+          "size": 1
+        },
+        "id": 1,
+        "name": "Qiqi",
+        "compareMode": "COMPARE_BY_ID",
+        "isConnectedToAccount": true
+      }
+    },
+    "size": 1
+  },
+  "lastId": 1
+}

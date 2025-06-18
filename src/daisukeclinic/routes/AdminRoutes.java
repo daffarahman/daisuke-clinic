@@ -18,6 +18,7 @@ import daisukeclinic.model.Appointment;
 import daisukeclinic.model.Doctor;
 import daisukeclinic.model.MedicalRecord;
 import daisukeclinic.model.Patient;
+import daisukeclinic.model.Person;
 import daisukeclinic.model.User;
 import daisukeclinic.utils.ConsoleUtility;
 import daisukeclinic.utils.TableUtility;
@@ -214,7 +215,7 @@ public class AdminRoutes {
                 lTmp.insertBack(doctor);
                 System.out.println("Doctor logged out:");
                 TableUtility.displayDoctorLoginTable(lTmp);
-                System.out.println("Successfully logged out in!");
+                System.out.println("Successfully logged out!");
             } else {
                 System.out.println("Doctor is not logged in!");
             }
@@ -372,6 +373,7 @@ public class AdminRoutes {
 
         final User.Role[] role = new User.Role[1];
         int roleId = -1;
+        Person person;
 
         MenuList roleMenuList = new MenuList("Select Account Type", 3);
         roleMenuList.addMenuItem(new MenuItem("Patient", () -> {
@@ -390,6 +392,8 @@ public class AdminRoutes {
             return;
         }
 
+        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
+
         if (role[0] == User.Role.ROLE_DOCTOR) {
             roleId = ConsoleUtility.getIntPromptInput("Enter Doctor ID to Connect: ");
             Doctor d = DoctorList.getInstance().findDoctorById(roleId);
@@ -400,13 +404,15 @@ public class AdminRoutes {
                 return;
             }
 
-            User decoy = new User("", "", User.Role.ROLE_DOCTOR, roleId);
-            decoy.setCompareMode(User.CompareMode.COMPARE_BY_ROLE_ID);
-            if (UserListManager.getInstance().getList().find(decoy) != null) {
+            if (d.isConnectedToAccount()) {
                 System.out.println("This doctor is already connected into an account! exiting...");
                 ConsoleUtility.pressAnyKeyToContinue();
                 return;
             }
+
+            d.setIsConnectedAccount(true);
+            person = d;
+
         } else if (role[0] == User.Role.ROLE_PATIENT) {
             roleId = ConsoleUtility.getIntPromptInput("Enter Patient ID to Connect: ");
             Patient p = PatientRecord.getInstance().findPatientById(roleId);
@@ -417,27 +423,34 @@ public class AdminRoutes {
                 return;
             }
 
-            User decoy = new User("", "", User.Role.ROLE_PATIENT, roleId);
-            decoy.setCompareMode(User.CompareMode.COMPARE_BY_ROLE_ID);
-            if (UserListManager.getInstance().getList().find(decoy) != null) {
+            if (p.isConnectedToAccount()) {
                 System.out.println("This patient is already connected into an account! exiting...");
                 ConsoleUtility.pressAnyKeyToContinue();
                 return;
             }
+
+            p.setIsConnectedAccount(true);
+            person = p;
+
         } else {
             System.out.println("Please select either Doctor or Patient! exiting...");
             ConsoleUtility.pressAnyKeyToContinue();
             return;
         }
 
-        String username = ConsoleUtility.getStringPromptInput("Username: ");
+        ConsoleUtility.printTitle(
+                "Connect MyDaisuke Account for " + person.getName());
+
+        System.out.println("Note: username can be different from real name");
+        String username = ConsoleUtility.getStringPromptInput("New username: ");
 
         if (UserListManager.getInstance().getUser(username) != null) {
-            System.out.println("Username already exist!");
+            System.out.println("Username already exist! exiting...");
             ConsoleUtility.pressAnyKeyToContinue();
+            return;
         }
 
-        String password = ConsoleUtility.getPasswordPromptInput("Enter Password: ");
+        String password = ConsoleUtility.getPasswordPromptInput("New Password: ");
 
         UserListManager.getInstance().addNewUser(username, password, role[0], roleId);
 

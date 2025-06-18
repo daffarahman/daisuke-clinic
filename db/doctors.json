@@ -1,0 +1,32 @@
+{
+  "doctorList": {
+    "head": {
+      "data": {
+        "specialty": "Men",
+        "loginTime": "2025-06-18T08:49:03.265513944",
+        "logoutTime": "2025-06-18T08:46:34.842849024",
+        "isLoggedIn": true,
+        "scheduleStart": "08:01:00",
+        "scheduleEnd": "09:00:00",
+        "id": 1,
+        "name": "Dr. Amba",
+        "compareMode": "COMPARE_BY_ID",
+        "isConnectedToAccount": true
+      },
+      "next": {
+        "data": {
+          "specialty": "Computer",
+          "isLoggedIn": false,
+          "scheduleStart": "09:41:00",
+          "scheduleEnd": "10:41:00",
+          "id": 2,
+          "name": "Dapa",
+          "compareMode": "COMPARE_BY_ID",
+          "isConnectedToAccount": true
+        }
+      }
+    },
+    "size": 2
+  },
+  "lastId": 2
+}

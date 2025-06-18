@@ -1,0 +1,19 @@
+{
+  "patientTree": {
+    "root": {
+      "data": {
+        "age": 19,
+        "address": "Magelang",
+        "phoneNumber": "293230230232",
+        "medicalRecords": {
+          "size": 0
+        },
+        "id": 1,
+        "name": "Qiqi",
+        "compareMode": "COMPARE_BY_ID",
+        "isConnectedToAccount": false
+      },
+      "height": 1
+    }
+  }
+}

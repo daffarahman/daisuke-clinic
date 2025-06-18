@@ -152,4 +152,13 @@ public class PatientRoutes {
 
         ConsoleUtility.pressAnyKeyToContinue();
     }
+
+    public static void viewAllDoctorsScheduleRoute() {
+        ConsoleUtility.clearScreen();
+        ConsoleUtility.printTitle("Doctor Schedules");
+
+        TableUtility.displayDoctorTable(DoctorList.getInstance().getList());
+
+        ConsoleUtility.pressAnyKeyToContinue();
+    }
 }

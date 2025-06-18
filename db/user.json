@@ -1,0 +1,41 @@
+{
+  "userList": {
+    "head": {
+      "data": {
+        "username": "admin",
+        "password": "admin123",
+        "role": "ROLE_ADMIN",
+        "roleId": -1,
+        "compareMode": "COMPARE_BY_USERNAME"
+      },
+      "next": {
+        "data": {
+          "username": "drdap",
+          "password": "helloworld",
+          "role": "ROLE_DOCTOR",
+          "roleId": 2,
+          "compareMode": "COMPARE_BY_USERNAME"
+        },
+        "next": {
+          "data": {
+            "username": "dramba",
+            "password": "helloworld",
+            "role": "ROLE_DOCTOR",
+            "roleId": 1,
+            "compareMode": "COMPARE_BY_USERNAME"
+          },
+          "next": {
+            "data": {
+              "username": "qiqiganteng",
+              "password": "helloworld",
+              "role": "ROLE_PATIENT",
+              "roleId": 1,
+              "compareMode": "COMPARE_BY_USERNAME"
+            }
+          }
+        }
+      }
+    },
+    "size": 4
+  }
+}

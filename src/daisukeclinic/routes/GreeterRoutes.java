@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import daisukeclinic.components.MenuItem;
 import daisukeclinic.components.MenuList;
 import daisukeclinic.controller.DoctorList;
+import daisukeclinic.controller.DoctorLoginList;
 import daisukeclinic.controller.PatientRecord;
 import daisukeclinic.controller.UserListManager;
 import daisukeclinic.model.User;
@@ -38,7 +39,7 @@ public class GreeterRoutes {
             AppConsole.getInstance().menuStack.push(AppConsole.getInstance().patientMainMenuList);
         else if (u.getRole() == User.Role.ROLE_DOCTOR) {
             AppConsole.getInstance().menuStack.push(AppConsole.getInstance().doctorMainMenuList);
-            DoctorList.getInstance().findDoctorById(u.getRoleId()).login();
+            DoctorLoginList.getInstance().loginDoctor(DoctorList.getInstance().findDoctorById(u.getRoleId()));
         } else if (u.getRole() == User.Role.ROLE_ADMIN)
             AppConsole.getInstance().menuStack.push(AppConsole.getInstance().mainMenuList);
 
@@ -60,7 +61,7 @@ public class GreeterRoutes {
         roleMenuList.addMenuItem(new MenuItem("Doctor", () -> {
             role[0] = User.Role.ROLE_DOCTOR;
         }));
-        roleMenuList.addMenuItem(new MenuItem("Superuser Admin", () -> {
+        roleMenuList.addMenuItem(new MenuItem("Administrator", () -> {
             role[0] = User.Role.ROLE_ADMIN;
         }));
 
@@ -73,12 +74,7 @@ public class GreeterRoutes {
             return;
         }
 
-        String username = ConsoleUtility.getStringPromptInput("Username: ");
-
-        if (UserListManager.getInstance().getUser(username) != null) {
-            System.out.println("Username already exist!");
-            ConsoleUtility.pressAnyKeyToContinue();
-        }
+        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
 
         if (role[0] == User.Role.ROLE_DOCTOR || role[0] == User.Role.ROLE_PATIENT) {
             String fullName = ConsoleUtility.getStringPromptInput("Full Name: ");
@@ -93,18 +89,34 @@ public class GreeterRoutes {
                         LocalTime.of(scheduleStart.getHour() + 1, 0), LocalTime.of(19, 0));
 
                 roleId = DoctorList.getInstance().registerDoctor(fullName, specialty, scheduleStart, scheduleEnd);
+                DoctorList.getInstance().findDoctorById(roleId).setIsConnectedAccount(true);
             } else {
                 int age = ConsoleUtility.getIntPromptInput("Age: ");
                 String address = ConsoleUtility.getStringPromptInput("Address: ");
                 String phoneNumber = ConsoleUtility.getPhoneNumberPromptInput("Phone Number: ");
 
                 roleId = PatientRecord.getInstance().addPatient(fullName, age, address, phoneNumber);
+                PatientRecord.getInstance().findPatientById(roleId).setIsConnectedAccount(true);
             }
         } else {
             roleId = -1;
         }
 
-        String password = ConsoleUtility.getPasswordPromptInput("Enter Password: ");
+        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
+
+        if (role[0] != User.Role.ROLE_ADMIN) {
+            System.out.println("Note: username can be different from real name");
+        }
+
+        String username = ConsoleUtility.getStringPromptInput("New username: ");
+
+        if (UserListManager.getInstance().getUser(username) != null) {
+            System.out.println("Username already exist! exiting...");
+            ConsoleUtility.pressAnyKeyToContinue();
+            return;
+        }
+
+        String password = ConsoleUtility.getPasswordPromptInput("New Password: ");
 
         UserListManager.getInstance().addNewUser(username, password, role[0], roleId);
 

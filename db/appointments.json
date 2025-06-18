@@ -1,0 +1,18 @@
+{
+  "appointments": {
+    "entries": {
+      "head": {
+        "data": {
+          "key": 1,
+          "value": {
+            "appointments": {
+              "size": 0
+            },
+            "lastId": 1
+          }
+        }
+      },
+      "size": 1
+    }
+  }
+}
