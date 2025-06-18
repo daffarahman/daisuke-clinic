@@ -1,5 +1,32 @@
 {
   "doctorLogins": {
-    "size": 0
+    "head": {
+      "data": {
+        "specialty": "Neurology",
+        "loginTime": "2025-06-18T19:20:59.009037192",
+        "isLoggedIn": true,
+        "scheduleStart": "10:00:00",
+        "scheduleEnd": "11:00:00",
+        "id": 4,
+        "name": "Dr. Bond",
+        "compareMode": "COMPARE_BY_ID",
+        "isConnectedToAccount": false
+      },
+      "next": {
+        "data": {
+          "specialty": "Cardiology",
+          "loginTime": "2025-06-18T19:46:16.647476533",
+          "logoutTime": "2025-06-18T19:21:16.750191595",
+          "isLoggedIn": true,
+          "scheduleStart": "10:00:00",
+          "scheduleEnd": "11:00:00",
+          "id": 1,
+          "name": "Dr. Dapa",
+          "compareMode": "COMPARE_BY_ID",
+          "isConnectedToAccount": true
+        }
+      }
+    },
+    "size": 2
   }
 }

@@ -6,9 +6,17 @@
           "key": 1,
           "value": {
             "appointments": {
-              "size": 0
+              "head": {
+                "data": {
+                  "id": 8,
+                  "patientId": 6,
+                  "doctorId": 1,
+                  "time": "2025-06-18T10:00:00"
+                }
+              },
+              "size": 1
             },
-            "lastId": 1
+            "lastId": 8
           }
         }
       },

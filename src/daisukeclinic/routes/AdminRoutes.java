@@ -56,7 +56,6 @@ public class AdminRoutes {
         removePatientMenuList.addMenuItem(new MenuItem("Remove By Id", () -> {
             ConsoleUtility.clearScreen();
             ConsoleUtility.printTitle("Remove a Patient Their ID");
-            System.out.print("Enter Patient ID: ");
             int selectedId = ConsoleUtility.getIntPromptInput("Enter Patient ID: ");
             if (PatientRecord.getInstance().removePatientById(selectedId)) {
                 System.out.printf("Patient with id: %d has been successfuly removed\n", selectedId);

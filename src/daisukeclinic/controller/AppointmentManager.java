@@ -62,12 +62,11 @@ public class AppointmentManager implements Serializable {
         for (int i = 0; i < appointmentEntries.getSize(); i++) {
             MapEntry<Integer, AppointmentQueue> entry = appointmentEntries.getIndex(i);
             if (!entry.value.getQueue().isEmpty()) {
-                // System.out.println("Doctor ID: " + entry.key);
                 System.out.print("\n");
-                Doctor d = DoctorList.getInstance().findDoctorById(i);
+                Doctor d = DoctorList.getInstance().findDoctorById(entry.key); // FIX: use entry.key not i
                 if (d != null) {
                     ConsoleUtility.printTitle(String.format("%d | %s | %s", entry.key, d.getName(), d.getSpecialty()));
-                    TableUtility.displayAppointmentTable(appointmentEntries.getIndex(i).value.getQueue());
+                    TableUtility.displayAppointmentTable(entry.value.getQueue()); // Also use entry directly
                 }
             }
         }

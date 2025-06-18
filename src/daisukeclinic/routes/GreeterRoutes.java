@@ -74,9 +74,8 @@ public class GreeterRoutes {
             return;
         }
 
-        ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
-
         if (role[0] == User.Role.ROLE_DOCTOR || role[0] == User.Role.ROLE_PATIENT) {
+            ConsoleUtility.printChars('-', ConsoleUtility.getConsoleWidth());
             String fullName = ConsoleUtility.getStringPromptInput("Full Name: ");
 
             if (role[0] == User.Role.ROLE_DOCTOR) {

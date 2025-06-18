@@ -10,18 +10,18 @@
       },
       "next": {
         "data": {
-          "username": "drdap",
-          "password": "helloworld",
+          "username": "dapa",
+          "password": "hewlloworld",
           "role": "ROLE_DOCTOR",
-          "roleId": 2,
+          "roleId": 1,
           "compareMode": "COMPARE_BY_USERNAME"
         },
         "next": {
           "data": {
-            "username": "dramba",
+            "username": "dapa123",
             "password": "helloworld",
             "role": "ROLE_DOCTOR",
-            "roleId": 1,
+            "roleId": 5,
             "compareMode": "COMPARE_BY_USERNAME"
           },
           "next": {
@@ -29,13 +29,22 @@
               "username": "qiqiganteng",
               "password": "helloworld",
               "role": "ROLE_PATIENT",
-              "roleId": 1,
+              "roleId": 5,
               "compareMode": "COMPARE_BY_USERNAME"
+            },
+            "next": {
+              "data": {
+                "username": "fazam",
+                "password": "helloworld",
+                "role": "ROLE_PATIENT",
+                "roleId": 6,
+                "compareMode": "COMPARE_BY_USERNAME"
+              }
             }
           }
         }
       }
     },
-    "size": 4
+    "size": 5
   }
 }

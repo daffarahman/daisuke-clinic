@@ -2,33 +2,82 @@
   "doctorList": {
     "head": {
       "data": {
-        "specialty": "Men",
-        "loginTime": "2025-06-18T09:31:29.287306523",
-        "logoutTime": "2025-06-18T09:31:43.485278189",
-        "isLoggedIn": false,
-        "scheduleStart": "08:01:00",
-        "scheduleEnd": "09:00:00",
+        "specialty": "Cardiology",
+        "loginTime": "2025-06-18T19:46:16.647476533",
+        "logoutTime": "2025-06-18T19:21:16.750191595",
+        "isLoggedIn": true,
+        "scheduleStart": "10:00:00",
+        "scheduleEnd": "11:00:00",
         "id": 1,
-        "name": "Dr. Amba",
+        "name": "Dr. Dapa",
         "compareMode": "COMPARE_BY_ID",
         "isConnectedToAccount": true
       },
       "next": {
         "data": {
-          "specialty": "Computer",
-          "loginTime": "2025-06-18T09:32:04.132981486",
-          "logoutTime": "2025-06-18T09:32:55.388944941",
+          "specialty": "Neurology",
           "isLoggedIn": false,
-          "scheduleStart": "09:41:00",
-          "scheduleEnd": "10:41:00",
+          "scheduleStart": "13:00:00",
+          "scheduleEnd": "14:00:00",
           "id": 2,
-          "name": "Dapa",
+          "name": "Dr. James",
           "compareMode": "COMPARE_BY_ID",
-          "isConnectedToAccount": true
+          "isConnectedToAccount": false
+        },
+        "next": {
+          "data": {
+            "specialty": "Surgery",
+            "isLoggedIn": false,
+            "scheduleStart": "17:00:00",
+            "scheduleEnd": "18:00:00",
+            "id": 3,
+            "name": "Dr. Craig",
+            "compareMode": "COMPARE_BY_ID",
+            "isConnectedToAccount": false
+          },
+          "next": {
+            "data": {
+              "specialty": "Neurology",
+              "loginTime": "2025-06-18T19:20:59.009037192",
+              "isLoggedIn": true,
+              "scheduleStart": "10:00:00",
+              "scheduleEnd": "11:00:00",
+              "id": 4,
+              "name": "Dr. Bond",
+              "compareMode": "COMPARE_BY_ID",
+              "isConnectedToAccount": false
+            },
+            "next": {
+              "data": {
+                "specialty": "Neurology",
+                "loginTime": "2025-06-18T20:01:55.910627552",
+                "logoutTime": "2025-06-18T20:02:08.111703446",
+                "isLoggedIn": false,
+                "scheduleStart": "14:00:00",
+                "scheduleEnd": "16:00:00",
+                "id": 5,
+                "name": "Dapa",
+                "compareMode": "COMPARE_BY_ID",
+                "isConnectedToAccount": true
+              },
+              "next": {
+                "data": {
+                  "specialty": "Cardiology",
+                  "isLoggedIn": false,
+                  "scheduleStart": "08:00:00",
+                  "scheduleEnd": "09:00:00",
+                  "id": 6,
+                  "name": "Dr. Bro",
+                  "compareMode": "COMPARE_BY_ID",
+                  "isConnectedToAccount": false
+                }
+              }
+            }
+          }
         }
       }
     },
-    "size": 2
+    "size": 6
   },
-  "lastId": 2
+  "lastId": 6
 }

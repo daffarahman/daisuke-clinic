@@ -135,7 +135,8 @@ public class ConsoleUtility {
                         hourEnd.getHour(),
                         hourEnd.getMinute());
 
-                if (result.isAfter(todayStart) && result.isBefore(todayEnd))
+                if ((result.equals(todayStart) || result.isAfter(todayStart)) &&
+                        (result.equals(todayEnd) || result.isBefore(todayEnd)))
                     looping = false;
                 else {
                     System.out.println("Time must be between " +
@@ -185,7 +186,8 @@ public class ConsoleUtility {
             try {
                 result = LocalTime.parse(input, formatter);
 
-                if (result.isAfter(timeStart) && result.isBefore(timeEnd)) {
+                if ((result.equals(timeStart) || result.isAfter(timeStart)) &&
+                        (result.equals(timeEnd) || result.isBefore(timeEnd))) {
                     looping = false;
                 } else {
                     System.out.println("Time must be between " +

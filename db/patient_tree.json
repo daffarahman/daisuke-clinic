@@ -3,17 +3,32 @@
     "root": {
       "data": {
         "age": 19,
-        "address": "Magelang",
-        "phoneNumber": "293230230232",
+        "address": "magelang",
+        "phoneNumber": "+62230293029320",
         "medicalRecords": {
           "size": 0
         },
-        "id": 1,
-        "name": "Qiqi",
+        "id": 5,
+        "name": "qiqi",
         "compareMode": "COMPARE_BY_ID",
         "isConnectedToAccount": false
       },
-      "height": 1
+      "right": {
+        "data": {
+          "age": 19,
+          "address": "Indonesia",
+          "phoneNumber": "+6223920932039",
+          "medicalRecords": {
+            "size": 0
+          },
+          "id": 6,
+          "name": "Faza Zulfan",
+          "compareMode": "COMPARE_BY_ID",
+          "isConnectedToAccount": true
+        },
+        "height": 1
+      },
+      "height": 2
     }
   }
 }

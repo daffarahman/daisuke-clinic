@@ -116,7 +116,19 @@ public class AppConsole {
                 mainMenuList.addMenuItem(
                                 new MenuItem("Manage Appointments", () -> menuStack.push(manageAppointmentMenuList)));
                 mainMenuList.addMenuItem(new MenuItem("About This App", () -> {
+                        ConsoleUtility.clearScreen();
+                        ConsoleUtility.printTitle("About This App");
+                        System.out.println("Daisuke Clinic Data Management App");
+                        System.out.println("Version 1.1");
+                        System.out.println("By Kelompok 2\n");
 
+                        System.out.println("Muhammad Daffa Rahman (L0124062)\n" +
+                                        "Naufal Ahmad Fakhriza (L0124068)\n" +
+                                        "Phyrurizqi Altiano Firdauzan (L0124069)\n" +
+                                        "Majeeda Athaya Nashwanaira Ali (L0124104)\n" +
+                                        "M. Faza Zulfan Balya (L0124107)");
+
+                        ConsoleUtility.pressAnyKeyToContinue();
                 }));
                 mainMenuList.addMenuItem(
                                 new MenuItem("Register & Connect Account",

@@ -64,3 +64,10 @@ Daisuke Clinic is a **console based data management application** for a small cl
 ## Flow Of The Program
 
 ## Feature Checklist Proof
+
+Feaure checklist from this [docs](https://docs.google.com/document/d/1nFTebiibxVecV4F5Yga1dyzBEQkZEAGwspSo9VjPVrw/edit?tab=t.0#heading=h.bvhel064fgvf)
+
+### Patient Record Management (LinkedList)
+* Each patient has: ID, Name, Age, Address, Phone Number.
+  
+* 
