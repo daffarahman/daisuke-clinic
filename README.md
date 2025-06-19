@@ -7,7 +7,11 @@ Small Clinic, BIG Impact.
 Daisuke Clinic is a **console based data management application** for a small clinic built using Java.
 
 ## Features
-
+* Easy to use Patient, Doctor data management
+* MyDaisuke account for Patient and Doctor
+* Seamless appointment management
+* Lightning quick patient data search
+* JSON support
 
 
 ## Our Team
@@ -121,22 +125,22 @@ TableUtility.java to display the list as table
       ![alt text](img/proof19.png)
   * viewUpcomingAppointments() → display queue
       ![alt text](img/proof20.png)
-      [TableUtility.java](src/daisukeclinic/utils/TableUtility.java)
+      [TableUtility.java](src/daisukeclinic/utils/TableUtility.java)   
       ![alt text](img/proof21.png)
 
 ### SearchablePatientTree (Binary Search Tree)
-![alt text](img/proof22.png)
+![alt text](img/proof22.png)  
 * Use PatientID as the key.
 * Implement BST to allow fast lookup of patients:
    * insertPatient(Patient p)
-      ![alt text](img/proof23.png)
-      [BST.java](src/daisukeclinic/datastructure/BST.java)  
-      ![alt text](img/proof24.png)
+      ![alt text](img/proof23.png)  
+      [BST.java](src/daisukeclinic/datastructure/BST.java)   
+      ![alt text](img/proof24.png)  
    * searchPatient(int id)
-      ![alt text](img/proof25.png)
-      [BST.java](src/daisukeclinic/datastructure/BST.java)  
-      ![alt text](img/proof26.png)
+      ![alt text](img/proof25.png)  
+      [BST.java](src/daisukeclinic/datastructure/BST.java)    
+      ![alt text](img/proof26.png)  
    * inOrderDisplay()
-      ![alt text](img/proof27.png)
+      ![alt text](img/proof27.png)  
       [BST.java](src/daisukeclinic/datastructure/BST.java)  
       ![alt text](img/proof28.png)
