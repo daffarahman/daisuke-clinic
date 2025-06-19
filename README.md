@@ -122,5 +122,18 @@ TableUtility.java to display the list as table
       ![alt text](img/proof21.png)
 
 ### SearchablePatientTree (Binary Search Tree)
-
-
+![alt text](img/proof22.png)
+* Use PatientID as the key.
+* Implement BST to allow fast lookup of patients:
+   * insertPatient(Patient p)
+      ![alt text](img/proof23.png)
+      [BST.java](src/daisukeclinic/datastructure/BST.java)  
+      ![alt text](img/proof24.png)
+   * searchPatient(int id)
+      ![alt text](img/proof25.png)
+      [BST.java](src/daisukeclinic/datastructure/BST.java)  
+      ![alt text](img/proof26.png)
+   * inOrderDisplay()
+      ![alt text](img/proof27.png)
+      [BST.java](src/daisukeclinic/datastructure/BST.java)  
+      ![alt text](img/proof28.png)

@@ -11,7 +11,6 @@ public class BST<T extends Comparable<T>> implements Serializable {
         TRAVERSE_POSTORDER
     }
 
-    // Insert Normal
     public void insert(T data) {
         root = insertBalanceHelper(root, new BSTNode<T>(data));
     }
