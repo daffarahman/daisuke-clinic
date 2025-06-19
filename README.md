@@ -61,6 +61,9 @@ Daisuke Clinic is a **console based data management application** for a small cl
     java -cp out daisukeclinic.Main
     ```
 
+## Program Flow Demo
+[Watch the Demo on YouTube](https://www.youtube.com/watch?v=9QH48e0fncY)
+
 ## Feature Checklist Proof
 
 Feaure checklist from this [docs](https://docs.google.com/document/d/1nFTebiibxVecV4F5Yga1dyzBEQkZEAGwspSo9VjPVrw/edit?tab=t.0#heading=h.bvhel064fgvf)
