@@ -72,23 +72,40 @@ Feaure checklist from this [docs](https://docs.google.com/document/d/1nFTebiibxV
 * Each patient has: ID, Name, Age, Address, Phone Number.
   ![Proof 1](img/proof1.png)  
 * Create a singly linked list to store patient records.
-[Custom Implemented LinkedList.java](src/daisukeclinic/datastructure/LinkedList.java)  
-![alt text](img/proof2.png)  
-[Custom LinkedList implemented in PatientRecord.java](src/daisukeclinic/controller/PatientRecord.java)  
-![alt text](img/proof3.png)  
+   [Custom Implemented LinkedList.java](src/daisukeclinic/datastructure/LinkedList.java)  
+   ![alt text](img/proof2.png)  
+   [Custom LinkedList implemented in PatientRecord.java](src/daisukeclinic/controller/PatientRecord.java)  
+   ![alt text](img/proof3.png)  
 * Implement the following:
    * addPatient()  
-![alt text](img/proof4.png)  
+      ![alt text](img/proof4.png)  
    * removePatientById(int id)  
-![alt text](img/proof5.png)  
+      ![alt text](img/proof5.png)  
    * findPatientByName(String name)  
-![alt text](img/proof6.png)  
+      ![alt text](img/proof6.png)  
    * displayAllPatients()  
-![alt text](img/proof7.png)  
+      ![alt text](img/proof7.png)  
 TableUtility.java to display the list as table  
-![alt text](img/proof8.png)  
+      ![alt text](img/proof8.png)  
 
 ### DoctorLoginList (LinkedList)
+* Use a custom singly or doubly linked list.
+[Custom Implemented LinkedList.java](src/daisukeclinic/datastructure/LinkedList.java)  
+   ![alt text](img/proof2.png)  
+
+* Each node is a Doctor object (ID, name, specialty, login time).  
+  ![alt text](img/proof10.png)  
+  ![alt text](img/proof11.png)  
+* You can implement:
+   * loginDoctor(Doctor doctor) → add to list  
+      [DoctorLoginList.java](src/daisukeclinic/controller/DoctorLoginList.java)  
+      ![alt text](img/proof12.png)
+   * logoutDoctor(int doctorId) → remove by ID
+      ![alt text](img/proof13.png)
+   * getAllLoggedInDoctors() → traverse and display
+      ![alt text](img/proof14.png)  
+      [TableUtility.java](src/daisukeclinic/utils/TableUtility.java)
+      ![alt text](img/proof15.png)  
 
 ### AppointmentQueue (Queue)
 
