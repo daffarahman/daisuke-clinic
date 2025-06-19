@@ -108,6 +108,18 @@ TableUtility.java to display the list as table
       ![alt text](img/proof15.png)  
 
 ### AppointmentQueue (Queue)
+* Each appointment contains: AppointmentID, PatientID, DoctorID, Time.
+  ![alt text](img/proof16.png)
+  ![alt text](img/proof17.png)  
+* Use a queue (FIFO) to:
+  * scheduleAppointment(Appointment a) → enqueue
+      ![alt text](img/proof18.png)  
+  * processNextAppointment() → dequeue
+      ![alt text](img/proof19.png)
+  * viewUpcomingAppointments() → display queue
+      ![alt text](img/proof20.png)
+      [TableUtility.java](src/daisukeclinic/utils/TableUtility.java)
+      ![alt text](img/proof21.png)
 
 ### SearchablePatientTree (Binary Search Tree)
 
